@@ -82,7 +82,7 @@
 											</div>
 										</div>
 									</p>
-									<p> <br>
+									<p>
 										By utilizing a RGB-D structured light camera, we propose a novel and robust algorithm to segment motions from consecutive frames. Based on a modified random sample consensus algorithm (RANSAC), we exploit the coherence of color and spatiality in the scene to estimate motion. It inherits the computational efficiency and probabilistic robustness from the RANSAC paradigm. After aligning two point clouds by the estimated transformation, we use inlier and outlier distribution as the prior knowledge to conduct graph-cut based segmentation. Moreover, we introduce physical support to realize the relation between motion segments. We provide a large annotated RGB-D dataset captured in a crowded urban environment to demonstrate our idea. Comparing to several motion segmentation methods in the same pipeline, we show that our approach performs well in the highly dynamic scene.
 									</p>
 									<p>
@@ -93,9 +93,11 @@
 									<header class="main">
 										<h2>Interactive Image Segmentation</h2>
 									</header>
-									<center>
-									<a href="./img/interactive_seg.jpg" class="image"><img src="./img/interactive_seg.jpg" alt="" style="width: 90%; height: 90%; margin:auto;"/></a>
-									</center>
+									<p>
+										<center>
+											<a href="./img/interactive_seg.jpg" class="image"><img src="./img/interactive_seg.jpg" alt="" style="width: 90%; height: 90%; margin:auto;"/></a>
+										</center>
+									</p>
 									<p>
 										In the motion segmentation section, two important techniques to do segmentation are graph-cut optimization and simple linear iterative clustering (SLIC). I have tried these two methods in interactive image segmentation first. The instruction is to use red/blue pen to annotate your interested/uninterested region. Then, through maxima-flow algorithm, the region could be separated accordingly. It's simple to implement and the performance is quite good.
 									</p>
@@ -189,7 +191,7 @@
 										<h2>Get in touch</h2>
 									</header>
 									<p>
-										If you want to reach me, please use the following e-mail address. Feel free to ask me questions.
+										If you would like to reach me, please use the following e-mail address. Feel free to ask me questions.
 									</p>
 									<ul class="contact">
 										<li class="fa-envelope-o"><a href="mailto:chhsu@nyu.edu">chhsu@nyu.edu</a></li>
