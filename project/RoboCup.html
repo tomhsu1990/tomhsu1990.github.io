@@ -62,20 +62,22 @@
 									</header>
 
 									<hr class="major" />
-									<div class="row">
-										<div class="6u">
-											<center>
-												<a href="./img/Nao.JPG" class="image"><img src="./img/Nao.JPG" alt="" style="width: 100%; height: 100%;"/></a>
-											</center>
+									<p>
+										<div class="row">
+											<div class="6u">
+												<center>
+													<a href="./img/Nao.JPG" class="image"><img src="./img/Nao.JPG" alt="" style="width: 100%; height: 100%;"/></a>
+												</center>
+											</div>
+											<div class="6u">
+												<center>
+													<div class="video-container">
+														<iframe src="https://www.youtube.com/embed/cYmNmJltFQQ" frameborder="0" allowfullscreen></iframe>
+													</div>
+												</center>
+											</div>
 										</div>
-										<div class="6u">
-											<center>
-												<div class="video-container">
-													<iframe src="http://www.youtube.com/embed/cYmNmJltFQQ" frameborder="0" allowfullscreen></iframe>
-												</div>
-											</center>
-										</div>
-									</div>
+									</p>
 									<p> <br>
 										In our RoboCup system, there are three main components: <b>perception, behavior, and motion.</b> I would like to use a pipeline figure to uncover our RoboCup system. Here is a short scenario to go over the pipeline.<br>
 										Suppose there are two robots on the soccer field. Once they are turned on, they will use their field detectors (goal, center circle, corner, line detectors) to locate themselves based on these static features. Meanwhile, they will utilize ball and robot detectors to locate these two kinds of moving objects. Then, after integrating these features as a feature vector, we combine them with odometer's reading into our multiple hypotheses tracking and multiple-robot simultaneous localization and tracking modules to get self, other robot's, and ball's position estimation. Since our robots are acting in a distributed manner, they will share their estimation and fuse other's estimation to have a more accurate understanding of the field. Then, according to these perception results, the robot which is closer to the ball will advance into a striker and another one will become a defense supporter. Here, we have conduct a filtering to avoid state oscillation. As long as their roles are determined and their planned position is computed, they will call their motion module to move ahead to their target (ball or defense position) and either kick or block the ball.
