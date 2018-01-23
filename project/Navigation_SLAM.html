@@ -1,0 +1,276 @@
+<!DOCTYPE HTML>
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Navigation, Localization, and Mapping</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+
+							<!-- Header -->
+								<header id="header">
+									<ul class="icons">
+										<li><a href="mailto:chhsu@nyu.edu" class="icon fa-envelope-o"><span class="label">E-mail</span></a></li>
+										<li><a href="https://www.linkedin.com/in/ching-hsiang-hsu/" class="icon fa-linkedin"><span class="label">LinkedIn</span></a></li>
+										<li><a href="https://github.com/tomhsu1990" class="icon fa-github"><span class="label">Github</span></a></li>
+										<li><a href="https://www.youtube.com/channel/UCsyHPAJxPqzgiJW0HllRzHA" class="icon fa-youtube"><span></span></a></li>
+										<li><a href="https://www.facebook.com/tomhsu1990" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+										<li><a href="https://plus.google.com/+TomHsu1990" class="icon fa-google-plus"><span class="label">Google+</span></a></li>
+										<!-- 
+										<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+										<li><a href="#" class="icon fa-snapchat-ghost"><span class="label">Snapchat</span></a></li>
+										<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+										<li><a href="#" class="icon fa-medium"><span class="label">Medium</span></a></li>
+										<li><a href="#" class="icon fa-tumblr"><span class="label">Tumblr</span></a></li>
+										<li><a href="#" class="icon fa-rss"><span>RSS</span></a></li>
+										<li><a href="#" class="icon fa-foursquare"><span>Foursquare</span></a></li>
+										<li><a href="#" class="icon fa-skype"><span>Skype</span></a></li>
+										<li><a href="#" class="icon fa-soundcloud"><span>Soundcloud</span></a></li>
+										<li><a href="#" class="icon fa-blogger"><span>Blogger</span></a></li>
+										<li><a href="#" class="icon fa-flickr"><span>Flickr</span></a></li>
+										<li><a href="#" class="icon fa-vimeo"><span>Vimeo</span></a></li>
+										-->
+									</ul>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<header class="main">
+										<h1>Navigation, Localization, and Mapping</h1>
+										<ol>
+											Navigation is one of the most essential functionalities for robots. Robots use the given map to get the location and then find the direction to reach the target. However, The given map is an assumption. Most of the time, there is no map or the map is not accurate as it is produced. Therefore, to build the map of the unknown/known environment becomes an indispensable problem in robotics.<br>
+											While to do localization and mapping at the same time is a chicken-and-egg problem, there are several well-known approximation algorithm to solve it such as particle filter, extended Kalman filter ... etc. In my work, I have tried particle filter to do Simultaneous Localization and Mapping (SLAM).
+										</ol>
+									</header>
+
+									<hr class="major" />
+									<header class="main">
+										<h2>Mobile Robot Navigation System</h2>
+										<ol>
+											Course: Robotics, Department of Computer Science, National Taiwan University
+										</ol>
+									</header>
+									<div class="row">
+										<div class="6u">
+											<p>
+												This is my first robotics project. I worked with one classmate to control a pioneer-like mobile robot to autonomously navigate in dynamic scenes with a Kinect sensor to reach a ball. I constructed the system to combine the mobility with the perception's estimation. In addition, I design a simple obstacle avoidance algorithm and grid-based path planning.
+											</p>
+										</div>
+										<div class="6u">
+											<center>
+											<a href="./img/mobile_robot.jpg" class="image"><img src="./img/mobile_robot.jpg" alt="" width="100%" height="100%"/></a>
+											</center>
+										</div>
+									</div>
+
+									<hr class="major" />
+									<header class="main">
+										<h2>Localization and SLAM Competition</h2>
+										<ol>
+											Course: Robot Perception and Learning, Department of Computer Science, National Taiwan University
+										</ol>
+									</header>
+									<p>
+										We use an Xtion sensor and a manually controlled mobile robot to get RGB, depth, and odometry information in both competitions. My main strategy to accomplish these two tasks is via Monte Carlo method (particle filter). As you can see in the video, red dots are randomly generated particles based on the given mean and sigma. The challenge in the localization task is that the robot will pass by some dark places where RGB information is helpless. In addition, there are some walking students whom may cause inaccurate depth alignment. On the other hand, in the SLAM task, we have to do loop detection and try to handle loop closure problem.<br>
+										<div class="video-container">
+											<iframe src="" frameborder="0" allowfullscreen style="width: 95%; height: 95%;"></iframe>
+										</div>
+										The localization competition is an online demonstration. The shown video is based on the recorded images and odometry measurement. There are four main steps in the localization process.
+										<ol>
+											<li> Predict the possible position distribution by using the odometry readings.</li>
+											<li> Weight the particles based on the distribution and correct some particles by using depth information. (Here, due to real-time performance issue, I only use one row of the depth image. It can be treated as a kind of 2D scan.)</li>
+											<li> Estimate the most likely position after computing the correlation of the current RGB image and integrating with the previous weighting result. (To find the correlation between images, I use SIFT feature detector to match and compute weighting, #matched_keypoints/#all_keypoints.)</li>
+											<li> Resample particles.</li>
+										</ol>
+										In the SLAM videos, the measurements are captured at our RoboCup field. To build the map, I exploit the 2D scan to do Iterative Closest Point (ICP) alignment. Then, do the above localization and use the estimated position to refine self position. The difference between the left and right video is that the right video has a map refinement process after loop detection. Since we take the video at a RoboCup field, one of the most obvious alignment difference is the goal. As you can see, in the right video the goal has much fewer duplicates than the left video which means it builds a better map based on the estimated position.
+									</p>
+									<div class="row">
+										<div class="6u">
+											<center>
+												<iframe src="" frameborder="0" allowfullscreen></iframe>
+											</center>
+										</div>
+										<div class="6u">
+											<center>
+												<iframe src="" frameborder="0" allowfullscreen></iframe>
+											</center>
+										</div>
+									</div>
+
+									<hr class="major" />
+									<header class="main">
+										<h2>WiFi-SLAM</h2>
+									</header>
+									<p> 
+										<center>
+										<a href="./img/WiFi-SLAM.png" class="image"><img src="./img/WiFi-SLAM.png" alt="" style="width: 100%; height: 100%; margin:auto;"/></a>
+										</center>
+									</p> 
+
+									<p>
+										The massive deployment of wireless network in the indoor environment paves a way not only for doing localization, but also helping build a wireless map. Without knowing the location of the wireless landmarks, SLAM provides a solution to build the map and do localization at the same time. Based on the paper, <i>Efficient Probabilistic Range-Only SLAM</i>, I build the WiFi-SLAM system with a Raspberry PI and iRobot vacuum cleaner and test in an office. Since the WiFi signal is noisy and unstable when the robot is moving, I have implemented a bucket filter to stabilize the signal strength. (In the experiments, I have set up multiple Raspberry PI which can both receive WiFi signal and be a hot-spot.)<br>
+										Compare with the original odometer reading, it shows excellent performance in practice in some cases. However, I haven't figured out how to deal with symmetric problem when changing the orientation. I give an unsuccessful result to address this intrinsic problem when estimating orientation.
+									</p>
+
+									<p>
+										<div class="row">
+											<div class="6u">
+												<center>
+													<div class="video-container">
+														<iframe src="https://www.youtube.com/embed/ARinYz8XgFk" frameborder="0" allowfullscreen></iframe>
+													</div>
+												</center>
+											</div>
+											<div class="6u">
+												<center>
+													<div class="video-container">
+														<iframe src="https://www.youtube.com/embed/LHXWc2jNL64" frameborder="0" allowfullscreen></iframe>
+													</div>
+												</center>
+											</div>
+										</div>
+									</p>
+
+									<hr class="major" />
+									<p>
+										<i>
+											<ol>
+												One should clearly distinguish between two aspects of the estimation problem:
+												<li>The theoretical aspect. Here interest centers on:<br>
+													(i) The general form of the solution.<br>
+													(ii) Conditions which guarantee a priori the existence, physical realizability, and stability of the optimal filter.<br>
+													(iii) Characterization of the general results in terms of some simple quantities, such as signal-to-noise ratio, information rate, bandwidth, etc... 
+												</li>
+												<li>The computational aspect. The classical (more accurately, old-fashioned) view is that a mathematical problem is solved if the solution is expressed by a formula. It is not a trivial matter, however, to substitute numbers in a formula. The current literature on the Wiener problem is full of semi-rigorously derived formulas which turn out to be unusable for practical computation when the order of the system becomes even moderately large...
+												</li>
+											</ol>
+										</i>
+										<p style="text-align:right">- Rudolf E. Kalman</p>
+									</p>
+
+								</section>
+
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+					<div id="sidebar">
+						<div class="inner">
+
+							<!-- Search -->
+							<!--
+								<section id="search" class="alt">
+									<form method="post" action="#">
+										<input type="text" name="query" id="query" placeholder="Search" />
+									</form>
+								</section>
+							-->
+
+							<!-- Menu -->
+								<nav id="menu">
+									<!--
+									<header class="major">
+										<h2>Menu</h2>
+									</header>
+									-->
+									<ul>
+										<li><a href="../index.html">Homepage</a></li>
+										<li><a href="../background.html">Academic Background</a></li>
+										<li>
+											<span class="opener">Projects</span>
+											<ul>
+												<li><a href="./Navigation_SLAM.html">Navigation, Localization and Mapping</a></li>
+												<li><a href="./RoboCup.html">RoboCup Standard Platform League</a></li>
+												<li><a href="./LEGO_arm.html">LEGO Robot Arm System</a></li>
+												<li><a href="./3D_pop-up.html">3D Pop-up Book</a></li>
+											</ul>
+										</li>
+										<li>
+											<span class="opener">Research and Publication</span>
+											<ul>
+												<li><a href="../research/SSS.html">Soft Subdivision Search</a></li>
+												<li><a href="../research/MotSeg.html">Motion and Semantic Segmentation</a></li>
+												<li><a href="../research/ActionRecog.html">Egocentric Action Recognition</a></li>
+											</ul>
+										</li>
+										<li><a href="../work.html">Work Experience</a></li>
+										<li><a href="../oj_records.html">Online Judge Record</a></li>
+									</ul>
+								</nav>
+
+							<!-- Section -->
+							<!--
+								<section>
+									<header class="major">
+										<h2>Ante interdum</h2>
+									</header>
+									<div class="mini-posts">
+										<article>
+											<a href="#" class="image"><img src="images/pic07.jpg" alt="" /></a>
+											<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore aliquam.</p>
+										</article>
+										<article>
+											<a href="#" class="image"><img src="images/pic08.jpg" alt="" /></a>
+											<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore aliquam.</p>
+										</article>
+										<article>
+											<a href="#" class="image"><img src="images/pic09.jpg" alt="" /></a>
+											<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore aliquam.</p>
+										</article>
+									</div>
+									<ul class="actions">
+										<li><a href="#" class="button">More</a></li>
+									</ul>
+								</section>
+							-->
+
+							<!-- Section -->
+								<section>
+									<header class="major">
+										<h2>Get in touch</h2>
+									</header>
+									<p>If you want to reach me, please use the following e-mail address. Feel free to ask me questions.</p>
+									<ul class="contact">
+										<li class="fa-envelope-o"><a href="mailto:chhsu@nyu.edu">chhsu@nyu.edu</a></li>
+										<!--
+										<li class="fa-phone">(929) 000-0000</li>
+										<li class="fa-home">1234 Somewhere Road #8254<br />
+										Nashville, TN 00000-0000</li>
+										-->
+									</ul>
+								</section>
+
+							<!-- Footer -->
+								<footer id="footer">
+									<center><a href="http://www.clustrmaps.com/map/tomhsu1990.github.io" class="image;"><img src="http://www.clustrmaps.com/map_v2.png?d=HdRL3B8U_bQrQ6rtiscSKW7VoqU0spUiYcT3uaQWB8c" title="Visit tracker for tomhsu1990.github.io" alt="" style="width: 80%; height: 80%; margin:auto;"/></a></center>
+									<p class="copyright"><br> &copy; Ching-Hsiang Hsu. All rights reserved. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+								</footer>
+						</div>
+					</div>
+			</div>
+
+		<!-- Scripts -->
+			<script src="../assets/js/jquery.min.js"></script>
+			<script src="../assets/js/skel.min.js"></script>
+			<script src="../assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../assets/js/main.js"></script>
+
+	</body>
+</html>

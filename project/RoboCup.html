@@ -1,0 +1,212 @@
+<!DOCTYPE HTML>
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>RoboCup</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+
+							<!-- Header -->
+								<header id="header">
+									<ul class="icons">
+										<li><a href="mailto:chhsu@nyu.edu" class="icon fa-envelope-o"><span class="label">E-mail</span></a></li>
+										<li><a href="https://www.linkedin.com/in/ching-hsiang-hsu/" class="icon fa-linkedin"><span class="label">LinkedIn</span></a></li>
+										<li><a href="https://github.com/tomhsu1990" class="icon fa-github"><span class="label">Github</span></a></li>
+										<li><a href="https://www.youtube.com/channel/UCsyHPAJxPqzgiJW0HllRzHA" class="icon fa-youtube"><span></span></a></li>
+										<li><a href="https://www.facebook.com/tomhsu1990" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+										<li><a href="https://plus.google.com/+TomHsu1990" class="icon fa-google-plus"><span class="label">Google+</span></a></li>
+										<!-- 
+										<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+										<li><a href="#" class="icon fa-snapchat-ghost"><span class="label">Snapchat</span></a></li>
+										<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+										<li><a href="#" class="icon fa-medium"><span class="label">Medium</span></a></li>
+										<li><a href="#" class="icon fa-tumblr"><span class="label">Tumblr</span></a></li>
+										<li><a href="#" class="icon fa-rss"><span>RSS</span></a></li>
+										<li><a href="#" class="icon fa-foursquare"><span>Foursquare</span></a></li>
+										<li><a href="#" class="icon fa-skype"><span>Skype</span></a></li>
+										<li><a href="#" class="icon fa-soundcloud"><span>Soundcloud</span></a></li>
+										<li><a href="#" class="icon fa-blogger"><span>Blogger</span></a></li>
+										<li><a href="#" class="icon fa-flickr"><span>Flickr</span></a></li>
+										<li><a href="#" class="icon fa-vimeo"><span>Vimeo</span></a></li>
+										-->
+									</ul>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<header class="main">
+										<h1>RoboCup Standard Platform League</h1>
+										<p> 
+											advised by: Prof. <a href="https://sites.google.com/site/chiehchihbobwang/">Chieh-Chih (Bob) Wang</a>
+											<ol>
+												In the RoboCup Standard Platform League (SPL), all teams use identical robots, humanoid Nao. It allows the teams to concentrate on software development rather than the mechanics of robots. The robots operate fully autonomously in the competition; i.e., there is no remote control by either humans or computers during the games.
+											</ol>
+										</p> 
+									</header>
+
+									<hr class="major" />
+									<div class="row">
+										<div class="6u">
+											<center>
+											<a href="./img/Nao.JPG" class="image"><img src="./img/Nao.JPG" alt="" width="90%" height="90%"/></a>
+											</center>
+										</div>
+										<div class="6u">
+											<center>
+												<div class="video-container">
+												<iframe src="http://www.youtube.com/embed/cYmNmJltFQQ" frameborder="0" allowfullscreen style="width: 100%; height: 100%;"></iframe>
+												</div>
+											</center>
+										</div>
+									</div>
+									<p> <br>
+										In our RoboCup system, there are three main components: <b>perception, behavior, and motion.</b> I would like to use a pipeline figure to uncover our RoboCup system. Here is a short scenario to go over the pipeline.<br>
+										Suppose there are two robots on the soccer field. Once they are turned on, they will use their field detectors (goal, center circle, corner, line detectors) to locate themselves based on these static features. Meanwhile, they will utilize ball and robot detectors to locate these two kinds of moving objects. Then, after integrating these features as a feature vector, we combine them with odometer's reading into our multiple hypotheses tracking and multiple-robot simultaneous localization and tracking modules to get self, other robot's, and ball's position estimation. Since our robots are acting in a distributed manner, they will share their estimation and fuse other's estimation to have a more accurate understanding of the field. Then, according to these perception results, the robot which is closer to the ball will advance into a striker and another one will become a defense supporter. Here, we have conduct a filtering to avoid state oscillation. As long as their roles are determined and their planned position is computed, they will call their motion module to move ahead to their target (ball or defense position) and either kick or block the ball.
+									</p>
+
+									<center>
+									<a href="./img/RoboCup_system.png" class="image"><img src="./img/RoboCup_system.png" alt="" width="60%" height="60%"/></a>
+									</center>
+
+
+									<hr class="major" />
+									<p>
+										<i>
+											<ol>
+												<li>A robot may not injure a human being or, through inaction, allow a human being to come to harm.</li>
+												<li>A robot must obey the orders given it by human beings except where such orders would conflict with the First Law.</li>
+												<li>A robot must protect its own existence as long as such protection does not conflict with the First or Second Laws.</li>
+											</ol>
+										</i>
+									</p>
+									<p style="text-align:right">- Isaac Asimov, Runaround</p>
+
+								</section>
+
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+					<div id="sidebar">
+						<div class="inner">
+
+							<!-- Search -->
+							<!--
+								<section id="search" class="alt">
+									<form method="post" action="#">
+										<input type="text" name="query" id="query" placeholder="Search" />
+									</form>
+								</section>
+							-->
+
+							<!-- Menu -->
+								<nav id="menu">
+									<!--
+									<header class="major">
+										<h2>Menu</h2>
+									</header>
+									-->
+									<ul>
+										<li><a href="../index.html">Homepage</a></li>
+										<li><a href="../background.html">Academic Background</a></li>
+										<li>
+											<span class="opener">Projects</span>
+											<ul>
+												<li><a href="./Navigation_SLAM.html">Navigation, Localization and Mapping</a></li>
+												<li><a href="./RoboCup.html">RoboCup Standard Platform League</a></li>
+												<li><a href="./LEGO_arm.html">LEGO Robot Arm System</a></li>
+												<li><a href="./3D_pop-up.html">3D Pop-up Book</a></li>
+											</ul>
+										</li>
+										<li>
+											<span class="opener">Research and Publication</span>
+											<ul>
+												<li><a href="../research/SSS.html">Soft Subdivision Search</a></li>
+												<li><a href="../research/MotSeg.html">Motion Segmentation</a></li>
+												<li><a href="../research/ActionRecog.html">Egocentric Action Recognition</a></li>
+											</ul>
+										</li>
+										<li><a href="../work.html">Work Experience</a></li>
+										<li><a href="../oj_records.html">Online Judge Record</a></li>
+									</ul>
+								</nav>
+
+							<!-- Section -->
+							<!--
+								<section>
+									<header class="major">
+										<h2>Ante interdum</h2>
+									</header>
+									<div class="mini-posts">
+										<article>
+											<a href="#" class="image"><img src="images/pic07.jpg" alt="" /></a>
+											<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore aliquam.</p>
+										</article>
+										<article>
+											<a href="#" class="image"><img src="images/pic08.jpg" alt="" /></a>
+											<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore aliquam.</p>
+										</article>
+										<article>
+											<a href="#" class="image"><img src="images/pic09.jpg" alt="" /></a>
+											<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore aliquam.</p>
+										</article>
+									</div>
+									<ul class="actions">
+										<li><a href="#" class="button">More</a></li>
+									</ul>
+								</section>
+							-->
+
+							<!-- Section -->
+								<section>
+									<header class="major">
+										<h2>Get in touch</h2>
+									</header>
+									<p>
+										If you want to reach me, please use the following e-mail address. Feel free to ask me questions.
+									</p>
+									<ul class="contact">
+										<li class="fa-envelope-o"><a href="mailto:chhsu@nyu.edu">chhsu@nyu.edu</a></li>
+										<!--
+										<li class="fa-phone">(929) 000-0000</li>
+										<li class="fa-home">1234 Somewhere Road #8254<br />
+										Nashville, TN 00000-0000</li>
+										-->
+									</ul>
+								</section>
+
+							<!-- Footer -->
+								<footer id="footer">
+									<center><a href="http://www.clustrmaps.com/map/tomhsu1990.github.io" class="image;"><img src="http://www.clustrmaps.com/map_v2.png?d=HdRL3B8U_bQrQ6rtiscSKW7VoqU0spUiYcT3uaQWB8c" title="Visit tracker for tomhsu1990.github.io" alt="" style="width: 80%; height: 80%; margin:auto;"/></a></center>
+									<p class="copyright"><br> &copy; Ching-Hsiang Hsu. All rights reserved. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+								</footer>
+						</div>
+					</div>
+			</div>
+
+		<!-- Scripts -->
+			<script src="../assets/js/jquery.min.js"></script>
+			<script src="../assets/js/skel.min.js"></script>
+			<script src="../assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../assets/js/main.js"></script>
+
+	</body>
+</html>

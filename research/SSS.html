@@ -1,0 +1,270 @@
+<!DOCTYPE HTML>
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Soft Subdivision Search</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+
+							<!-- Header -->
+								<header id="header">
+									<ul class="icons">
+										<li><a href="mailto:chhsu@nyu.edu" class="icon fa-envelope-o"><span class="label">E-mail</span></a></li>
+										<li><a href="https://www.linkedin.com/in/ching-hsiang-hsu/" class="icon fa-linkedin"><span class="label">LinkedIn</span></a></li>
+										<li><a href="https://github.com/tomhsu1990" class="icon fa-github"><span class="label">Github</span></a></li>
+										<li><a href="https://www.youtube.com/channel/UCsyHPAJxPqzgiJW0HllRzHA" class="icon fa-youtube"><span></span></a></li>
+										<li><a href="https://www.facebook.com/tomhsu1990" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+										<li><a href="https://plus.google.com/+TomHsu1990" class="icon fa-google-plus"><span class="label">Google+</span></a></li>
+										<!-- 
+										<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+										<li><a href="#" class="icon fa-snapchat-ghost"><span class="label">Snapchat</span></a></li>
+										<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+										<li><a href="#" class="icon fa-medium"><span class="label">Medium</span></a></li>
+										<li><a href="#" class="icon fa-tumblr"><span class="label">Tumblr</span></a></li>
+										<li><a href="#" class="icon fa-rss"><span>RSS</span></a></li>
+										<li><a href="#" class="icon fa-foursquare"><span>Foursquare</span></a></li>
+										<li><a href="#" class="icon fa-skype"><span>Skype</span></a></li>
+										<li><a href="#" class="icon fa-soundcloud"><span>Soundcloud</span></a></li>
+										<li><a href="#" class="icon fa-blogger"><span>Blogger</span></a></li>
+										<li><a href="#" class="icon fa-flickr"><span>Flickr</span></a></li>
+										<li><a href="#" class="icon fa-vimeo"><span>Vimeo</span></a></li>
+										-->
+									</ul>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<header class="main">
+										<h1>Soft Subdivision Search</h1>
+										<p> 
+											advised by: Prof. <a href="http://cs.nyu.edu/cs/faculty/yap/">Chee Yap</a>
+											<ol>
+												Motion planning is a fundamental problem in robotics. There are three main approaches:
+												<li>
+													The Exact Approach which can, in principle, solve any algebraic planning problem. But practitioners tend to implement exact algorithms using machine approximations; then it is no longer clear what the guarantees of exact algorithms mean. In short, "Exact" algorithms are impractical except for the simplest cases.
+												</li>
+												<li>
+													The Sampling Approach has been dominant in motion planning research domain for the last two decades. We refer to Probabilistic Road Map (PRM) the main representative. Its central problem is inability to halting (couched as “narrow passage problem”).
+												</li>
+												<li>
+													The Subdivision Approach (cell decomposition) is the oldest among the three approaches, and remains popular with practitioners: our work falls under this category. We introduced the concept of resolution-exactness as the theoretical foundation for path planning that side-steps exact computation. This opens the way for the development of soft predicates, replacing the usual predicates that control the logic of all geometric algorithms.
+												</li>
+											</ol>
+										</p>
+									</header>
+
+
+									<hr class="major" />
+									<header class="main">
+										<h2>Path Planning for Simple Robots using Soft Subdivision Search</h2>
+									</header>
+									<div class="row">
+										<div class="6u">
+											<center>
+											<a href="./img/triangle_sub.png" class="image"><img src="./img/triangle_sub.png" alt="" width="80%" height="80%"/></a>
+											</center>
+										</div>
+										<div class="6u">
+											<center>
+												<div class="video-container">
+												<iframe src="http://www.youtube.com/embed/YYbzUEXy2Sk" frameborder="0" allowfullscreen></iframe>
+												</div>
+											</center>
+										</div>
+									</div>
+									<p> <br>
+										We introduce the Soft Subdivision Search (SSS) framework for designing a new class of path planning algorithms, founded on the concept of resolution-exactness. This video illustrates the SSS framework for a trio of simple planar robots: disc, triangle and 2-links. The algorithm achieves state-of-art real-time performance, and is relatively easy to implement.
+									</p>
+									<p>
+										<a href="./paper/simple-robots2016.pdf"><i>Ching-Hsiang Hsu, John Paul Ryan, and Chee Yap, "Path Planning for Simple Robots using Soft Subdivision Search," Multimedia Exposition. Proc. 32nd International Symposium on Computational Geometry, Boston, MA. June 14-18, 2016.</i></a>
+									</p>
+
+									<hr class="major" />
+									<header class="main">
+										<h2>Resolution-Exact Planner for Thick Non-Crossing 2-Link Robots</h2>
+									</header>
+									<div class="row">
+										<div class="6u">
+											<center>
+											<a href="./img/rod_rand100_trace.png" class="image"><img src="./img/rod_rand100_trace.png" alt="" width="80%" height="80%"/></a>
+											</center>
+										</div>
+										<div class="6u">
+											<center>
+												<div class="video-container">
+												<iframe  src="https://www.youtube.com/embed/beFQFtHwHhk" frameborder="0" allow="encrypted-media" allowfullscreen></iframe>
+												</div>
+											</center>
+										</div>
+									</div>
+									<p> <br>
+										We propose a novel and efficient planner for non-crossing 2-link thick robots. Our work contributes to the development of practical and theoretically sound subdivision planners. It is reasonable to expect a tradeoff between the stronger guarantees of our resolution-exact approach versus a faster running time for sampling approaches. But, our experiments suggest no such tradeoffs at all: SSS is consistently superior to sampling.<br>
+										The sampling approaches are from <a href="http://ompl.kavrakilab.org/">Open Motion Planning Library (OMPL)</a>. In addition, I have implemented one of the latest PRM variants, Lazy Toggle PRM in the comparison.
+										<center>
+										<a href="./img/toggle.png" class="image"><img src="./img/toggle.png" alt="" width="100%" height="100%"/></a>
+										</center>
+									</p>
+									<p>
+										<a href="./paper/non-crossing_2-links.pdf"><i>Chee Yap, Zhongdi Luo, and Ching-Hsiang Hsu, "Resolution-Exact Planner for Thick Non-Crossing 2-Link Robots," 12th Int'l Workshop on the Algorithmic Foundations of Robotics (WAFR 2016), Dec. 18-20, 2016</i></a></p>
+									</p>
+
+									<hr class="major" />
+									<header class="main">
+										<h2>Rods and Rings: Soft Subdivision Planner for R&sup3; &#120; S&sup2;</h2>
+									</header>
+									<div class="row">
+										<div class="6u">
+											<center>
+											<a href="./img/ring_trace.png" class="image"><img src="./img/ring_trace.png" alt="" width="80%" height="80%"/></a>
+											</center>
+										</div>
+										<div class="6u">
+											<center>
+												<div class="video-container">
+												<iframe src="https://www.youtube.com/embed/Is7VBd0mDXI" frameborder="0" allowfullscreen></iframe>
+												</div>
+											</center>
+										</div>
+									</div>
+									<p> <br>
+										We continue making progress of SSS for rods and rings in 3D, with implementations. One major technical difference from our previous work on planar robots is that we gave up the notion of "forbidden orientations" (this is quite complicated for spatial robots) but, opted for an alternative approach to bound the footprint of boxes using what we call Σ<sub>2</sub>-sets. Such sets generalize the concept of Π<sub>1</sub>-sets in our previous work. One benefit of Σ<sub>2</sub>-sets is that they are very flexible, allowing us to easily extend the planners to “thick” versions of a rod or ring. The trade-off in using Σ<sub>2</sub>-sets is a modest increase in the accuracy constant K.
+									</p>
+									<p>
+										<a href="./paper/FWCG_rod.pdf"><i>Ching-Hsiang Hsu, Yi-Jen Chiang, and Chee Yap, "Soft Subdivision Planner for a Rod," Fall Workshops on Computational Geometry, Oct 27-28, 2016.</i></a><br>
+										<i>Ching-Hsiang Hsu, Yi-Jen Chiang, and Chee Yap, "Rods and Rings: Soft Subdivision Planner for R&sup3; &#120; S&sup2;," submitted.</i>
+									</p>
+
+									<hr class="major" />
+									<p>
+										<i>There is no royal road to geometry.</i> - Euclid
+									</p>
+
+								</section>
+
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+					<div id="sidebar">
+						<div class="inner">
+
+							<!-- Search -->
+							<!--
+								<section id="search" class="alt">
+									<form method="post" action="#">
+										<input type="text" name="query" id="query" placeholder="Search" />
+									</form>
+								</section>
+							-->
+
+							<!-- Menu -->
+								<nav id="menu">
+									<!--
+									<header class="major">
+										<h2>Menu</h2>
+									</header>
+									-->
+									<ul>
+										<li><a href="../index.html">Homepage</a></li>
+										<li><a href="../background.html">Academic Background</a></li>
+										<li>
+											<span class="opener">Projects</span>
+											<ul>
+												<li><a href="../project/Navigation_SLAM.html">Navigation, Localization and Mapping</a></li>
+												<li><a href="../project/RoboCup.html">RoboCup Standard Platform League</a></li>
+												<li><a href="../project/LEGO_arm.html">LEGO Robot Arm System</a></li>
+												<li><a href="../project/3D_pop-up.html">3D Pop-up Book</a></li>
+											</ul>
+										</li>
+										<li>
+											<span class="opener">Research and Publication</span>
+											<ul>
+												<li><a href="./SSS.html">Soft Subdivision Search</a></li>
+												<li><a href="./MotSeg.html">Motion and Semantic Segmentation</a></li>
+												<li><a href="./ActionRecog.html">Egocentric Action Recognition</a></li>
+											</ul>
+										</li>
+										<li><a href="../work.html">Work Experience</a></li>
+										<li><a href="../oj_records.html">Online Judge Record</a></li>
+									</ul>
+								</nav>
+
+							<!-- Section -->
+							<!--
+								<section>
+									<header class="major">
+										<h2>Ante interdum</h2>
+									</header>
+									<div class="mini-posts">
+										<article>
+											<a href="#" class="image"><img src="images/pic07.jpg" alt="" /></a>
+											<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore aliquam.</p>
+										</article>
+										<article>
+											<a href="#" class="image"><img src="images/pic08.jpg" alt="" /></a>
+											<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore aliquam.</p>
+										</article>
+										<article>
+											<a href="#" class="image"><img src="images/pic09.jpg" alt="" /></a>
+											<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore aliquam.</p>
+										</article>
+									</div>
+									<ul class="actions">
+										<li><a href="#" class="button">More</a></li>
+									</ul>
+								</section>
+							-->
+
+							<!-- Section -->
+								<section>
+									<header class="major">
+										<h2>Get in touch</h2>
+									</header>
+									<p>
+										If you want to reach me, please use the following e-mail address. Feel free to ask me questions.
+									</p>
+									<ul class="contact">
+										<li class="fa-envelope-o"><a href="mailto:chhsu@nyu.edu">chhsu@nyu.edu</a></li>
+										<!--
+										<li class="fa-phone">(929) 000-0000</li>
+										<li class="fa-home">1234 Somewhere Road #8254<br />
+										Nashville, TN 00000-0000</li>
+										-->
+									</ul>
+								</section>
+
+							<!-- Footer -->
+								<footer id="footer">
+									<center><a href="http://www.clustrmaps.com/map/tomhsu1990.github.io" class="image;"><img src="http://www.clustrmaps.com/map_v2.png?d=HdRL3B8U_bQrQ6rtiscSKW7VoqU0spUiYcT3uaQWB8c" title="Visit tracker for tomhsu1990.github.io" alt="" style="width: 80%; height: 80%; margin:auto;"/></a></center>
+									<p class="copyright"><br> &copy; Ching-Hsiang Hsu. All rights reserved. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+								</footer>
+						</div>
+					</div>
+			</div>
+
+		<!-- Scripts -->
+			<script src="../assets/js/jquery.min.js"></script>
+			<script src="../assets/js/skel.min.js"></script>
+			<script src="../assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../assets/js/main.js"></script>
+
+	</body>
+</html>
