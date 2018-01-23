@@ -89,7 +89,7 @@
 									<p>
 										We use an Xtion sensor and a manually controlled mobile robot to get RGB, depth, and odometry information in both competitions. My main strategy to accomplish these two tasks is via Monte Carlo method (particle filter). As you can see in the video, red dots are randomly generated particles based on the given mean and sigma. The challenge in the localization task is that the robot will pass by some dark places where RGB information is helpless. In addition, there are some walking students whom may cause inaccurate depth alignment. On the other hand, in the SLAM task, we have to do loop detection and try to handle loop closure problem.<br>
 										<div class="video-container">
-											<iframe src="" frameborder="0" allowfullscreen style="width: 95%; height: 95%;"></iframe>
+											<iframe src="https://www.youtube.com/embed/I_S52X5WgVo" frameborder="0" allowfullscreen style="width: 95%; height: 95%;"></iframe>
 										</div>
 										The localization competition is an online demonstration. The shown video is based on the recorded images and odometry measurement. There are four main steps in the localization process.
 										<ol>
@@ -98,20 +98,26 @@
 											<li> Estimate the most likely position after computing the correlation of the current RGB image and integrating with the previous weighting result. (To find the correlation between images, I use SIFT feature detector to match and compute weighting, #matched_keypoints/#all_keypoints.)</li>
 											<li> Resample particles.</li>
 										</ol>
-										In the SLAM videos, the measurements are captured at our RoboCup field. To build the map, I exploit the 2D scan to do Iterative Closest Point (ICP) alignment. Then, do the above localization and use the estimated position to refine self position. The difference between the left and right video is that the right video has a map refinement process after loop detection. Since we take the video at a RoboCup field, one of the most obvious alignment difference is the goal. As you can see, in the right video the goal has much fewer duplicates than the left video which means it builds a better map based on the estimated position.
 									</p>
 									<div class="row">
 										<div class="6u">
 											<center>
-												<iframe src="" frameborder="0" allowfullscreen></iframe>
+												<div class="video-container">
+													<iframe src="https://www.youtube.com/embed/-tA2GjwFtg8" frameborder="0" allowfullscreen></iframe>
+												</div>
 											</center>
 										</div>
 										<div class="6u">
 											<center>
-												<iframe src="" frameborder="0" allowfullscreen></iframe>
+												<div class="video-container">
+													<iframe src="https://www.youtube.com/embed/K4yaagMHHME" frameborder="0" allowfullscreen></iframe>
+												</div>
 											</center>
 										</div>
 									</div>
+									<p><br>
+										In the SLAM videos, the measurements are captured at our RoboCup field. To build the map, I exploit the 2D scan to do Iterative Closest Point (ICP) alignment. Then, do the above localization and use the estimated position to refine self position. The difference between the left and right video is that the right video has a map refinement process after loop detection. Since we take the video at a RoboCup field, one of the most obvious alignment differences are the goal and goal zone. As you can see, in the right video the goal's yellow pillar and lines of goal zone have much fewer miss aligned duplicates than the left video which means it builds a better map based on the estimated position.
+									</p>
 
 									<hr class="major" />
 									<header class="main">
