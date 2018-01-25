@@ -6,7 +6,7 @@
 -->
 <html>
 	<head>
-		<title>3D Pop-up Book</title>
+		<title>Restaurant Rating System</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
@@ -52,55 +52,59 @@
 							<!-- Content -->
 								<section>
 									<header class="main">
-										<div class="row">
-											<div class="8u">
-												<h1>3D Pop-up Book</h1>
-												<p>
-													<ol>
-														Advised by: Dr. <a href="http://www.cs.nthu.edu.tw/~rrlee/rrlee/Home.html">Ruen-Rone Lee</a><br>
-														Date: Sep. 2010 - Aug. 2011
-													</ol>
-												</p>
-											</div>
-											<div class="3u">
-												<center>
-												<a href="./img/3D_pop-up_book.jpg" class="image"><img src="./img/3D_pop-up_book.jpg" alt="" style="width: 100%; height: 100%; margin:auto;"/></a>
-												</center>
-											</div>
-										</div>
+										<h1>Restaurant Rating System</h1>
+										<h3>Evaluating Restaurants by Extracting and Categorizing Information from Reviews</h3>
+										<p> 
+											<ol>
+												Course: Natural Language Processing, Department, New York University<br>
+												Date: Apr. 2017 - May 2017<br><br>
+												Online restaurant reviews are sometimes verbose and inaccurate, so the information might not live up to your expectation or not match your preference. We propose a restaurant rating system by adopting Natural Language Processing techniques to classify lengthy reviews into several categories such as taste, service, price, sanitation, and location. This way, customers can have a better understanding from different aspects of the restaurant. In addition, by applying our useful system, these reviews can provide much more objective and fair viewpoints for restaurant runners.
+											</ol>
+										</p>
 									</header>
 
 									<hr class="major" />
 									<p>
 										<div class="row">
 											<div class="6u">
-												<center>
-													<a href="./img/3D_PUB.jpg" class="image"><img src="./img/3D_PUB.jpg" alt="" style="width: 90%; height: 90%; margin:auto;"/></a>
-												</center>
+												<p>
+													Our system work consists three core parts:<br>
+													<ol>
+														<li>Scrape review data from Yelp into .csv file and do the labeling after parsing .csv file into a .txt file.</li>
+														<li>Build useful feature sets and train the model.</li>
+														<li>Test other reviews and compute each review's ratings.</li>
+													</ol>
+													When processing labels, we define seven basic categories with positive and negative tags to do annotation and classication which are Overall: LOVE/HATE, Taste: YUMMY/GROSS, Service: FRIENDLY/INHOSPITABLE, Price: CHEAP/EXPENSIVE, Sanitation: CLEAN/DIRTY, Location: CONVENIENT/INCONVENIENT, and Other: OTHER.<br>
+												</p>
 											</div>
 											<div class="6u">
 												<center>
-													<div class="video-container">
-														<iframe src="https://www.youtube.com/embed/ix4tuWYiFJ8" frameborder="0" allowfullscreen></iframe>
-													</div>
+												<a href="./img/RR_workflow.png" class="image"><img src="./img/RR_workflow.png" alt="" width="100%" height="100%"/></a>
 												</center>
 											</div>
 										</div>
-									</p>
-									<p>
-										3D Pop-up Book is a book rendering engine on portable devices. Through our engine's help, authors can edit and design various vivid 3D book contents for readers. The commercial idea is to have readers not only download author's design, but also download our platform. With our reading engine's friendly interaction interface and smooth folding effect, readers can enjoy author's contents in a different way.
-									</p>
-
-									<p>
-										<strong>First Prize, Telecom Innovation and Application Contest, Chunghwa Telecom Company, 2011</strong><br>
-										<strong>First Prize, Senior Student Project Contest, National Tsing Hua University, 2011</strong>
+										In the feature building phase, we eventually use the following five features to get our best feature extraction. Notice that the special lists are all relevant synonyms from <a href="http://www.thesaurus.com/">Thesaurus.com</a>.
+										<ol>
+											<li>sequence part-of-speech (POS) features, </li>
+											<li>POS combination like NN+VB+JJ, </li>
+											<li>the appearance of the token word, </li>
+											<li>special lists which related to the category, </li>
+											<li>special sentence structure in the reviews. </li>
+										</ol>
+										In the training phase, we make use of the maximum-entropy Markov model (MEMM) in the OpenNLP library.<br>
+										In conclusion, we can see the average ratings from the six categories (overall, taste, service, price, sanitation, location) is similar to the rating from Yelp. We believe our rating system can help business owners to have a better understanding about the reviews from Yelp. Still, there are some on-going enhancements of this rating model. In the future, we have three big directions to work:
+										<ol>
+											<li>Add sentiment analysis, so we can know which word is more likely to become positive or negative.</li>
+											<li>Improve dictionary list by adding words with different POS.</li>
+											<li>Label more reviews so we will have more data to train our model.</li>
+										</ol>
+										With all these improvements, we believe that they will help our systems to become more accurate and reliable.
 									</p>
 
 									<hr class="major" />
 									<p>
-										<i>There is no friend as loyal as a book.</i> - Ernest Hemingway
+										<i>Life is really simple, but we insist on making it complicated.</i> - Confucius
 									</p>
-
 								</section>
 
 						</div>
