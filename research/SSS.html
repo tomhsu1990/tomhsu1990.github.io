@@ -121,7 +121,14 @@
 									</p>
 									<p>
 										We propose a novel and efficient planner for non-crossing 2-link thick robots. Our work contributes to the development of practical and theoretically sound subdivision planners. It is reasonable to expect a tradeoff between the stronger guarantees of our resolution-exact approach versus a faster running time for sampling approaches. But, our experiments suggest no such tradeoffs at all: SSS is consistently superior to sampling.<br>
-										The sampling approaches are from <a href="http://ompl.kavrakilab.org/">Open Motion Planning Library (OMPL)</a>. In addition, I have implemented one of the latest PRM variants, Lazy Toggle PRM in the comparison.
+										The sampling approaches are from <a href="http://ompl.kavrakilab.org/">Open Motion Planning Library (OMPL)</a>. In addition, I have implemented one of the latest PRM variants, Lazy Toggle PRM in the performance comparison. (For making an unbiased comparison, I would like to adopt open source library first. But, I have implemented the both PRM and RRT algorithm on my own too. Please see the RRT demonstration video with a 2-links robot in different step size.)
+
+										<center>
+											<div class="video-container">
+												<iframe  src="https://www.youtube.com/embed/9Og65zC9iTY" frameborder="0" allowfullscreen style="width: 90%; height: 90%;"></iframe>
+											</div>
+										</center>
+
 										<center>
 											<a href="./img/toggle.png" class="image"><img src="./img/toggle.png" alt="" width="100%" height="100%"/></a>
 										</center>
@@ -129,7 +136,6 @@
 									<p>
 										<a href="./paper/non-crossing_2-links.pdf"><i>Chee Yap, Zhongdi Luo, and Ching-Hsiang Hsu, "Resolution-Exact Planner for Thick Non-Crossing 2-Link Robots," 12th Int'l Workshop on the Algorithmic Foundations of Robotics (WAFR 2016), Dec. 18-20, 2016</i></a></p>
 									</p>
-
 									<hr class="major" />
 									<header class="main">
 										<h2>Rods and Rings: Soft Subdivision Planner for R&sup3; &#120; S&sup2;</h2>
