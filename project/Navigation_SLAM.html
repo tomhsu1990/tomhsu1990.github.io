@@ -9,10 +9,7 @@
 		<title>Navigation, Localization, and Mapping</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
 		<link rel="stylesheet" href="../assets/css/main.css" />
-		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
-		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
 	</head>
 	<body>
 
@@ -26,12 +23,11 @@
 							<!-- Header -->
 								<header id="header">
 									<ul class="icons">
-										<li><a href="mailto:chhsu@nyu.edu" class="icon fa-envelope-o"><span class="label">E-mail</span></a></li>
-										<li><a href="https://www.linkedin.com/in/ching-hsiang-hsu/" class="icon fa-linkedin"><span class="label">LinkedIn</span></a></li>
-										<li><a href="https://github.com/tomhsu1990" class="icon fa-github"><span class="label">Github</span></a></li>
-										<li><a href="https://www.youtube.com/channel/UCsyHPAJxPqzgiJW0HllRzHA" class="icon fa-youtube"><span></span></a></li>
-										<li><a href="https://www.facebook.com/tomhsu1990" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
-										<li><a href="https://plus.google.com/+TomHsu1990" class="icon fa-google-plus"><span class="label">Google+</span></a></li>
+										<li><a href="mailto:chhsu@nyu.edu" class="icon brands fa-envelope-o"><span class="label">E-mail</span></a></li>
+										<li><a href="https://www.linkedin.com/in/ching-hsiang-hsu/" class="icon brands fa-linkedin"><span class="label">LinkedIn</span></a></li>
+										<li><a href="https://github.com/tomhsu1990" class="icon brands fa-github"><span class="label">Github</span></a></li>
+										<li><a href="https://www.youtube.com/channel/UCsyHPAJxPqzgiJW0HllRzHA" class="icon brands fa-youtube"><span></span></a></li>
+										<li><a href="https://www.facebook.com/tomhsu1990" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
 										<!-- 
 										<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
 										<li><a href="#" class="icon fa-snapchat-ghost"><span class="label">Snapchat</span></a></li>
@@ -68,12 +64,12 @@
 										</ol>
 									</header>
 									<div class="row">
-										<div class="6u">
+										<div class="col-6 col-12-medium">
 											<p>
 												This is my first robotics project. I worked with one classmate to control a pioneer-like mobile robot to autonomously reach a ball in dynamic scenes with a Kinect sensor. I constructed the system to combine the mobility with the perception's estimation. In addition, I design a simple obstacle avoidance algorithm and grid-based path planning.
 											</p>
 										</div>
-										<div class="6u">
+										<div class="col-6 col-12-medium">
 											<center>
 											<a href="./img/mobile_robot.jpg" class="image"><img src="./img/mobile_robot.jpg" alt="" width="100%" height="100%"/></a>
 											</center>
@@ -88,31 +84,45 @@
 											Date: Oct. 2013 - Jan. 2014
 										</ol>
 									</header>
-									<p>
-										We use an Xtion sensor and a manually controlled mobile robot to get RGB, depth, and odometry information in both competitions. My main strategy to accomplish these two tasks is via Monte Carlo method (particle filter). As you can see in the video, red dots are randomly generated particles based on the given mean and sigma. The challenge in the localization task is that the robot will pass by some dark places where RGB information is helpless. In addition, there are some walking students whom may cause inaccurate depth alignment. On the other hand, in the SLAM task, we have to do loop detection and try to handle loop closure problem.<br>
-										<div class="video-container">
-											<iframe src="https://www.youtube.com/embed/I_S52X5WgVo" frameborder="0" allowfullscreen style="width: 95%; height: 95%;"></iframe>
-										</div>
-										The localization competition is an online demonstration. The shown video is based on the recorded images and odometry measurement. There are four main steps in the localization process.
-										<ol>
-											<li> Predict the possible position distribution by using the odometry readings.</li>
-											<li> Weight the particles based on the distribution and correct some particles by using depth information. (Here, due to real-time performance issue, I only use one row of the depth image. It can be treated as a kind of 2D scan.)</li>
-											<li> Estimate the most likely position after computing the correlation of the current RGB image and integrating with the previous weighting result. (To find the correlation between images, I use SIFT feature detector to match and compute weighting, #matched_keypoints/#all_keypoints.)</li>
-											<li> Resample particles.</li>
-										</ol>
-									</p>
 									<div class="row">
-										<div class="6u">
+										<div class="col-6 col-12-medium">
+											<p>
+												We use an Xtion sensor and a manually controlled mobile robot to get RGB, depth, and odometry information in both competitions. My main strategy to accomplish these two tasks is via Monte Carlo method (particle filter). As you can see in the video, red dots are randomly generated particles based on the given mean and sigma. The challenge in the localization task is that the robot will pass by some dark places where RGB information is helpless. In addition, there are some walking students whom may cause inaccurate depth alignment. On the other hand, in the SLAM task, we have to do loop detection and try to handle loop closure problem.<br>
+											</p>
+										</div>
+										<div class="col-6 col-12-medium">
+											<div class="video-container">
+												<p align="center">
+													<iframe width="640" height="480"
+														src="https://www.youtube.com/embed/I_S52X5WgVo" frameborder="0" allowfullscreen>
+													</iframe>
+												</p>
+											</div>
+										</div>
+									</div>
+									The localization competition is an online demonstration. The shown video is based on the recorded images and odometry measurement. There are four main steps in the localization process.
+									<ol>
+										<li> Predict the possible position distribution by using the odometry readings.</li>
+										<li> Weight the particles based on the distribution and correct some particles by using depth information. (Here, due to real-time performance issue, I only use one row of the depth image. It can be treated as a kind of 2D scan.)</li>
+										<li> Estimate the most likely position after computing the correlation of the current RGB image and integrating with the previous weighting result. (To find the correlation between images, I use SIFT feature detector to match and compute weighting, #matched_keypoints/#all_keypoints.)</li>
+										<li> Resample particles.</li>
+									</ol>
+									<div class="row">
+										<div class="col-6 col-12-medium">
 											<center>
 												<div class="video-container">
-													<iframe src="https://www.youtube.com/embed/-tA2GjwFtg8" frameborder="0" allowfullscreen></iframe>
+													<iframe width="640" height="480"
+														src="https://www.youtube.com/embed/-tA2GjwFtg8" frameborder="0" allowfullscreen>
+													</iframe>
 												</div>
 											</center>
 										</div>
-										<div class="6u">
+										<div class="col-6 col-12-medium">
 											<center>
 												<div class="video-container">
-													<iframe src="https://www.youtube.com/embed/K4yaagMHHME" frameborder="0" allowfullscreen></iframe>
+													<iframe width="640" height="480"
+														src="https://www.youtube.com/embed/K4yaagMHHME" frameborder="0" allowfullscreen>
+													</iframe>
 												</div>
 											</center>
 										</div>
@@ -140,26 +150,28 @@
 										The massive deployment of wireless network in the indoor environment paves a way not only for doing localization, but also helping build a wireless map. Without knowing the location of the wireless landmarks, SLAM provides a solution to build the map and do localization at the same time. Based on the paper, <i>Efficient Probabilistic Range-Only SLAM</i>, and the tool, <a href="https://www.mrpt.org/">Mobile Robot Programming Tool (MRPT)</a>, I build the WiFi-SLAM system with a Raspberry PI and iRobot vacuum cleaner and test in an office. Since the WiFi signal is noisy and unstable when the robot is moving, I have implemented a bucket filter to stabilize the signal strength. (In the experiments, I have set up multiple Raspberry PI which can both receive WiFi signal and be a hot-spot.)<br><br>
 										Compare with the original odometer reading, it shows excellent performance in practice in some cases. However, I haven't figured out how to deal with symmetric problem when changing the orientation. I give an unsuccessful result to address this intrinsic problem when estimating orientation.
 									</p>
-									<p>
-										<div class="row">
-											<div class="6u">
-												<center>
-													<div class="video-container">
-														<iframe src="https://www.youtube.com/embed/ARinYz8XgFk" frameborder="0" allowfullscreen></iframe>
-													</div>
-												</center>
-											</div>
-											<div class="6u">
-												<center>
-													<div class="video-container">
-														<iframe src="https://www.youtube.com/embed/LHXWc2jNL64" frameborder="0" allowfullscreen></iframe>
-													</div>
-												</center>
-											</div>
+									<div class="row">
+										<div class="col-6 col-12-medium">
+											<center>
+												<div class="video-container">
+													<iframe width="640" height="480"
+														src="https://www.youtube.com/embed/ARinYz8XgFk" frameborder="0" allowfullscreen>
+													</iframe>
+												</div>
+											</center>
 										</div>
-									</p>
+										<div class="col-6 col-12-medium">
+											<center>
+												<div class="video-container">
+													<iframe width="640" height="480"
+														src="https://www.youtube.com/embed/LHXWc2jNL64" frameborder="0" allowfullscreen>
+													</iframe>
+												</div>
+											</center>
+										</div>
+									</div>
 
-									<hr class="major" />
+									<hr class="major"/>
 									<p>
 										<i>
 											<ol>
@@ -203,7 +215,16 @@
 									-->
 									<ul>
 										<li><a href="../index.html">Homepage</a></li>
+										<li><a href="../work.html">Work Experience</a></li>
 										<li><a href="../background.html">Academic Background</a></li>
+										<li>
+											<span class="opener">Research and Publication</span>
+											<ul>
+												<li><a href="../research/SSS.html">Soft Subdivision Search</a></li>
+												<li><a href="../research/MotSeg.html">Motion and Semantic Segmentation</a></li>
+												<li><a href="../research/ActionRecog.html">Egocentric Action Recognition</a></li>
+											</ul>
+										</li>
 										<li>
 											<span class="opener">Projects</span>
 											<ul>
@@ -214,15 +235,6 @@
 												<li><a href="./3D_pop-up.html">3D Pop-up Book</a></li>
 											</ul>
 										</li>
-										<li>
-											<span class="opener">Research and Publication</span>
-											<ul>
-												<li><a href="../research/SSS.html">Soft Subdivision Search</a></li>
-												<li><a href="../research/MotSeg.html">Motion and Semantic Segmentation</a></li>
-												<li><a href="../research/ActionRecog.html">Egocentric Action Recognition</a></li>
-											</ul>
-										</li>
-										<li><a href="../work.html">Work Experience</a></li>
 										<li><a href="../oj_records.html">Online Judge Record</a></li>
 									</ul>
 								</nav>
@@ -262,7 +274,7 @@
 										If you would like to reach me, please use the following e-mail address. Feel free to ask me questions.
 									</p>
 									<ul class="contact">
-										<li class="fa-envelope-o"><a href="mailto:chhsu@nyu.edu">chhsu@nyu.edu</a></li>
+										<li class="solid fa-envelope"><a href="mailto:chhsu@nyu.edu">chhsu@nyu.edu</a></li>
 										<!--
 										<li class="fa-phone">(929) 000-0000</li>
 										<li class="fa-home">1234 Somewhere Road #8254<br />
@@ -282,9 +294,9 @@
 
 		<!-- Scripts -->
 			<script src="../assets/js/jquery.min.js"></script>
-			<script src="../assets/js/skel.min.js"></script>
+			<script src="../assets/js/browser.min.js"></script>
+			<script src="../assets/js/breakpoints.min.js"></script>
 			<script src="../assets/js/util.js"></script>
-			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
 			<script src="../assets/js/main.js"></script>
 
 	</body>
