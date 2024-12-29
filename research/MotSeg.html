@@ -6,7 +6,7 @@
 -->
 <html>
 	<head>
-		<title>Motion Segmentaion</title>
+		<title>Motion Segmentation</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="../assets/css/main.css" />
@@ -27,8 +27,8 @@
 										<li><a href="https://www.linkedin.com/in/ching-hsiang-hsu/" class="icon brands fa-linkedin"><span class="label">LinkedIn</span></a></li>
 										<li><a href="https://github.com/tomhsu1990" class="icon brands fa-github"><span class="label">Github</span></a></li>
 										<li><a href="https://www.youtube.com/channel/UCsyHPAJxPqzgiJW0HllRzHA" class="icon brands fa-youtube"><span></span></a></li>
-										<li><a href="https://www.facebook.com/tomhsu1990" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-										<!-- 
+										<!--
+										<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
 										<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
 										<li><a href="#" class="icon fa-snapchat-ghost"><span class="label">Snapchat</span></a></li>
 										<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
@@ -53,7 +53,7 @@
 											<ol>
 												Advised by: Prof. <a href="https://sites.google.com/site/chiehchihbobwang/">Chieh-Chih (Bob) Wang</a><br>
 												Date: July 2013 - July 2014<br><br>
-												In robotics scenarios, there is a number of applications using data from a moving camera, for instance: navigation, tracking, and localization ... etc. It is inevitable to encounter multiple moving objects. Therefore, segmenting motion becomes an essential problem to enhance the performance of these general tasks. Our goal aims to partition regions in one RGB-D image with same estimated motion in 6 DoF. Moreover, we combined the idea of physical support to have a better understanding of the motion segments.
+												In robotics applications involving data from a moving camera—such as navigation, tracking, and localization—it is inevitable to encounter multiple moving objects. As a result, motion segmentation becomes a critical task to enhance the performance of these operations. Our goal is to partition regions in an RGB-D image that share the same estimated motion in 6 degrees of freedom (6 DoF). Additionally, we incorporated the concept of physical support to improve the accuracy and understanding of the motion segments.
 											</ol>
 										</p> 
 									</header>
@@ -82,7 +82,8 @@
 										</div>
 									</p>
 									<p>
-										By utilizing a RGB-D structured light camera, we propose a novel and robust algorithm to segment motions from consecutive frames. Based on a modified random sample consensus algorithm (RANSAC), we exploit the coherence of color and spatiality in the scene to estimate motion. It inherits the computational efficiency and probabilistic robustness from the RANSAC paradigm. After aligning two point clouds by the estimated transformation, we use inlier and outlier distribution as the prior knowledge to conduct graph-cut based segmentation. Moreover, we introduce physical support to realize the relation between motion segments. We provide a large annotated RGB-D dataset captured in a crowded urban environment to demonstrate our idea. Comparing to several motion segmentation methods in the same pipeline, we show that our approach performs well in the highly dynamic scene.
+										We propose a novel and robust motion segmentation algorithm leveraging RGB-D video captured with a structured light camera. Using a modified Random Sample Consensus (RANSAC) algorithm, we estimate motion by exploiting the coherence of color and spatial relationships in the scene. This approach inherits the computational efficiency and probabilistic robustness of the RANSAC paradigm. After aligning two point clouds using the estimated transformation, we utilize the distribution of inliers and outliers as prior knowledge for graph-cut-based segmentation.<br><br>
+										To further enhance the understanding of motion segments, we integrate the concept of physical support relationships, allowing us to capture meaningful interactions between motion segments. Additionally, we provide a comprehensive annotated RGB-D dataset captured in a crowded urban environment to validate our method. Comparisons with existing motion segmentation approaches demonstrate the superior performance of our method in highly dynamic scenes, particularly in accurately handling challenging scenarios such as occlusions and complex motions.
 									</p>
 									<p>
 										<a href="./paper/MotSeg.pdf"><i>Ching-Hsiang Hsu, "Graph-cut based Motion Segmentation with Physical Support Relationships in Crowded Urban Areas from a Moving RGB-D Camera," National Taiwan University Thesis Press, July, 2014.</i></a>
@@ -101,7 +102,7 @@
 										</center>
 									</p>
 									<p>
-										In the motion segmentation section, two important techniques to do segmentation are graph-cut optimization and simple linear iterative clustering (SLIC). I have tried these two methods in interactive image segmentation first. The instruction is to use red/blue pen to annotate your interested/uninterested region. Then, through maxima-flow algorithm, the region could be separated accordingly. It's simple to implement and the performance is quite good.
+										In the motion segmentation section, two key techniques used for segmentation are graph-cut optimization and Simple Linear Iterative Clustering (SLIC). I initially experimented with these methods in interactive image segmentation. The process involves using a red pen to annotate regions of interest and a blue pen for regions of non-interest. By applying the max-flow algorithm, the regions are effectively separated based on the annotations. This approach is straightforward to implement and delivers impressive performance.
 									</p>
 
 									<hr class="major" />
@@ -131,11 +132,9 @@
 
 							<!-- Menu -->
 								<nav id="menu">
-									<!--
 									<header class="major">
 										<h2>Menu</h2>
 									</header>
-									-->
 									<ul>
 										<li><a href="../index.html">Homepage</a></li>
 										<li><a href="../work.html">Work Experience</a></li>

@@ -27,8 +27,8 @@
 										<li><a href="https://www.linkedin.com/in/ching-hsiang-hsu/" class="icon brands fa-linkedin"><span class="label">LinkedIn</span></a></li>
 										<li><a href="https://github.com/tomhsu1990" class="icon brands fa-github"><span class="label">Github</span></a></li>
 										<li><a href="https://www.youtube.com/channel/UCsyHPAJxPqzgiJW0HllRzHA" class="icon brands fa-youtube"><span></span></a></li>
-										<li><a href="https://www.facebook.com/tomhsu1990" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
 										<!-- 
+										<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
 										<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
 										<li><a href="#" class="icon fa-snapchat-ghost"><span class="label">Snapchat</span></a></li>
 										<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
@@ -50,8 +50,9 @@
 									<header class="main">
 										<h1>Navigation, Localization, and Mapping</h1>
 										<ol>
-											Navigation is one of the most essential functionalities for robots. Robots use the given map to get the location and then find the direction to reach the target. However, The given map is an assumption. Most of the time, there is no map or the map is not accurate as it is produced. Therefore, to build the map of the unknown/known environment becomes an indispensable problem in robotics.<br>
-											While to do localization and mapping at the same time is a chicken-and-egg problem, there are several well-known approximation algorithm to solve it such as particle filter, extended Kalman filter ... etc. In my work, I have tried particle filter to do Simultaneous Localization and Mapping (SLAM).
+											Navigation is one of the most critical functionalities for robots. Robots typically rely on a given map to determine their location and plan a path to their target. However, this reliance assumes the map is accurate, which is often not the case. In many situations, maps are either unavailable or imprecise, making the task of building a map of the environment—whether known or unknown—an indispensable challenge in robotics.<br><br>
+
+											Simultaneously addressing localization and mapping presents a classic chicken-and-egg problem: accurate localization requires a reliable map, while building an accurate map depends on precise localization. To tackle this, several well-known approximation algorithms, such as particle filters and extended Kalman filters, have been developed. In my work, I explored the use of particle filters to implement Simultaneous Localization and Mapping (SLAM).
 										</ol>
 									</header>
 
@@ -66,7 +67,7 @@
 									<div class="row">
 										<div class="col-6 col-12-medium">
 											<p>
-												This is my first robotics project. I worked with one classmate to control a pioneer-like mobile robot to autonomously reach a ball in dynamic scenes with a Kinect sensor. I constructed the system to combine the mobility with the perception's estimation. In addition, I design a simple obstacle avoidance algorithm and grid-based path planning.
+												This was my first robotics project, where I collaborated with a classmate to control a pioneer-like mobile robot equipped with a Kinect sensor. The goal was to enable the robot to autonomously locate and approach a ball in dynamic environments. I developed the system to integrate mobility with perception-based estimations. Additionally, I designed a simple obstacle avoidance algorithm and implemented grid-based path planning to ensure efficient and safe navigation.
 											</p>
 										</div>
 										<div class="col-6 col-12-medium">
@@ -87,7 +88,9 @@
 									<div class="row">
 										<div class="col-6 col-12-medium">
 											<p>
-												We use an Xtion sensor and a manually controlled mobile robot to get RGB, depth, and odometry information in both competitions. My main strategy to accomplish these two tasks is via Monte Carlo method (particle filter). As you can see in the video, red dots are randomly generated particles based on the given mean and sigma. The challenge in the localization task is that the robot will pass by some dark places where RGB information is helpless. In addition, there are some walking students whom may cause inaccurate depth alignment. On the other hand, in the SLAM task, we have to do loop detection and try to handle loop closure problem.<br>
+												In both competitions, we used an Xtion sensor and a manually controlled mobile robot to collect RGB, depth, and odometry data. My primary approach to solving the tasks was based on the Monte Carlo method (particle filter). As demonstrated in the video, red dots represent randomly generated particles, initialized using the given mean and standard deviation (sigma).<br><br>
+
+												The localization task presented challenges, such as navigating through dark areas where RGB data became unreliable, and dealing with moving pedestrians, which often disrupted depth alignment. For the SLAM task, additional complexities included performing loop detection and addressing the loop closure problem to ensure accurate mapping.
 											</p>
 										</div>
 										<div class="col-6 col-12-medium">
@@ -100,12 +103,12 @@
 											</div>
 										</div>
 									</div>
-									The localization competition is an online demonstration. The shown video is based on the recorded images and odometry measurement. There are four main steps in the localization process.
+									The localization competition was conducted as an online demonstration, with the video showcasing results based on recorded images and odometry measurements. The localization process consists of four main steps:
 									<ol>
-										<li> Predict the possible position distribution by using the odometry readings.</li>
-										<li> Weight the particles based on the distribution and correct some particles by using depth information. (Here, due to real-time performance issue, I only use one row of the depth image. It can be treated as a kind of 2D scan.)</li>
-										<li> Estimate the most likely position after computing the correlation of the current RGB image and integrating with the previous weighting result. (To find the correlation between images, I use SIFT feature detector to match and compute weighting, #matched_keypoints/#all_keypoints.)</li>
-										<li> Resample particles.</li>
+										<li><b>Prediction:</b> Estimate the possible position distribution using odometry readings.</li>
+										<li><b>Weighting and Correction:</b> Assign weights to particles based on their distribution and refine some particles using depth information. (For real-time performance optimization, I used only a single row of the depth image, treating it as a simplified 2D scan.)</li>
+										<li><b>Position Estimation:</b> Calculate the most likely position by analyzing the correlation of the current RGB image with previous weighting results. To determine image correlation, I employed the SIFT feature detector to match keypoints and computed the weighting as the ratio of matched keypoints to all detected keypoints.</li>
+										<li><b>Resampling:</b> Resample particles to maintain an accurate distribution.</li>
 									</ol>
 									<div class="row">
 										<div class="col-6 col-12-medium">
@@ -128,7 +131,9 @@
 										</div>
 									</div>
 									<p><br>
-										In the SLAM videos, the measurements are captured at our RoboCup field. To build the map, I exploit the 2D scan to do Iterative Closest Point (ICP) alignment. Then, do the above localization and use the estimated position to refine self position. The difference between the left and right video is that the right video has a map refinement process after loop detection. Since we take the video at a RoboCup field, one of the most obvious alignment differences are the goal and goal zone. As you can see, in the right video the goal's yellow pillar and lines of goal zone have much fewer miss aligned duplicates than the left video which means it builds a better map based on the estimated position.
+										The SLAM videos were recorded on our RoboCup field, where measurements were captured to construct the map. To build the map, I utilized 2D scans and applied the Iterative Closest Point (ICP) algorithm for alignment. The localization process was then performed, and the estimated positions were used to further refine the robot's self-localization.<br><br>
+
+										The difference between the two videos lies in the map refinement process: the right video includes a refinement step following loop detection, while the left video does not. One noticeable improvement in the right video is the alignment accuracy of the goal and goal zone. For example, the goal’s yellow pillar and the goal zone lines exhibit significantly fewer misaligned duplicates in the right video, indicating a more accurate map reconstruction based on the estimated positions.
 									</p>
 
 									<hr class="major" />
@@ -147,8 +152,11 @@
 									</p> 
 									-->
 									<p>
-										The massive deployment of wireless network in the indoor environment paves a way not only for doing localization, but also helping build a wireless map. Without knowing the location of the wireless landmarks, SLAM provides a solution to build the map and do localization at the same time. Based on the paper, <i>Efficient Probabilistic Range-Only SLAM</i>, and the tool, <a href="https://www.mrpt.org/">Mobile Robot Programming Tool (MRPT)</a>, I build the WiFi-SLAM system with a Raspberry PI and iRobot vacuum cleaner and test in an office. Since the WiFi signal is noisy and unstable when the robot is moving, I have implemented a bucket filter to stabilize the signal strength. (In the experiments, I have set up multiple Raspberry PI which can both receive WiFi signal and be a hot-spot.)<br><br>
-										Compare with the original odometer reading, it shows excellent performance in practice in some cases. However, I haven't figured out how to deal with symmetric problem when changing the orientation. I give an unsuccessful result to address this intrinsic problem when estimating orientation.
+										The widespread deployment of wireless networks in indoor environments offers opportunities not only for localization but also for constructing wireless maps. When the locations of wireless landmarks are unknown, SLAM provides an effective solution to simultaneously build the map and perform localization. Based on the paper <i>Efficient Probabilistic Range-Only SLAM</i> and the tool  <a href="https://www.mrpt.org/">Mobile Robot Programming Tool (MRPT)</a>, I developed a WiFi-SLAM system using a Raspberry Pi and an iRobot vacuum cleaner, which I tested in an office environment.<br><br>
+
+										Since WiFi signals tend to be noisy and unstable when the robot is in motion, I implemented a bucket filter to stabilize signal strength. For the experiments, I deployed multiple Raspberry Pi devices, which were configured to both receive WiFi signals and act as hotspots.<br><br>
+
+										Compared to the original odometer readings, the system demonstrated excellent practical performance in certain cases. However, I encountered challenges with the symmetry problem when the robot changed orientation. To address this intrinsic issue, I presented an unsuccessful result, highlighting the difficulty in accurately estimating orientation under these conditions.
 									</p>
 									<div class="row">
 										<div class="col-6 col-12-medium">
@@ -208,11 +216,9 @@
 
 							<!-- Menu -->
 								<nav id="menu">
-									<!--
 									<header class="major">
 										<h2>Menu</h2>
 									</header>
-									-->
 									<ul>
 										<li><a href="../index.html">Homepage</a></li>
 										<li><a href="../work.html">Work Experience</a></li>
@@ -235,7 +241,7 @@
 												<li><a href="./3D_pop-up.html">3D Pop-up Book</a></li>
 											</ul>
 										</li>
-										<li><a href="../oj_records.html">Online Judge Record</a></li>
+										<li><a href="../oj_records.html" >Online Judge Record</a></li>
 									</ul>
 								</nav>
 

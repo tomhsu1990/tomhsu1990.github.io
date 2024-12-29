@@ -27,8 +27,8 @@
 										<li><a href="https://www.linkedin.com/in/ching-hsiang-hsu/" class="icon brands fa-linkedin"><span class="label">LinkedIn</span></a></li>
 										<li><a href="https://github.com/tomhsu1990" class="icon brands fa-github"><span class="label">Github</span></a></li>
 										<li><a href="https://www.youtube.com/channel/UCsyHPAJxPqzgiJW0HllRzHA" class="icon brands fa-youtube"><span></span></a></li>
-										<li><a href="https://www.facebook.com/tomhsu1990" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
 										<!-- 
+										<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
 										<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
 										<li><a href="#" class="icon fa-snapchat-ghost"><span class="label">Snapchat</span></a></li>
 										<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
@@ -54,7 +54,7 @@
 											<ol>
 												Course: Natural Language Processing, Computer Science Department, New York University<br>
 												Date: Apr. 2017 - May 2017<br><br>
-												Online restaurant reviews are sometimes verbose and inaccurate, so the information might not live up to your expectation or not match your preference. We propose a restaurant rating system by adopting Natural Language Processing techniques to classify lengthy reviews into several categories such as taste, service, price, sanitation, and location. This way, customers can have a better understanding from different aspects of the restaurant. In addition, by applying our useful system, these reviews can provide much more objective and fair viewpoints for restaurant runners.
+												Online restaurant reviews can often be verbose or inaccurate, making it difficult for readers to find relevant information or determine whether a restaurant matches their preferences. To address this, we propose a restaurant rating system that leverages Natural Language Processing (NLP) techniques to classify lengthy reviews into key categories such as taste, service, price, sanitation, and location. This approach enables customers to gain a clearer and more comprehensive understanding of a restaurant from multiple perspectives. Additionally, our system provides restaurant owners with more objective and actionable insights, fostering fairer and more constructive feedback.
 											</ol>
 										</p>
 									</header>
@@ -64,14 +64,23 @@
 										<div class="row">
 											<div class="col-6 col-12-medium">
 												<p>
-													Our system achieved average <b>97.08%</b> tagging accuracy of classifying three restaurants’ reviews into seven self-defined categories.<br>
-													The whole pipeline consists three core parts:<br>
+													Our system achieved an average tagging accuracy of <b>97.08%</b> in classifying reviews from three restaurants into seven self-defined categories. The pipeline comprises three core components:
 													<ol>
-														<li>Scrape review data from Yelp into .csv file and do the labeling after parsing .csv file into a .txt file.</li>
-														<li>Build useful feature sets and train the model.</li>
-														<li>Test other reviews and compute each review's ratings.</li>
+														<li>Data Collection and Labeling: Scrape review data from Yelp into a .csv file, parse it into a .txt file, and label the reviews.
+</li>
+														<li>Feature Engineering and Model Training: Develop effective feature sets and train the model.</li>
+														<li>Testing and Rating Calculation: Test the model on additional reviews and compute ratings for each review.</li>
 													</ol>
-													When processing labels, we define seven basic categories with positive and negative tags to do annotation and classication which are Overall: LOVE/HATE, Taste: YUMMY/GROSS, Service: FRIENDLY/INHOSPITABLE, Price: CHEAP/EXPENSIVE, Sanitation: CLEAN/DIRTY, Location: CONVENIENT/INCONVENIENT, and Other: OTHER.<br>
+													To classify reviews, we defined seven categories with both positive and negative tags for annotation and classification:
+													<ul>
+														<li>Overall: LOVE/HATE</li>
+														<li>Taste: YUMMY/GROSS</li>
+														<li>Service: FRIENDLY/INHOSPITABLE</li>
+														<li>Price: CHEAP/EXPENSIVE</li>
+														<li>Sanitation: CLEAN/DIRTY</li>
+														<li>Location: CONVENIENT/INCONVENIENT</li>
+														<li>Other: OTHER</li>
+													</ul>
 												</p>
 											</div>
 											<div class="col-6 col-12-medium">
@@ -80,22 +89,30 @@
 												</center>
 											</div>
 										</div>
-										In the feature building phase, we eventually use the following five features to get our best feature extraction. Notice that the special lists are all relevant synonyms from <a href="http://www.thesaurus.com/">Thesaurus.com</a>.
+										<h3>Feature Engineering</h3>
+										During feature extraction, we identified five key features to optimize classification performance. These include:
 										<ol>
-											<li>sequence part-of-speech (POS) features, </li>
-											<li>POS combination like NN+VB+JJ, </li>
-											<li>the appearance of the token word, </li>
-											<li>special lists which related to the category, </li>
-											<li>special sentence structure in the reviews. </li>
+											<li>Sequence Part-of-Speech (POS) Features </li>
+											<li>POS Combinations (e.g., NN+VB+JJ)</li>
+											<li>Token Word Appearance</li>
+											<li>Special Lists: Synonyms relevant to each category from  <a href="http://www.thesaurus.com/">Thesaurus.com</a></li>
+											<li>Special Sentence Structures: Common patterns in reviews</li>
 										</ol>
-										In the training phase, we make use of the maximum-entropy Markov model (MEMM) in the OpenNLP library.<br>
-										In conclusion, we can see the average ratings from the six categories (overall, taste, service, price, sanitation, location) is similar to the rating from Yelp. We believe our rating system can help business owners to have a better understanding about the reviews from Yelp. Still, there are some on-going enhancements of this rating model. In the future, we have three big directions to work:
+										<h4>Model Training</h4>
+										We trained the system using the Maximum-Entropy Markov Model (MEMM) implemented in the OpenNLP library.<br><br>
+
+										<h4>Results and Insights</h4>
+										Our system produced category ratings—Overall, Taste, Service, Price, Sanitation, and Location—that closely matched Yelp’s aggregate ratings. This demonstrates the system’s potential to help business owners gain more detailed insights from Yelp reviews.<br><br>
+
+										<h4>Future Enhancements</h4>
+										To further improve accuracy and reliability, we plan to pursue three major enhancements:
 										<ol>
-											<li>Add sentiment analysis, so we can know which word is more likely to become positive or negative.</li>
-											<li>Improve dictionary list by adding words with different POS.</li>
-											<li>Label more reviews so we will have more data to train our model.</li>
+											<li>Incorporate Sentiment Analysis: Identify words most likely to convey positive or negative sentiment.</li>
+											<li>Enhance the Dictionary: Expand category-specific synonym lists and account for different POS variations.</li>
+											<li>Increase Training Data: Label more reviews to improve model performance through larger datasets.</li>
 										</ol>
-										With all these improvements, we believe that they will help our systems to become more accurate and reliable.
+										With these improvements, we believe our system will provide even more accurate and actionable insights for businesses and users alike.
+										We trained the system using the Maximum-Entropy Markov Model (MEMM) implemented in the OpenNLP library.
 									</p>
 
 									<hr class="major" />
@@ -122,11 +139,9 @@
 
 							<!-- Menu -->
 								<nav id="menu">
-									<!--
 									<header class="major">
 										<h2>Menu</h2>
 									</header>
-									-->
 									<ul>
 										<li><a href="../index.html">Homepage</a></li>
 										<li><a href="../work.html">Work Experience</a></li>

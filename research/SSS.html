@@ -27,8 +27,8 @@
 										<li><a href="https://www.linkedin.com/in/ching-hsiang-hsu/" class="icon brands fa-linkedin"><span class="label">LinkedIn</span></a></li>
 										<li><a href="https://github.com/tomhsu1990" class="icon brands fa-github"><span class="label">Github</span></a></li>
 										<li><a href="https://www.youtube.com/channel/UCsyHPAJxPqzgiJW0HllRzHA" class="icon brands fa-youtube"><span></span></a></li>
-										<li><a href="https://www.facebook.com/tomhsu1990" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-										<!-- 
+										<!--
+										<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li> 
 										<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
 										<li><a href="#" class="icon fa-snapchat-ghost"><span class="label">Snapchat</span></a></li>
 										<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
@@ -53,17 +53,17 @@
 											<ol>
 												Advised by: Prof. <a href="http://cs.nyu.edu/cs/faculty/yap/">Chee Yap</a><br>
 												Date: Sep. 2015 - July 2017<br><br>
-												Motion planning is a fundamental problem in robotics. There are three main approaches:
+												Motion planning is a fundamental problem in robotics, with three primary approaches:
 												<li>
-													The Exact Approach which can, in principle, solve any algebraic planning problem. But practitioners tend to implement exact algorithms using machine approximations; then it is no longer clear what the guarantees of exact algorithms mean. In short, "Exact" algorithms are impractical except for the simplest cases.
+													<b>Exact Approach:</b> This approach can theoretically solve any algebraic planning problem. However, in practice, exact algorithms are often implemented using machine approximations, which undermines their guarantees. As a result, "exact" algorithms are generally impractical except for the simplest cases.
 												</li>
 												<li>
-													The Sampling Approach has been dominant in motion planning research domain for the last two decades. We refer to Probabilistic Road Map (PRM) the main representative. Its central problem is inability to halting (couched as “narrow passage problem”).
+													<b>Sampling Approach:</b> Dominant in motion planning research over the past two decades, this approach is best represented by the Probabilistic Road Map (PRM). Its primary limitation is the inability to handle termination effectively, commonly known as the "narrow passage problem."
 												</li>
 												<li>
-													The Subdivision Approach (cell decomposition) is the oldest among the three approaches, and remains popular with practitioners: our work falls under this category. We introduced the concept of resolution-exactness as the theoretical foundation for path planning that side-steps exact computation. This opens the way for the development of soft predicates, replacing the usual predicates that control the logic of all geometric algorithms.
+													<b>Subdivision Approach (Cell Decomposition):</b> The oldest of the three, this approach remains popular among practitioners and is the foundation of our work. We introduced the concept of resolution-exactness as a theoretical basis for path planning that avoids exact computation. This innovation enables the use of soft predicates, which replace traditional predicates that govern the logic of geometric algorithms.
 												</li>
-												To find more details about our Lab, please reach out to <a href="https://cs.nyu.edu/exact/">NYU Exact Geometric Computation group (EGC)</a>.
+												For more information about our work, please visit the <a href="https://cs.nyu.edu/exact/">NYU Exact Geometric Computation group (EGC)</a>.
 											</ol>
 										</p>
 									</header>
@@ -92,7 +92,7 @@
 										</div>
 									</p>
 									<p>
-										We introduce the Soft Subdivision Search (SSS) framework for designing a new class of path planning algorithms, founded on the concept of resolution-exactness. This video illustrates the SSS framework for a trio of simple planar robots: disc, triangle and 2-links. The algorithm achieves state-of-art real-time performance, and is relatively easy to implement.
+										We introduce the <b>Soft Subdivision Search (SSS)</b> framework, a novel approach for designing path planning algorithms grounded in the concept of resolution-exactness. This video demonstrates the SSS framework applied to three simple planar robots: a disc, a triangle, and a 2-link robot. The algorithm achieves state-of-the-art real-time performance and is both computationally efficient and straightforward to implement.
 									</p>
 									<p>
 										<a href="./paper/simple-robots2016.pdf"><i>Ching-Hsiang Hsu, John Paul Ryan, and Chee Yap, "Path Planning for Simple Robots using Soft Subdivision Search," Multimedia Exposition. Proc. 32nd International Symposium on Computational Geometry (SoCG), Boston, MA. June 14-18, 2016.</i></a>
@@ -121,9 +121,9 @@
 										</div>
 									</p>
 									<p>
-										We propose a novel and efficient planner for non-crossing 2-link thick robots. Our work contributes to the development of practical and theoretically sound subdivision planners. It is reasonable to expect a tradeoff between the stronger guarantees of our resolution-exact approach versus a faster running time for sampling approaches. But, our experiments suggest no such tradeoffs at all: SSS is consistently superior to sampling.<br>
-										The sampling approaches are from <a href="http://ompl.kavrakilab.org/">Open Motion Planning Library (OMPL)</a>. In addition, I have implemented one of the latest PRM variants, Lazy Toggle PRM in the performance comparison. (For making an unbiased comparison, I would like to adopt open source library first. But, I have implemented the both PRM and RRT algorithm on my own too. Please see the RRT demonstration video with a 2-links robot in different step size.)
+										We propose a novel and efficient planner for non-crossing 2-link thick robots, contributing to the development of practical and theoretically sound subdivision planners. While it is commonly assumed that resolution-exact approaches trade stronger theoretical guarantees for slower runtime compared to sampling-based methods, our experiments challenge this notion. The results indicate that our Soft Subdivision Search (SSS) framework consistently outperforms sampling approaches in both speed and success rate.<br><br>
 
+										For performance comparison, we utilized sampling-based approaches from the <a href="http://ompl.kavrakilab.org/">Open Motion Planning Library (OMPL)</a> and implemented one of the latest PRM variants, Lazy Toggle PRM. To ensure fairness, we adopted open-source libraries as the primary benchmark but also implemented PRM and RRT algorithms independently. For further illustration, please refer to our RRT demonstration video, which showcases a 2-link robot navigating with different step sizes.
 										<div class="video-container">
 											<p align="center">
 												<iframe width="720" height="540"
@@ -162,7 +162,7 @@
 										</div>
 									</p>
 									<p>
-										We continue making progress of SSS for rods and rings in 3D, with implementations. One major technical difference from our previous work on planar robots is that we gave up the notion of "forbidden orientations" (this is quite complicated for spatial robots) but, opted for an alternative approach to bound the footprint of boxes using what we call Σ<sub>2</sub>-sets. Such sets generalize the concept of Π<sub>1</sub>-sets in our previous work. One benefit of Σ<sub>2</sub>-sets is that they are very flexible, allowing us to easily extend the planners to “thick” versions of a rod or ring. The trade-off in using Σ<sub>2</sub>-sets is a modest increase in the accuracy constant K.
+										We continue advancing the Soft Subdivision Search (SSS) framework for rods and rings in 3D, now with practical implementations. A key technical shift from our prior work on planar robots is abandoning the notion of "forbidden orientations," which becomes exceedingly complex for spatial robots. Instead, we adopt an alternative strategy by introducing Σ<sub>2</sub>-sets to bound the footprints of boxes. These sets generalize the concept of Π<sub>1</sub>-sets from our earlier work, providing greater flexibility and enabling the extension of planners to "thick" rods and rings. While this approach entails a modest increase in the accuracy constant <i><b>K</b></i>, it significantly enhances the robustness and adaptability of our algorithms.
 									</p>
 									<p>
 										<a href="./paper/FWCG_rod.pdf"><i>Ching-Hsiang Hsu, Yi-Jen Chiang, and Chee Yap, "Soft Subdivision Planner for a Rod," Fall Workshops on Computational Geometry, New York, NY, Oct 27-28, 2016.</i></a><br>

@@ -27,8 +27,8 @@
 										<li><a href="https://www.linkedin.com/in/ching-hsiang-hsu/" class="icon brands fa-linkedin"><span class="label">LinkedIn</span></a></li>
 										<li><a href="https://github.com/tomhsu1990" class="icon brands fa-github"><span class="label">Github</span></a></li>
 										<li><a href="https://www.youtube.com/channel/UCsyHPAJxPqzgiJW0HllRzHA" class="icon brands fa-youtube"><span></span></a></li>
-										<li><a href="https://www.facebook.com/tomhsu1990" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-										<!-- 
+										<!--
+										<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li> 
 										<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
 										<li><a href="#" class="icon fa-snapchat-ghost"><span class="label">Snapchat</span></a></li>
 										<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
@@ -53,7 +53,7 @@
 											<ol>
 												Advised by: Prof. <a href="https://sites.google.com/site/chiehchihbobwang/">Chieh-Chih (Bob) Wang</a><br>
 												Date: Sep. 2012 - June 2013<br><br>
-												In the RoboCup Standard Platform League (SPL), all teams use identical robots, humanoid Nao. It allows the teams to concentrate on software development rather than the mechanics of robots. The robots operate fully autonomously in the competition; i.e., there is no remote control by either humans or computers during the games.
+												In the RoboCup Standard Platform League (SPL), all teams use identical humanoid Nao robots. This standardization allows teams to focus exclusively on software development rather than robot hardware. During the competition, the robots operate fully autonomously, with no remote control or external intervention by humans or computers.
 											</ol>
 										</p> 
 									</header>
@@ -70,7 +70,7 @@
 												<div class="video-container">
 													<p align="center">
 														<iframe width="640" height="480"
-															src="https://www.youtube.com/embed/cYmNmJltFQQ" frameborder="0" allowfullscreen>
+															src="https://www.youtube.com/embed/ckf8MDzsiYo" frameborder="0" allowfullscreen>
 														</iframe>
 													</p>
 												</div>
@@ -78,9 +78,15 @@
 										</div>
 									</p>
 									<p>
-										In our RoboCup system, there are three main components: <b>perception, behavior, and motion.</b> I would like to use a pipeline figure to uncover our RoboCup system. Here is a short scenario to go over the pipeline.<br><br>
-										Suppose there are two robots on the soccer field. Once they are turned on, they will use their field detectors (goal, center circle, corner, line detectors) to locate themselves based on these static features. Meanwhile, they will utilize ball and robot detectors to locate these two kinds of moving objects. Then, after integrating these features as a feature vector, we combine them with odometer's reading into our multiple hypotheses tracking and multiple-robot simultaneous localization and tracking modules to get self, other robot's, and ball's position estimation. Since our robots are acting in a distributed manner, they will share their estimation and fuse other's estimation to have a more accurate understanding of the field. Then, according to these perception results, the robot which is closer to the ball will advance into a striker and another one will become a defense supporter. Here, we have conduct a filtering to avoid state oscillation. As long as their roles are determined and their planned position is computed, they will call their motion module to move ahead to their target (ball or defense position) and either kick or block the ball.<br><br>
-										If there are multiple robots on the field, role oscillation becomes a problem. Through designing strict rules for a defender and loosed rules for astriker, the abnormal switching situation had decreased a lot.
+										Our RoboCup system is composed of three main components: <b>perception, behavior, and motion</b>. A pipeline figure can effectively illustrate the system’s structure and functionality. Below is a brief scenario demonstrating how the pipeline operates.<br><br>
+
+										Suppose there are two robots on a soccer field. Once activated, the robots use field detectors (goal, center circle, corner, and line detectors) to localize themselves based on static features. Simultaneously, they utilize ball and robot detectors to track these dynamic objects. These features are then integrated into a feature vector, which, when combined with odometer readings, feeds into our <b>multiple hypotheses tracking and multi-robot simultaneous localization and tracking (SLAM)</b> modules to estimate the positions of the robots, their teammates, and the ball.<br><br>
+
+										Since the robots operate in a distributed manner, they share their estimations with one another and fuse the received data to achieve a more accurate understanding of the field. Based on these perception results, the robot closer to the ball transitions into the role of a striker, while the other assumes the role of a defensive supporter. A filtering mechanism is applied to prevent state oscillations during role assignments.<br><br>
+
+										Once roles are determined and planned positions are computed, the motion module activates, directing the robots to their respective targets—either the ball or a defensive position—enabling them to kick or block the ball as required.<br><br>
+
+										When multiple robots are on the field, role oscillation can become an issue. To mitigate this, we implemented stricter rules for defensive roles and more flexible rules for strikers. This design has significantly reduced abnormal switching and improved overall performance.<br><br>
 										<center>
 											<a href="./img/RoboCup_system.png" class="image"><img src="./img/RoboCup_system.png" alt="" width="60%" height="60%"/></a>
 										</center>
@@ -118,11 +124,9 @@
 
 							<!-- Menu -->
 								<nav id="menu">
-									<!--
 									<header class="major">
 										<h2>Menu</h2>
 									</header>
-									-->
 									<ul>
 										<li><a href="../index.html">Homepage</a></li>
 										<li><a href="../work.html">Work Experience</a></li>

@@ -1,9 +1,11 @@
 /*
-	Editorial by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
-*/
+       Editorial by HTML5 UP
+       html5up.net | @ajlkn
+       Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 
+       updated: Ching-Hsiang Hsu 2024/12/28
+       notes: section folder folded/unfolded functionality
+*/
 (function($) {
 
 	var	$window = $(window),
@@ -239,24 +241,61 @@
 			$menu_openers = $menu.children('ul').find('.opener');
 
 		// Openers.
-			$menu_openers.each(function() {
+			$menu_openers.each(function () {
+			    var $this = $(this);
 
-				var $this = $(this);
+			    $this.on('click', function (event) {
+			        // Prevent default.
+			        event.preventDefault();
 
-				$this.on('click', function(event) {
+			        // Toggle the clicked opener.
+			        $this.toggleClass('active');
 
-					// Prevent default.
-						event.preventDefault();
+			        // Ensure only clicked section remains open, unless it is clicked again.
+			        $menu_openers.not($this).removeClass('active').next('ul').slideUp();
+			        if ($this.hasClass('active')) {
+			            $this.next('ul').slideDown();
+			        } else {
+			            $this.next('ul').slideUp();
+			        }
 
-					// Toggle.
-						$menu_openers.not($this).removeClass('active');
-						$this.toggleClass('active');
+			        // Trigger resize (sidebar lock).
+			        $window.triggerHandler('resize.sidebar-lock');
+			    });
+			});
 
-					// Trigger resize (sidebar lock).
-						$window.triggerHandler('resize.sidebar-lock');
+			// Ensure the active link's parent opener remains expanded after page reload.
+			$(document).ready(function () {
+			    // Get the current page file name
+			    const currentPath = window.location.pathname.split('/').pop();
+			    const $menu = $('#menu');
 
-				});
+			    // Iterate through all openers to check if they contain the current page
+			    $menu.find('.opener').each(function () {
+			        const $opener = $(this);
+			        const $submenu = $opener.next('ul'); // The associated submenu
 
+			        // Check if the current page link exists in this submenu
+			        const $currentLink = $submenu.find(`a[href="./${currentPath}"]`);
+			        if ($currentLink.length) {
+			            // Expand this section and highlight the link
+			            $opener.addClass('active');
+			            $submenu.show();
+			            $currentLink.addClass('current');
+			        } else {
+			            // Collapse this section if no match
+			            $opener.removeClass('active');
+			            $submenu.hide();
+			        }
+			    });
+
+			    // Add click behavior for openers to toggle open/close
+			    $menu.find('.opener').on('click', function (event) {
+			        event.preventDefault();
+			        const $this = $(this);
+			        $this.toggleClass('active');
+			        $this.next('ul').slideToggle();
+			    });
 			});
 
 })(jQuery);
