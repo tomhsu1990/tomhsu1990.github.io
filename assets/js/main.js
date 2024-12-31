@@ -288,32 +288,34 @@
 			const menuHTML = `
 			<nav id="menu">
 				<header class="major">
-				<h2>Menu</h2>
+					<!--
+					<h2>Menu</h2>
+					-->
 				</header>
-					<ul>
-						<li><a href="${basePath}index.html">Homepage</a></li>
-						<li><a href="${basePath}work.html">Work Experience</a></li>
-						<li><a href="${basePath}background.html">Academic Background</a></li>
-						<li>
-							<span class="opener">Research and Publication</span>
-							<ul>
-								<li><a href="${basePath}research/SSS.html">Soft Subdivision Search</a></li>
-								<li><a href="${basePath}research/MotSeg.html">Motion and Semantic Segmentation</a></li>
-								<li><a href="${basePath}research/ActionRecog.html">Egocentric Action Recognition</a></li>
-							</ul>
-						</li>
-						<li>
-							<span class="opener">Projects</span>
-							<ul>
-								<li><a href="${basePath}project/Navigation_SLAM.html">Navigation, Localization and Mapping</a></li>
-								<li><a href="${basePath}project/RoboCup.html">RoboCup Standard Platform League</a></li>
-								<li><a href="${basePath}project/LEGO_arm.html">LEGO Robot Arm System</a></li>
-								<li><a href="${basePath}project/Restaurant_Rating.html">Restaurant Rating System</a></li>
-								<li><a href="${basePath}project/3D_pop-up.html">3D Pop-up Book</a></li>
-							</ul>
-						</li>
-						<li><a href="${basePath}oj_records.html">Online Judge Record</a></li>
-					</ul>
+				<ul>
+					<li><a href="${basePath}index.html">Homepage</a></li>
+					<li><a href="${basePath}work.html">Work Experience</a></li>
+					<li><a href="${basePath}background.html">Academic Background</a></li>
+					<li>
+						<span class="opener">Research and Publication</span>
+						<ul>
+							<li><a href="${basePath}research/SSS.html">Soft Subdivision Search</a></li>
+							<li><a href="${basePath}research/MotSeg.html">Motion and Semantic Segmentation</a></li>
+							<li><a href="${basePath}research/ActionRecog.html">Egocentric Action Recognition</a></li>
+						</ul>
+					</li>
+					<li>
+						<span class="opener">Projects</span>
+						<ul>
+							<li><a href="${basePath}project/Navigation_SLAM.html">Navigation, Localization and Mapping</a></li>
+							<li><a href="${basePath}project/RoboCup.html">RoboCup Standard Platform League</a></li>
+							<li><a href="${basePath}project/LEGO_arm.html">LEGO Robot Arm System</a></li>
+							<li><a href="${basePath}project/Restaurant_Rating.html">Restaurant Rating System</a></li>
+							<li><a href="${basePath}project/3D_pop-up.html">3D Pop-up Book</a></li>
+						</ul>
+					</li>
+					<li><a href="${basePath}oj_records.html">Online Judge Record</a></li>
+				</ul>
 			</nav>
 			`;
 
@@ -384,22 +386,23 @@
 	// Contact.
 		document.addEventListener("DOMContentLoaded", function () {
 		    const contactHTML = `
-		        <section>
+		       <section>
 		            <header class="major">
+		    		  <!--
 		                <h2>Get in touch</h2>
+		    	         -->
 		            </header>
 		            <p>
-		                If you would like to reach me, please use the following e-mail address. Feel free to ask me questions.
+		                If you’d like to get in touch, feel free to reach out via the email address below. I’m happy to answer any questions you may have.
 		            </p>
 		            <ul class="contact">
-		                <li class="solid fa-envelope"><a href="mailto:chhsu@nyu.edu">chhsu@nyu.edu</a></li>
+		                <li class="solid fa-envelope">chhsu (at) nyu (dot) edu</li>
 		                <!--
 		                <li class="fa-phone">(929) 000-0000</li>
-		                <li class="fa-home">1234 Somewhere Road #8254<br />
-		                Nashville, TN 00000-0000</li>
+		                <li class="fa-home">1234 Somewhere Road #8254 Nashville, TN 00000-0000</li>
 		                -->
 		            </ul>
-		        </section>
+		       </section>
 		    `;
 		    document.getElementById("contact-placeholder").innerHTML = contactHTML;
 		});
