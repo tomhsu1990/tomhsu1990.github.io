@@ -1,0 +1,194 @@
+<!DOCTYPE HTML>
+<!--
+	Updated: Ching-Hsiang Hsu
+-->
+<html>
+	<head>
+	    <title>C++ journey: Virtual Functions and Polymorphism</title>
+	    <meta charset="utf-8" />
+	    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	    <link rel="stylesheet" href="../assets/css/default.min.css" />
+	    <link rel="stylesheet" href="../assets/css/main.css" />
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+
+							<!-- Header -->
+								<div id="header-placeholder"></div>
+
+							<!-- Section -->
+								<section>
+									<header class="main">
+										<h1>C++ journey: Virtual Functions and Polymorphism</h1>
+										<div id="back-to-post-placeholder"></div>
+									</header>
+									<hr/>
+
+									<p>
+										In C++, virtual functions and polymorphism are foundational concepts that enable flexible and maintainable object-oriented designs. They allow developers to write code that can operate on objects of different types through a common interface, facilitating extensibility and code reuse.
+										<hr/>
+
+										<h3>Understanding Virtual Functions</h3>
+										A virtual function is a member function in a base class that you expect to override in derived classes. By declaring a function as virtual using the <code>virtual</code> keyword, you enable dynamic linkage, allowing the program to decide at runtime which function implementation to invoke based on the actual object type.<br>
+										Example:
+										<div id="code-container" style="margin: 10px 10px;">
+												<div class="code-block" data-code='
+#include <iostream>
+
+class Base {
+public:
+    virtual void show() {
+        std::cout << "Base class show function\n";
+    }
+};
+
+class Derived : public Base {
+public:
+    void show() override {
+        std::cout << "Derived class show function\n";
+    }
+};
+
+int main() {
+    Base* b;
+    Derived d;
+    b = &d;
+    b->show(); // Outputs: Derived class show function
+    return 0;
+}
+												' data-language="cpp"></div>
+										</div>
+										In this example, calling <code>b->show()</code> invokes the <code>show</code> function of the <code>Derived</code> class, even though <code>b</code> is a pointer to <code>Base</code>. This behavior is due to the virtual function mechanism, which ensures that the most derived version of the function is called.
+										<hr/>
+										
+										<h3>Polymorphism</h3>
+										Polymorphism allows objects of different classes to be treated as objects of a common base class. It comes in two forms:
+										<ol>
+											<li><b>Compile-time (Static) Polymorphism</b>: Achieved through function overloading and templates.</li>
+											<li><b>Runtime (Dynamic) Polymorphism</b>: Achieved through inheritance and virtual functions.</li>
+										</ol>
+										Virtual functions are instrumental in implementing runtime polymorphism, enabling a base class pointer or reference to invoke derived class methods.<br>
+										Example:
+										<div id="code-container" style="margin: 10px 10px;">
+												<div class="code-block" data-code='
+#include <iostream>
+#include <vector>
+
+class Shape {
+public:
+    virtual void draw() const {
+        std::cout << "Drawing Shape\n";
+    }
+    virtual ~Shape() = default; // Virtual destructor
+};
+
+class Circle : public Shape {
+public:
+    void draw() const override {
+        std::cout << "Drawing Circle\n";
+    }
+};
+
+class Square : public Shape {
+public:
+    void draw() const override {
+        std::cout << "Drawing Square\n";
+    }
+};
+
+int main() {
+    std::vector<Shape*> shapes;
+    shapes.push_back(new Circle());
+    shapes.push_back(new Square());
+
+    for (const auto& shape : shapes) {
+        shape->draw(); // Calls the appropriate draw() function
+    }
+
+    // Clean up
+    for (auto& shape : shapes) {
+        delete shape;
+    }
+    return 0;
+}
+												' data-language="cpp"></div>
+										</div>
+										Here, the <code>draw</code> function is overridden in both <code>Circle</code> and <code>Square</code> classes. When iterating through the <code>shapes</code> vector, the correct <code>draw</code> function is called for each object, demonstrating runtime polymorphism.
+										<hr/>
+										
+										<h3>Importance of Virtual Destructors</h3>
+										When dealing with polymorphism, it's crucial to have a virtual destructor in the base class. This ensures that the destructor of the derived class is called when a base class pointer pointing to a derived object is deleted, allowing for proper resource cleanup.<br>
+										Example:
+										<div id="code-container" style="margin: 10px 10px;">
+												<div class="code-block" data-code='
+class Base {
+public:
+    virtual ~Base() {
+        // Cleanup code
+    }
+};
+
+class Derived : public Base {
+public:
+    ~Derived() override {
+        // Derived cleanup code
+    }
+};
+												' data-language="cpp"></div>
+										</div>
+										Without a virtual destructor, deleting a derived object through a base pointer results in undefined behavior, potentially causing resource leaks.
+										<hr/>
+
+										<h3>Benefits of Using Virtual Functions and Polymorphism</h3>
+										<ul>
+											<li><b>Extensibility</b>: New derived classes can be added with minimal changes to existing code.</li>
+											<li><b>Maintainability</b>: Common interfaces simplify code management and updates.</li>
+											<li><b>Flexibility</b>: Functions can operate on objects of different types, enhancing code versatility.</li>
+										</ul>
+										<hr/>
+
+										<h3>Best Practices</h3>
+										<ul>
+											<li><b>Use Virtual Functions Judiciously</b>: While powerful, virtual functions introduce a slight runtime overhead. Use them when dynamic behavior is necessary.</li>
+											<li><b>Override Keyword</b>: Use the <code>override</code> specifier in derived classes to ensure you're correctly overriding a virtual function. This helps catch errors at compile time.</li>
+											<li><b>Avoid Calling Virtual Functions in Constructors/Destructors</b>: During object construction and destruction, the dynamic type of the object is not fully established, which can lead to unexpected behavior if virtual functions are called.</li>
+										</ul>
+										<hr/>
+
+										<h3>Conclusion</h3>
+										Virtual functions and polymorphism are cornerstones of object-oriented programming in C++, enabling dynamic behavior and fostering code flexibility. By understanding and applying these concepts, developers can create robust and scalable applications.
+									</p>
+								</section>
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+					<div id="sidebar">
+						<div class="inner">
+							<!-- Menu -->
+								<div id="menu-placeholder"></div>
+
+							<!-- Section -->
+								<div id="contact-placeholder"></div>
+
+							<!-- Footer -->
+								<div id="footer-placeholder"></div>
+						</div>
+					</div>
+	    	</div>
+
+		<!-- Scripts -->
+			<script src="../assets/js/jquery.min.js"></script>
+			<script src="../assets/js/browser.min.js"></script>
+			<script src="../assets/js/breakpoints.min.js"></script>
+			<script src="../assets/js/util.js"></script>
+			<script src="../assets/js/highlight.min.js"></script>
+			<script src="../assets/js/main.js"></script>
+	</body>
+</html>

@@ -1,0 +1,217 @@
+<!DOCTYPE HTML>
+<!--
+	Updated: Ching-Hsiang Hsu
+-->
+<html>
+	<head>
+	    <title>C++ journey: Smart Pointers - shared_ptr vs unique_ptr</title>
+	    <meta charset="utf-8" />
+	    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	    <link rel="stylesheet" href="../assets/css/default.min.css" />
+	    <link rel="stylesheet" href="../assets/css/main.css" />
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+
+							<!-- Header -->
+								<div id="header-placeholder"></div>
+
+							<!-- Section -->
+								<section>
+									<header class="main">
+										<h1>C++ journey: Smart Pointers - shared_ptr vs unique_ptr</h1>
+										<div id="back-to-post-placeholder"></div>
+									</header>
+									<hr/>
+
+									<p>
+										Smart pointers in C++ are powerful tools for managing dynamic memory, eliminating the risk of resource leaks and making code more robust. Among the smart pointers, <code>shared_ptr</code> and <code>unique_ptr</code> are widely used, each catering to specific use cases. Let’s explore their features, differences, and when to use each.
+										<hr/>
+
+										<h3><code>unique_ptr</code>: Single Ownership</h3>
+										A <code>unique_ptr</code> represents sole ownership of a dynamically allocated object. Once a <code>unique_ptr</code> is assigned to manage a resource, no other smart pointer can own it simultaneously.<br><br>
+										<b>Key Features:</b>
+										<ul>
+											<li>Non-Copyable: Ensures there’s only one owner of the resource.</li>
+											<li>Moveable: Ownership can be transferred to another <code>unique_ptr</code> using <code>std::move</code>.</li>
+											<li>Lightweight: No reference counting or additional overhead.</li>
+										</ul>
+										<b>Example:</b>
+										<div id="code-container" style="margin: 10px 10px;">
+												<div class="code-block" data-code='
+#include <iostream>
+#include <memory>
+
+int main() {
+    std::unique_ptr<int> ptr = std::make_unique<int>(3);
+    std::cout << "Value: " << *ptr << std::endl;
+
+    // Transfer ownership
+    std::unique_ptr<int> ptr2 = std::move(ptr);
+    if (!ptr) {
+        std::cout << "ptr is now null" << std::endl;
+    }
+    return 0;
+}
+												' data-language="cpp"></div>
+										</div>
+										<br>
+										<b>Best Use Cases:</b>
+										<ol>
+											<li>Resource ownership within a single scope or object.</li>
+											<li>Optimized performance when ownership transfer is infrequent.</li>
+										</ol>
+										<hr/>
+
+										<h3><code>shared_ptr</code>: Shared Ownership</h3>
+										A <code>shared_ptr</code> allows multiple smart pointers to share ownership of a single resource. It employs reference counting to keep track of how many <code>shared_ptr</code> instances are managing the same resource. When the last <code>shared_ptr</code> goes out of scope, the resource is deleted.<br><br>
+										<b>Key Features:</b>
+										<ul>
+											<li><b>Reference Counting</b>: Automatically deallocates the resource when the last <code>shared_ptr</code> is destroyed.
+</li>
+											<li><b>Copyable</b>: Multiple <code>shared_ptr</code> instances can manage the same resource.</li>
+											<li><b>Thread-Safe Reference Count</b>: Suitable for multi-threaded environments.</li>
+										</ul>
+										<b>Example:</b>
+										<div id="code-container" style="margin: 10px 10px;">
+												<div class="code-block" data-code='
+#include <iostream>
+#include <memory>
+
+int main() {
+    std::shared_ptr<int> sp1 = std::make_shared<int>(11);
+    std::shared_ptr<int> sp2 = sp1; // Shared ownership
+
+    std::cout << "Value: " << *sp1 << std::endl;
+    std::cout << "Use count: " << sp1.use_count() << std::endl; // Outputs 2
+    return 0;
+}
+												' data-language="cpp"></div>
+										</div>
+										<br>
+										<b>Best Use Cases:</b>
+										<ol>
+											<li>Shared ownership in complex systems where multiple objects or threads need access to the resource.</li>
+											<li>Dynamic lifetimes when ownership is not tied to a single scope.</li>
+										</ol>
+										<hr/>
+
+										<h3>Comparison: <code>shared_ptr</code> vs <code>unique_ptr</code></h3>
+										<div class="table-container">
+											<table>
+											    <thead>
+											        <tr>
+											            <th>Feature</th>
+											            <th>unique_ptr</th>
+											            <th>shared_ptr</th>
+											        </tr>
+											    </thead>
+											    <tbody>
+											        <tr>
+											            <td>Ownership</td>
+											            <td>Single</td>
+											            <td>Shared</td>
+											        </tr>
+											        <tr>
+											            <td>Copyable</td>
+											            <td>No</td>
+											            <td>Yes</td>
+											        </tr>
+											        <tr>
+											            <td>Overhead</td>
+											            <td>Minimal</td>
+											            <td>Higher (due to reference count)</td>
+											        </tr>
+											        <tr>
+											            <td>Thread Safety</td>
+											            <td>No</td>
+											            <td>Yes (reference counting only)</td>
+											        </tr>
+											        <tr>
+											            <td>Best Use Case</td>
+											            <td>Exclusive ownership, lightweight</td>
+											            <td>Shared ownership scenarios</td>
+											        </tr>
+											    </tbody>
+											</table>
+										</div>
+										<hr/>
+
+
+										<h3>Avoiding Pitfalls</h3>
+										Circular References in <code>shared_ptr</code>: Circular references can prevent resource deallocation. Use <code>std::weak_ptr</code> to break cycles.
+										<div id="code-container" style="margin: 10px 10px;">
+												<div class="code-block" data-code='
+#include <iostream>
+#include <memory>
+
+class B; // Forward declaration
+
+class A {
+public:
+    std::shared_ptr<B> b_ptr;  // Shared pointer to B
+    // std::weak_ptr<B> b_ptr; // Use weak_ptr to avoid circular reference
+    ~A() { std::cout << "A destroyed\n"; }
+};
+
+class B {
+public:
+    std::shared_ptr<A> a_ptr;  // Shared pointer to A
+    // std::weak_ptr<A> a_ptr; // Use weak_ptr to avoid circular reference
+    ~B() { std::cout << "B destroyed\n"; }
+};
+
+int main() {
+    auto a = std::make_shared<A>();
+    auto b = std::make_shared<B>();
+
+    a->b_ptr = b;
+    b->a_ptr = a;
+
+    // When main ends, both objects will not be destroyed
+    // due to circular reference
+    return 0;
+}
+												' data-language="cpp"></div>
+										</div>
+										Solution: Replace one <code>shared_ptr</code> with <code>std::weak_ptr</code>.
+										<hr/>
+
+
+										<h3>Conclusion</h3>
+										Both <code>unique_ptr</code> and <code>shared_ptr</code> offer elegant solutions for memory management in C++. Choosing the right one depends on the ownership model and performance requirements of your application.
+									</p>
+								</section>
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+					<div id="sidebar">
+						<div class="inner">
+							<!-- Menu -->
+								<div id="menu-placeholder"></div>
+
+							<!-- Section -->
+								<div id="contact-placeholder"></div>
+
+							<!-- Footer -->
+								<div id="footer-placeholder"></div>
+						</div>
+					</div>
+	    	</div>
+
+		<!-- Scripts -->
+			<script src="../assets/js/jquery.min.js"></script>
+			<script src="../assets/js/browser.min.js"></script>
+			<script src="../assets/js/breakpoints.min.js"></script>
+			<script src="../assets/js/util.js"></script>
+			<script src="../assets/js/highlight.min.js"></script>
+			<script src="../assets/js/main.js"></script>
+	</body>
+</html>

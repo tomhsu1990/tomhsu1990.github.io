@@ -6,9 +6,8 @@
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 
   updated: Ching-Hsiang Hsu
-  notes: highlight text color from red to brown,
-         section folder highlight
 */
+
 html, body, div, span, applet, object,
 iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
 pre, a, abbr, acronym, address, big, cite,
@@ -35,7 +34,13 @@ body {
   line-height: 1; }
 
 ol, ul {
-  list-style: none; }
+  list-style: none;
+}
+
+ol ul {
+  list-style-type: solid circle; /* Different bullets for nested lists */
+  margin-left: 20px; /* Add indentation for nested lists */
+}
 
 ul ul {
     list-style-type: circle; /* Different bullets for nested lists */
@@ -129,6 +134,15 @@ a {
     a:hover strong {
       color: inherit; }
 
+.custom-link {
+  color: #32AFE9; /* New link color */
+  border-bottom-color: #32AFE9; /* New underline color */
+}
+.custom-link:hover {
+  color: #32AFE9; /* Hover link color */
+  border-bottom-color: #32AFE9; /* Hover underline color */
+}
+
 strong, b {
   color: #3d4449;
   font-weight: 600; }
@@ -202,13 +216,10 @@ blockquote {
   padding: 0.5em 0 0.5em 2em; }
 
 code {
-  background: rgba(230, 235, 237, 0.25);
-  border-radius: 0.375em;
-  border: solid 1px rgba(210, 215, 217, 0.75);
-  font-family: "Courier New", monospace;
-  font-size: 0.9em;
-  margin: 0 0.25em;
-  padding: 0.25em 0.65em; }
+    background-color: #F5F5F5;
+    padding: 2px 4px;
+    border-radius: 6px;
+}
 
 pre {
   -webkit-overflow-scrolling: touch;
@@ -1269,14 +1280,14 @@ a.image {
 /* List */
 ol {
   list-style: decimal;
-  margin: 0 0 2em 0;
+  margin: 0.5em 0 0.5em 0;
   padding-left: 1.25em; }
   ol li {
     padding-left: 0.25em; }
 
 ul {
   list-style: disc;
-  margin: 0 0 2em 0;
+  margin: 0.5em 0 0.5em 0;
   padding-left: 1em; }
   ul li {
     padding-left: 0.5em; }
@@ -1457,41 +1468,42 @@ ul.pagination {
   -webkit-overflow-scrolling: touch;
   overflow-x: auto; }
 
+.table-container {
+    overflow: hidden; /* Ensures rounded corners are applied to the entire table */
+    border-radius: 6px; /* Adds rounded corners to the table container */
+    border: 1px solid #ddd; /* Optional: Adds a border around the entire table */
+    margin: 20px 0;
+}
+
 table {
-  margin: 0 0 2em 0;
-  width: 100%; }
-  table tbody tr {
-    border: solid 1px rgba(210, 215, 217, 0.75);
-    border-left: 0;
-    border-right: 0; }
-    table tbody tr:nth-child(2n + 1) {
-      background-color: rgba(230, 235, 237, 0.25); }
-  table td {
-    padding: 0.75em 0.75em; }
-  table th {
-    color: #3d4449;
-    font-size: 0.9em;
-    font-weight: 600;
-    padding: 0 0.75em 0.75em 0.75em;
-    text-align: left; }
-  table thead {
-    border-bottom: solid 2px rgba(210, 215, 217, 0.75); }
-  table tfoot {
-    border-top: solid 2px rgba(210, 215, 217, 0.75); }
-  table.alt {
-    border-collapse: separate; }
-    table.alt tbody tr td {
-      border: solid 1px rgba(210, 215, 217, 0.75);
-      border-left-width: 0;
-      border-top-width: 0; }
-      table.alt tbody tr td:first-child {
-        border-left-width: 1px; }
-    table.alt tbody tr:first-child td {
-      border-top-width: 1px; }
-    table.alt thead {
-      border-bottom: 0; }
-    table.alt tfoot {
-      border-top: 0; }
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0; /* Removes spacing between table cells */
+    font-size: 16px;
+    text-align: left;
+}
+
+thead tr {
+    background-color: #f2f2f2;
+    border-bottom: 2px solid #ddd;
+}
+
+th, td {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+}
+
+th {
+    font-weight: bold;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+tbody tr:hover {
+    background-color: #f1f1f1;
+}
 
 /* Button */
 input[type="submit"],
@@ -2286,3 +2298,126 @@ button,
     border-top: 0;
     margin-top: 0;
     padding-top: 0; }
+
+/* Container for the code block */
+.code-block {
+    position: relative;
+    margin: 0 0;
+    border: 1px solid #ddd; /* Outer border */
+    border-radius: 6px; /* Rounded corners */
+    background-color: #f8f9fa; /* Light background color */
+    padding: 2px;
+    font-family: "Courier New", Courier, monospace; /* Monospace font */
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    overflow: hidden; /* Avoid overflowing content */
+}
+
+/* Scoped styling for <pre> used in code blocks */
+.code-block pre {
+    -webkit-overflow-scrolling: touch;
+    font-family: monospace;
+    font-size: 14px;
+    font-size: 0.9em;
+    margin: 0 0 0 0;
+}
+
+.code-block pre code {
+    display: block;
+    line-height: 1.75;
+    padding: 1em 1.5em;
+    overflow-x: auto;
+    background-color: transparent;
+    border: none;
+    font-family: monospace;
+    font-size: 14px;
+}
+
+.code-block .hljs {
+  color: #333;
+}
+
+/* General styles for C++ syntax highlighting */
+.code-block .hljs-keyword {
+    color: #A1259F; /* Purple for keywords */
+    font-weight: normal; /* Make class or struct names not bold */
+}
+
+.code-block .hljs-type {
+    color: #986801; /* Brown for types like int, float, etc. */
+}
+
+.code-block .hljs-string {
+    color: #50A14F; /* Dark green for strings */
+}
+
+.code-block .hljs-number {
+    color: #986801; /* Brown for numbers */
+}
+
+.code-block .hljs-comment {
+    color: #6a737d; /* Gray for comments */
+    font-style: italic;
+}
+
+.code-block .hljs-function {
+    color: #24292e; /* Black for function names */
+}
+
+.code-block .hljs-title {
+    color: #005cc5; /* Blue for class or struct names */
+    font-weight: normal; /* Make class or struct names not bold */
+}
+
+.code-block .hljs-operator {
+    color: #d73a49; /* Red for operators */
+}
+
+.code-block .hljs-variable {
+    color: #986801; /* Brown for variables */
+}
+
+.code-block .hljs-punctuation {
+    color: #24292e; /* Black for punctuation */
+}
+
+.code-block .hljs-meta {
+    color: #005cc5; /* Blue for preprocessor directive text (#include, etc.) */
+}
+
+/* Copy button styling */
+.code-block .copy-btn {
+    position: absolute;
+    top: 0px; /* Adjusted value to move it slightly up */
+    right: 30px;
+    background-color: #f8f9fa;
+    color: #24292e !important;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-family: monospace;
+    font-size: 14px;
+    font-weight: normal; /* Make class or struct names not bold */
+
+    border: none;
+    outline: none;
+    box-shadow: none;
+}
+
+.code-block .copy-btn:hover {
+    border: 1px solid #f8f9fa;
+    background-color: #f8f9fa; /* Darker blue on hover */
+}
+
+.code-block .copy-btn:active {
+    border: 1px solid #f8f9fa;
+    background-color: #f8f9fa; /* Even darker blue on click */
+}
+
+.code-block .copy-btn.copied {
+    border: 1px solid #f8f9fa;
+    background-color: #f8f9fa; /* Green when copied */
+}
+
+.code-block .copy-btn.copied:hover {
+    border: 1px solid #f8f9fa;
+    background-color: #f8f9fa; /* Darker green on hover */
+}

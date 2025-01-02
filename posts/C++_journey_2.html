@@ -1,0 +1,183 @@
+<!DOCTYPE HTML>
+<!--
+	Updated: Ching-Hsiang Hsu
+-->
+<html>
+	<head>
+	    <title>C++ journey: push_back vs. emplace_back</title>
+	    <meta charset="utf-8" />
+	    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	    <link rel="stylesheet" href="../assets/css/default.min.css" />
+	    <link rel="stylesheet" href="../assets/css/main.css" />
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+
+							<!-- Header -->
+								<div id="header-placeholder"></div>
+
+							<!-- Section -->
+								<section>
+									<header class="main">
+										<h1>C++ journey: push_back vs. emplace_back</h1>
+										<div id="back-to-post-placeholder"></div>
+									</header>
+									<hr/>
+
+									<p>
+										When working with containers like std::vector or std::deque, you’ll often need to add elements dynamically. C++ provides two commonly used methods for this: <code>push_back</code> and <code>emplace_back</code>. While they may appear similar, their internal workings and use cases differ significantly.
+										<hr/>
+
+										<h3>The Basics</h3>
+										<ul>
+											<li><code>push_back</code><br>
+											Adds a copy (or move) of the provided object to the container.<br>
+											Example:
+											<div id="code-container" style="margin: 10px 10px;">
+    												<div class="code-block" data-code='
+std::vector<std::pair<int, std::string>> vec;
+vec.push_back(std::make_pair(1, "apple"));  // Copies/moves the object
+    												' data-language="cpp"></div>
+											</div>
+											</li>
+											<li><code>emplace_back</code><br>
+											Constructs the object directly within the container, avoiding the need for a temporary object.<br>
+											Example:
+											<div id="code-container" style="margin: 10px 10px;">
+    												<div class="code-block" data-code='
+vec.emplace_back(1, "apple");  // Constructs the pair in-place
+    												' data-language="cpp"></div>
+											</div>
+										</ul>
+										<hr/>
+
+										<h3>Key Differences</h3>
+										<ol>
+											<li><b>Construction vs. Insertion</b></li>
+											<ul>
+												<li><code>push_back</code> requires a fully constructed object as its argument, which is then copied or moved into the container.</li>
+												<li><code>emplace_back</code> constructs the object directly within the container using the provided arguments.</li>
+											</ul>
+											<li><b>Performance</b></li>
+											<ul>
+												<li><code>push_back</code> involves at least one copy or move operation.</li>
+												<li><code>emplace_back</code> avoids unnecessary construction and destruction of temporary objects, leading to better performance in scenarios involving complex objects.</li>
+											</ul>
+
+											<li><b>Ease of Use</b></li>
+											<ul>
+												<li><code>push_back</code> is straightforward when you already have a constructed object.</li>
+												<li><code>emplace_back</code> can handle complex types more elegantly, as you only need to provide the arguments for construction.</li>
+											</ul>
+										</ol>
+										<hr/>
+
+										<h3>Illustrative Example</h3>
+										Consider a <code>std::vector</code> of a custom class Item:
+										<div id="code-container" style="margin: 10px 10px;">
+												<div class="code-block" data-code='
+class Item {
+public:
+	Item(int id, const std::string& name) : id_(id), name_(name) {}
+	private:
+	int id_;
+	std::string name_;
+};
+												' data-language="cpp"></div>
+										</div>
+										Using <code>push_back</code>:
+										<div id="code-container" style="margin: 10px 10px;">
+												<div class="code-block" data-code='
+std::vector<Item> items;
+items.push_back(Item(1, "car"));  // Constructs an Item, then moves it into the vector
+												' data-language="cpp"></div>
+										</div>
+										Using <code>emplace_back</code>:
+										<div id="code-container" style="margin: 10px 10px;">
+												<div class="code-block" data-code='
+items.emplace_back(1, "car");  // Directly constructs the Item within the vector
+												' data-language="cpp"></div>
+										</div>
+										With <code>push_back</code>, the constructor of Item is invoked twice (once for the temporary object and once during insertion). With <code>emplace_back</code>, it is called only once.
+										<hr/>
+
+										<h3>When to Use?</h3>
+										<ul>
+											<li>Use <code>push_back</code>:</li>
+											<ul>
+												<li>When you already have a constructed object to insert.</li>
+												<li>For simpler types where the performance difference is negligible.</li>
+											</ul>
+											<li>Use <code>emplace_back</code>:</li>
+											<ul>
+												<li>When constructing complex objects directly in the container.</li>
+												<li>To avoid unnecessary copies or moves, especially in performance-critical code.</li>
+											</ul>
+										</ul>
+										<hr/>
+
+										<h3>Summary Table</h3>
+										<div class="table-container">
+											<table>
+											    <thead>
+											        <tr>
+											            <th>Feature</th>
+											            <th>push_back</th>
+											            <th>emplace_back</th>
+											        </tr>
+											    </thead>
+											    <tbody>
+											        <tr>
+											            <td>Arguments</td>
+											            <td>Pre-constructed object</td>
+											            <td>Arguments for object construction</td>
+											        </tr>
+											        <tr>
+											            <td>Performance</td>
+											            <td>May involve extra copies/moves</td>
+											            <td>Direct construction in place</td>
+											        </tr>
+											        <tr>
+											            <td>Use Case</td>
+											            <td>Insert an existing object</td>
+											            <td>Construct object in container</td>
+											        </tr>
+											    </tbody>
+											</table>
+										</div>
+										While <code>push_back</code> is a classic and versatile method, <code>emplace_back</code> shines in scenarios involving complex types or performance-critical applications. Understanding their differences and applying them appropriately can lead to more efficient and readable code.
+									</p>
+								</section>
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+					<div id="sidebar">
+						<div class="inner">
+							<!-- Menu -->
+								<div id="menu-placeholder"></div>
+
+							<!-- Section -->
+								<div id="contact-placeholder"></div>
+
+							<!-- Footer -->
+								<div id="footer-placeholder"></div>
+						</div>
+					</div>
+	    	</div>
+
+		<!-- Scripts -->
+			<script src="../assets/js/jquery.min.js"></script>
+			<script src="../assets/js/browser.min.js"></script>
+			<script src="../assets/js/breakpoints.min.js"></script>
+			<script src="../assets/js/util.js"></script>
+			<script src="../assets/js/highlight.min.js"></script>
+			<script src="../assets/js/main.js"></script>
+	</body>
+</html>

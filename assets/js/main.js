@@ -3,11 +3,7 @@
        html5up.net | @ajlkn
        Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 
-	Updated: Ching-Hsiang Hsu 2024/12/29
-	Notes: moduleration
-
-       updated: Ching-Hsiang Hsu 2024/12/28
-       notes: section folder folded/unfolded functionality
+	Updated: Ching-Hsiang Hsu
 */
 (function($) {
 
@@ -305,7 +301,7 @@
 						</ul>
 					</li>
 					<li>
-						<span class="opener">Projects</span>
+						<span class="opener">Project</span>
 						<ul>
 							<li><a href="${basePath}project/Navigation_SLAM.html">Navigation, Localization and Mapping</a></li>
 							<li><a href="${basePath}project/RoboCup.html">RoboCup Standard Platform League</a></li>
@@ -314,6 +310,7 @@
 							<li><a href="${basePath}project/3D_pop-up.html">3D Pop-up Book</a></li>
 						</ul>
 					</li>
+					<li><a href="${basePath}post.html">Post</a></li>
 					<li><a href="${basePath}oj_records.html">Online Judge Record</a></li>
 				</ul>
 			</nav>
@@ -427,5 +424,81 @@
 		    `;
 		    document.getElementById("footer-placeholder").innerHTML = footerHTML;
 		});
+
+	// Dynamically add a "Back to Post" link
+	function addBackToPostLink(containerId) {
+	    const container = document.getElementById(containerId);
+	    if (container) {
+	        container.innerHTML = `
+	            <a href="../post.html" class="custom-link">
+	                <i class="fa fa-folder" style="font-size: 24px; vertical-align: middle; color: #32AFE9;"></i>
+	                <span style="margin-left: 5px; color: #32AFE9;">Back to Post</span>
+	            </a>
+	        `;
+	    }
+	}
+	document.addEventListener("DOMContentLoaded", () => {
+	    addBackToPostLink("back-to-post-placeholder");
+	});
+
+	// Function to create a code block with syntax highlighting and a copy button
+	function createCodeBlock(code, language = "cpp") {
+	    // Create the container div
+	    const codeBlockDiv = document.createElement("div");
+	    codeBlockDiv.classList.add("code-block");
+
+	    // Create the Copy button
+	    const copyButton = document.createElement("button");
+	    copyButton.classList.add("code-block");
+	    copyButton.classList.add("copy-btn");
+	    copyButton.innerHTML = '<i class="fa fa-copy"></i> Copy';
+	    copyButton.onclick = () => {
+	        navigator.clipboard.writeText(code).then(() => {
+	            copyButton.innerHTML = '<i class="fa fa-check"></i> Copied!';
+	            copyButton.classList.add("copied");
+	            setTimeout(() => {
+	                copyButton.innerHTML = '<i class="fa fa-copy"></i> Copy';
+	                copyButton.classList.remove("copied");
+	            }, 2000);
+	        }).catch(err => console.error("Failed to copy text:", err));
+	    };
+
+	    // Create the pre and code elements
+	    const pre = document.createElement("pre");
+	    const codeElement = document.createElement("code");
+	    // Apply the Highlight.js class to the code element
+	    codeElement.classList.add(`${language}`);
+	    codeElement.textContent = code;
+
+
+	    // Append the code element to the pre element
+	    pre.appendChild(codeElement);
+
+	    // Append the button and pre to the container div
+	    codeBlockDiv.appendChild(copyButton);
+	    codeBlockDiv.appendChild(pre);
+
+	    return codeBlockDiv;
+	}
+
+	// Wait for DOMContentLoaded to ensure the container is available
+	document.addEventListener("DOMContentLoaded", () => {
+	    const containers = document.querySelectorAll("#code-container .code-block");
+
+	    containers.forEach((block) => {
+	        // Get the code and language from data attributes
+	        const code = block.getAttribute("data-code").trim();
+	        const language = block.getAttribute("data-language") || "cpp";
+
+	        // Create the code block dynamically
+	        const codeBlock = createCodeBlock(code, language);
+
+	        // Replace the placeholder block with the generated code block
+	        block.replaceWith(codeBlock);
+	    });
+
+	    // Apply syntax highlighting
+	    hljs.highlightAll();
+	});
 
 })(jQuery);

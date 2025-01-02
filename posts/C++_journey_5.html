@@ -1,0 +1,212 @@
+<!DOCTYPE HTML>
+<!--
+	Updated: Ching-Hsiang Hsu
+-->
+<html>
+	<head>
+	    <title>C++ journey: Concurrency and Multithreading</title>
+	    <meta charset="utf-8" />
+	    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	    <link rel="stylesheet" href="../assets/css/default.min.css" />
+	    <link rel="stylesheet" href="../assets/css/main.css" />
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+
+							<!-- Header -->
+								<div id="header-placeholder"></div>
+
+							<!-- Section -->
+								<section>
+									<header class="main">
+										<h1>C++ journey: Concurrency and Multithreading</h1>
+										<div id="back-to-post-placeholder"></div>
+									</header>
+									<hr/>
+
+									<p>
+										Concurrency and multithreading in C++ are powerful paradigms for improving application performance and responsiveness by allowing tasks to execute simultaneously. With modern C++ standards, the language provides robust support for multithreading through the <code>thread</code> library, synchronization primitives, and atomic operations.
+										<hr/>
+
+										<h3>Thread Management</h3>
+										At the heart of multithreading is the <code>std::thread</code> class, which represents an independent thread of execution.<br>
+										<b>Creating and Joining Threads</b>: Threads are created by passing a callable (e.g., a function or lambda) to the <code>std::thread</code> constructor. To ensure a thread completes before the program exits, you must join it using <code>std::thread::join</code>.<br>
+										Example:
+										<div id="code-container" style="margin: 10px 10px;">
+												<div class="code-block" data-code='
+#include <iostream>
+#include <thread>
+
+void threadFunction(int id) {
+    std::cout << "Thread " << id << " is running\n";
+}
+
+int main() {
+    std::thread t1(threadFunction, 1);
+    std::thread t2(threadFunction, 2);
+
+    t1.join();
+    t2.join();
+
+    std::cout << "All threads finished\n";
+    return 0;
+}
+												' data-language="cpp"></div>
+										</div>
+										<b>Detaching Threads</b>: Threads can also be detached using std::thread::detach, allowing them to run independently. However, detached threads require careful resource management to avoid accessing invalid objects.
+										<hr/>
+
+										<h3>Synchronization Primitives</h3>
+										Concurrency often involves shared resources. Without proper synchronization, race conditions and undefined behavior can occur. C++ offers several primitives to manage thread synchronization:
+										<ol>
+											<li><b>Condition Variables (<code>std::condition_variable</code>)</b></li>
+											<ul>
+												<li>Used for thread coordination, allowing one thread to wait until another signals it.</li>
+												<li>Works in tandem with <code>std::unique_lock.</code></li>
+											</ul>
+											Example:
+											<div id="code-container" style="margin: 10px 10px;">
+												<div class="code-block" data-code='
+#include <iostream>
+#include <thread>
+#include <mutex>
+#include <condition_variable>
+
+std::mutex mtx;
+std::condition_variable cv;
+bool ready = false;
+
+void workerFunction() {
+    std::unique_lock<std::mutex> lock(mtx);
+    cv.wait(lock, [] { return ready; });
+    std::cout << "Worker thread is processing\n";
+}
+
+void signalFunction() {
+    {
+        std::lock_guard<std::mutex> lock(mtx);
+        ready = true;
+    }
+    cv.notify_one();
+}
+
+int main() {
+    std::thread worker(workerFunction);
+    std::thread signal(signalFunction);
+
+    worker.join();
+    signal.join();
+
+    return 0;
+}
+
+												' data-language="cpp"></div>
+											</div>
+										</ol>
+										<hr/>
+
+										<h3>Avoiding Common Pitfalls</h3>
+										<ol>
+											<li><b>Race Conditions</b>: Occur when multiple threads access shared data without proper synchronization. Use locks to ensure thread safety.</li>
+											<li><b>Deadlocks</b>: Arise when two or more threads are waiting for each other to release locks. Avoid by:
+												<ul>
+													<li>Using <code>std::lock</code> for consistent locking.</li>
+													<li>Always acquiring locks in a predefined order.</li>
+												</ul>
+											</li>
+											<li><b>Data Corruption</b>: Use atomic operations (std::atomic) for lock-free, thread-safe data manipulation.</li>
+										</ol>
+										<hr/>
+
+										<h3>Advanced Topics</h3>
+										<ol>
+											<li><b>Atomic Operations</b></li>
+											<ul>
+												<li>Provided by <code>std::atomic</code> for operations that need to be performed atomically without locks.</li>
+												<li>Ideal for counters or flags shared among threads.</li>
+											</ul>
+											Example:
+											<div id="code-container" style="margin: 10px 10px;">
+												<div class="code-block" data-code='
+#include <iostream>
+#include <atomic>
+#include <thread>
+#include <vector>
+
+std::atomic<int> counter(0);
+
+void incrementCounter(int numIterations) {
+    for (int i = 0; i < numIterations; ++i) {
+        counter.fetch_add(1, std::memory_order_relaxed);
+    }
+}
+
+int main() {
+    const int numThreads = 10;
+    const int numIterations = 1000;
+
+    std::vector<std::thread> threads;
+    for (int i = 0; i < numThreads; ++i) {
+        threads.emplace_back(incrementCounter, numIterations);
+    }
+
+    for (auto& thread : threads) {
+        thread.join();
+    }
+
+    std::cout << "Final counter value: " << counter.load() << std::endl;
+    return 0;
+}
+
+												' data-language="cpp"></div>
+											</div>
+											<li><b>Thread Pools</b></li>
+											<ul>
+												<li>Managing multiple threads efficiently using a thread pool avoids the overhead of frequently creating and destroying threads.</li>
+												<li>The C++ Standard Library currently lacks built-in support, but third-party libraries like Boost and Threading Building Blocks (TBB) offer robust solutions.</li>
+											</ul>
+											<li><b>Parallel Algorithms</b></li>
+											<ul>
+												<li>C++17 introduced parallel algorithms (e.g., <code>std::for_each</code>) that use multiple threads behind the scenes.</li>
+											</ul>
+										</ol>
+										<hr/>
+
+
+										<h3>Conclusion</h3>
+										Concurrency and multithreading in C++ enable efficient utilization of multi-core processors, improving application performance. However, they come with challenges like race conditions and deadlocks. By understanding the tools provided by modern C++, such as threads, mutexes, and atomic operations, developers can write robust, thread-safe, and efficient code.
+									</p>
+								</section>
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+					<div id="sidebar">
+						<div class="inner">
+							<!-- Menu -->
+								<div id="menu-placeholder"></div>
+
+							<!-- Section -->
+								<div id="contact-placeholder"></div>
+
+							<!-- Footer -->
+								<div id="footer-placeholder"></div>
+						</div>
+					</div>
+	    	</div>
+
+		<!-- Scripts -->
+			<script src="../assets/js/jquery.min.js"></script>
+			<script src="../assets/js/browser.min.js"></script>
+			<script src="../assets/js/breakpoints.min.js"></script>
+			<script src="../assets/js/util.js"></script>
+			<script src="../assets/js/highlight.min.js"></script>
+			<script src="../assets/js/main.js"></script>
+	</body>
+</html>
