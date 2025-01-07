@@ -1,0 +1,300 @@
+<!DOCTYPE HTML>
+<!--
+	Updated: Ching-Hsiang Hsu
+-->
+<html>
+	<head>
+	    <title>AI playground: Trellis</title>
+	    <meta charset="utf-8" />
+	    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	    <link rel="stylesheet" href="../assets/css/default.min.css" />
+	    <link rel="stylesheet" href="../assets/css/main.css" />
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+
+							<!-- Header -->
+								<div id="header-placeholder"></div>
+
+							<!-- Section -->
+								<section>
+									<header class="main">
+										<h1>AI playground: Trellis</h1>
+										<div id="back-to-post-placeholder"></div>
+									</header>
+									<hr/>
+
+									<p>
+										<a href="https://github.com/microsoft/TRELLIS" class="icon brands fa-github"><span class="label">Github</span></a> <a href="https://github.com/microsoft/TRELLIS">https://github.com/microsoft/TRELLIS</a> <br><br>
+										Trellis is a cutting-edge AI framework designed for efficient 3D asset generation from textual or visual inputs. Its primary goal is to streamline and democratize the process of creating high-quality, versatile 3D models for applications in gaming, virtual reality, digital art, and industrial design. By focusing on surface-based representations, Trellis enables the generation of diverse 3D formats, making it a comprehensive solution for various needs.<br>
+										Key purposes include:
+										<ul>
+											<li><b>Simplifying and speeding up 3D Content Creation</b>: Providing a user-friendly interface to generate complex 3D assets without requiring expertise in 3D modeling.</li>
+											<li><b>Enhancing Cross-Format Utility</b>: Allowing users to export assets in multiple formats like meshes, radiance fields, and 3D Gaussians.</li>
+											<li><b>Advancing AI-driven Design</b>: Pioneering structured latent representation techniques that push the boundaries of 3D content creation.</li>
+										</ul>
+										<hr/>
+
+										<h3>Core Features of Trellis</h3>
+										<ul>
+											<li><b>Structured Latent Representation (SLAT)</b>: Trellis employs a novel method called Structured LATents (SLAT), which focuses on the surfaces of 3D objects. This approach enables efficient data processing and allows the generation of multiple 3D asset formats from a single representation, enhancing versatility and quality.
+											</li>
+											<li><b>Diverse Output Formats</b>: The model can produce 3D assets in various formats, including Radiance Fields, 3D Gaussians, and meshes, catering to different needs in fields like gaming, virtual reality, and digital art.</li>
+											<li><b>Scalability and Versatility</b>: Trellis has been developed in three model sizes—Basic (342 million parameters), Large (1.1 billion parameters), and X-Large (2 billion parameters). Trained using 64 A100 GPUs with 400,000 steps and a batch size of 256, the model's generation quality improves with size, offering scalable solutions for diverse applications.</li>
+											<li><b>Integration with CLIP and Custom Transformers</b>: Trellis utilizes CLIP to convert text into features and employs a custom-developed Rectified Flow Transformer for efficient 3D grid generation. This integration ensures that the model effectively interprets and generates 3D assets based on textual or visual input.</li>
+										</ul>
+										<hr/>
+
+										<h3>Basic Hardware Requirements</h3>
+										<ul>
+											<li><b>GPU</b>: An NVIDIA GPU with a minimum of 16 GB VRAM is essential. The code has been tested on NVIDIA A100 and A6000 GPUs.</li>
+											<li><b>CUDA Toolkit</b>: Necessary for compiling certain submodules. The code has been tested with CUDA versions 11.8 and 12.2.</li>
+											<li><b>Python</b>: Version 3.8 or higher is required.</li>
+										</ul>
+										<hr/>
+
+										<h3>Setting Up Trellis on Different Operating Systems</h3>
+										<ol>
+											<li><b>Linux</b>:</li>
+											<ul>
+												<li><b>Prerequisites</b>:</li>
+												<ul>
+													<li>Ensure the NVIDIA GPU drivers and CUDA Toolkit are installed.</li>
+													<li>Install Conda for managing dependencies.</li>
+												</ul>
+												<li><b>Installation Steps</b>:</li>
+												<ol>
+													<li>Clone the Repository:</li>
+													<div id="code-container" style="margin: 10px 10px;">
+    													<div class="code-block" data-code='
+git clone --recurse-submodules https://github.com/microsoft/TRELLIS.git
+cd TRELLIS
+    													' data-language="bash"></div>
+													</div>
+													<li>Set Up the Environment:</li>
+													<div id="code-container" style="margin: 10px 10px;">
+    													<div class="code-block" data-code='
+conda create -n trellis python=3.10
+conda activate trellis
+conda install pytorch==2.4.0 torchvision==0.19.0 pytorch-cuda=11.8 -c pytorch -c nvidia
+    													' data-language="bash"></div>
+													</div>
+													<li>Install Dependencies:</li>
+													<div id="code-container" style="margin: 10px 10px;">
+    													<div class="code-block" data-code='
+bash setup.sh --new-env
+    													' data-language="bash"></div>
+													</div>
+													<li>Execute:</li>
+													<div id="code-container" style="margin: 10px 10px;">
+    													<div class="code-block" data-code='
+python ./app.py
+    													' data-language="bash"></div>
+													</div>
+												</ol>
+											</ul>
+											<li><b>Windows</b>:</li>
+											<ul>
+												<li><b>Prerequisites</b>:</li>
+												<ul>
+													<li>Install the latest NVIDIA GPU drivers and CUDA Toolkit.</li>
+													<li>Install Conda for dependency management.</li>
+												</ul>
+												<li><b>Installation Steps</b>:</li>
+												<ol>
+													<li>Clone the Repository:</li>
+													<div id="code-container" style="margin: 10px 10px;">
+    													<div class="code-block" data-code='
+git clone --recurse-submodules https://github.com/if-ai/TRELLIS-for-windows.git
+cd TRELLIS-for-windows
+    													' data-language="powershell"></div>
+													</div>
+													<li>Set Up the Environment:</li>
+													<div id="code-container" style="margin: 10px 10px;">
+    													<div class="code-block" data-code='
+conda create -n trellis python=3.10
+conda activate trellis
+    													' data-language="powershell"></div>
+													</div>
+													<li>Install Dependencies:</li>
+													<div id="code-container" style="margin: 10px 10px;">
+    													<div class="code-block" data-code='
+pip install torch==2.5.1 torchvision --index-url=https://tinyurl.com/55xwd3zx
+pip install xformers==0.0.28.post3 --index-url=https://tinyurl.com/55xwd3zx
+pip install pillow imageio imageio-ffmpeg tqdm easydict
+pip install opencv-python-headless scipy ninja rembg onnxruntime
+pip install trimesh xatlas pyvista pymeshfix igraph transformers
+pip install git+https://tinyurl.com/4buyavsa
+pip install https://tinyurl.com/yc4dx5xw
+pip install kaolin -f https://tinyurl.com/473vhseb
+ 
+git clone https://github.com/NVlabs/nvdiffrast.git ./tmp/extensions/nvdiffrast
+pip install ./tmp/extensions/nvdiffrast
+ 
+git clone --recurse-submodules https://tinyurl.com/4fmxvurx ./tmp/extensions/diffoctreerast
+pip install ./tmp/extensions/diffoctreerast
+ 
+git clone https://tinyurl.com/48sk36d2 ./tmp/extensions/mip-splatting
+pip install ./tmp/extensions/mip-splatting/submodules/diff-gaussian-rasterization/
+ 
+xcopy /E /I .\extensions\vox2seq .\tmp\extensions\vox2seq
+pip install ./tmp/extensions/vox2seq
+ 
+pip install spconv-cu120
+pip install gradio==4.44.1 gradio_litmodel3d==0.0.1
+    													' data-language="powershell"></div>
+													</div>
+													<li>Execute:</li>
+													<div id="code-container" style="margin: 10px 10px;">
+    													<div class="code-block" data-code='
+set ATTN_BACKEND=flash-attn
+set SPCONV_ALGO=native
+python ./app.py
+    													' data-language="powershell"></div>
+													</div>
+												</ol>
+											</ul>
+										</ol>
+										<hr/>
+
+										<h3>Applications and Accessibility</h3>
+										Trellis is particularly beneficial for professionals in gaming, virtual reality, and digital art, providing a streamlined process for creating detailed 3D models from simple text descriptions or images. A demo is available on Hugging Face, allowing users to generate 3D assets from images, facilitating hands-on exploration of Trellis's capabilities.
+										<hr/>
+
+										<h3>Demos</h3>
+										<ul>
+											<li><b>Text-to-3D Asset Creation</b>:</li>
+											<ul>
+												<li>Users input descriptive text prompts, such as "a futuristic flying car," and Trellis generates a detailed 3D model representing the object.</li>
+											</ul>
+											<li><b>Image-to-3D Transformation</b>:</li>
+											<ul>
+												<li>Upload an image, and Trellis converts it into a structured 3D representation, useful for creating virtual objects from 2D references.</li>
+											</ul>
+											<li><b>Multi-format Output</b>:</li>
+											<ul>
+												<li>Generate the same object in different formats (e.g., radiance fields for rendering, meshes for 3D printing) to suit various use cases.</li>
+											</ul>
+											<li><b>Live Demo on Hugging Face</b>:</li>
+											<ul>
+												<li>A functional online demo available on platforms like Hugging Face allows users to experiment with Trellis in real time by generating 3D assets from images or text.</li>
+											</ul>
+										</ul>
+										<hr/>
+
+										<h3>Future Work</h3>
+										Trellis represents a foundational step in structured 3D asset generation, and its future development could focus on:
+										<ol>
+											<li><b>Improving Generation Quality</b>:</li>
+											<ul>
+												<li>Enhancing the resolution and fidelity of generated 3D models, especially for high-precision use cases like medical imaging or engineering.</li>
+											</ul>
+											<li><b>Real-time Applications</b>:</li>
+											<ul>
+												<li>Optimizing for real-time 3D generation in VR/AR environments, enabling dynamic object creation during gameplay or simulations.</li>
+											</ul>
+											<li><b>Integration with Design Tools</b>:</li>
+											<ul>
+												<li>Developing plugins for popular design software (e.g., Blender, Unity) to streamline workflows for artists and developers.</li>
+											</ul>
+											<li><b>Comparison Studies and Benchmarks</b>:</li>
+											<ul>
+												<li>Conducting systematic comparisons with other frameworks like DreamFusion or NerfStudio to establish Trellis's advantages in quality, speed, and versatility.</li>
+											</ul>
+											<li><b>Fine-tuning for Specific Industries</b>:</li>
+											<ul>
+												<li>Training specialized versions for niches such as automotive design, architecture, or virtual try-ons in e-commerce.</li>
+											</ul>
+										</ol>
+										<hr/>
+
+										<h3>Comparison</h3>
+										<div class="table-container">
+											<table>
+											    <thead>
+											        <tr>
+											            <th>Feature</th>
+											            <th>Trellis</th>
+											            <th>DreamFusion</th>
+											            <th>NerfStudio</th>
+											        </tr>
+											    </thead>
+											    <tbody>
+											        <tr>
+											            <td>Representation</td>
+											            <td>Structured Latent Surfaces</td>
+											            <td>Neural Radiance Fields</td>
+											            <td>Neural Radiance Fields</td>
+											        </tr>
+											        <tr>
+											            <td>Input</td>
+											            <td>Text/Image</td>
+											            <td>Text</td>
+											            <td>Image</td>
+											        </tr>
+											        <tr>
+											            <td>Output Formats</td>
+											            <td>Mesh, Radiance, 3D Gaussian</td>
+											            <td>Radiance Fields</td>
+											            <td>Radiance Fields</td>
+											        </tr>
+											        <tr>
+											            <td>Applications</td>
+											            <td>Multi-purpose, versatile</td>
+											            <td>Creative asset generation</td>
+											            <td>Visual rendering focus</td>
+											        </tr>
+											        <tr>
+											            <td>Model Size</td>
+											            <td>Scalable (Basic to X-Large)</td>
+											            <td>Fixed</td>
+											            <td>Fixed</td>
+											        </tr>
+											        <tr>
+											            <td>Training Efficiency</td>
+											            <td>Highly scalable, surface-based</td>
+											            <td>Radiance field-dependent</td>
+											            <td>Radiance field-dependent</td>
+											        </tr>
+											    </tbody>
+											</table>
+										</div>
+										<hr/>
+
+										<h3>Conclusion</h3>
+										Trellis is not just a 3D asset generation tool; it is a versatile platform poised to redefine how industries approach 3D modeling. Its innovative approach, coupled with scalable outputs and potential for further development, makes it a strong contender in the AI-driven 3D content space.
+									</p>
+								</section>
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+					<div id="sidebar">
+						<div class="inner">
+							<!-- Menu -->
+								<div id="menu-placeholder"></div>
+
+							<!-- Section -->
+								<div id="contact-placeholder"></div>
+
+							<!-- Footer -->
+								<div id="footer-placeholder"></div>
+						</div>
+					</div>
+	    	</div>
+
+		<!-- Scripts -->
+			<script src="../assets/js/jquery.min.js"></script>
+			<script src="../assets/js/browser.min.js"></script>
+			<script src="../assets/js/breakpoints.min.js"></script>
+			<script src="../assets/js/util.js"></script>
+			<script src="../assets/js/highlight.min.js"></script>
+			<script src="../assets/js/main.js"></script>
+	</body>
+</html>

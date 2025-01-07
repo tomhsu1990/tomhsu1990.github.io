@@ -31,7 +31,7 @@
 									<hr/>
 
 									<p>
-										When working with containers like std::vector or std::deque, you’ll often need to add elements dynamically. C++ provides two commonly used methods for this: <code>push_back</code> and <code>emplace_back</code>. While they may appear similar, their internal workings and use cases differ significantly.
+										When working with containers like std::vector or std::deque, you’ll often need to add elements dynamically. C++ provides two commonly used methods for this operation: <code>push_back</code> and <code>emplace_back</code>. While they may appear similar, their internal workings and use cases differ significantly.
 										<hr/>
 
 										<h3>The Basics</h3>
@@ -54,6 +54,7 @@ vec.push_back(std::make_pair(1, "apple"));  // Copies/moves the object
 vec.emplace_back(1, "apple");  // Constructs the pair in-place
     												' data-language="cpp"></div>
 											</div>
+											</li>
 										</ul>
 										<hr/>
 
@@ -85,7 +86,8 @@ vec.emplace_back(1, "apple");  // Constructs the pair in-place
 class Item {
 public:
 	Item(int id, const std::string& name) : id_(id), name_(name) {}
-	private:
+
+private:
 	int id_;
 	std::string name_;
 };
@@ -95,7 +97,7 @@ public:
 										<div id="code-container" style="margin: 10px 10px;">
 												<div class="code-block" data-code='
 std::vector<Item> items;
-items.push_back(Item(1, "car"));  // Constructs an Item, then moves it into the vector
+items.push_back(Item(1, "car"));  // Constructs an Item, then moves it into the vector. Destructs the constructed copy.
 												' data-language="cpp"></div>
 										</div>
 										Using <code>emplace_back</code>:

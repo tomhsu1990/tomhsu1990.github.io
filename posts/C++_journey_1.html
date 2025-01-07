@@ -44,7 +44,10 @@
 											    <div id="code-container" style="margin: 10px 10px;">
     												<div class="code-block" data-code="
 std::vector<int> vec{1, 2, 3};
-std::cout << vec[5]; // Undefined behavior
+std::cout << vec[2] = 6;            // Ok, outputs 6
+std::cout << vec.operator[](2) = 8; // Ok, outputs 8
+std::cout << vec[5];  // Undefined behavior
+std::cout << vec[-1]; // undefined behavior
     												" data-language="cpp"></div>
 												</div>
 												<li><code>.at()</code>: Throws an <code>std::out_of_range</code> exception if the index is invalid, making it safer but slightly slower.<br>
@@ -52,6 +55,8 @@ std::cout << vec[5]; // Undefined behavior
 												</li>
 											    <div id="code-container" style="margin: 10px 10px;">
     												<div class="code-block" data-code='
+cout << vec.at(1) = 7; // Ok, outputs 7
+
 try {
     std::cout << vec.at(5);
 } catch (const std::out_of_range& e) {
@@ -62,7 +67,7 @@ try {
 											</ul>
 											<li><b>Performance</b></li>
 											<ul>
-												<li><code>operator[]</code>: Fast, as there’s no overhead of bounds checking. Ideal when you are confident the index is valid.</li>
+												<li><code>operator[]</code>: Fast, as there’s no overhead of bounds checking. It is ideal when you are confident the index is valid.</li>
 												<li><code>.at()</code>: Slower due to added safety checks but preferable for debugging or when handling dynamic input.</li>
 											</ul>
 

@@ -52,7 +52,7 @@ int main() {
     std::unique_ptr<int> ptr = std::make_unique<int>(3);
     std::cout << "Value: " << *ptr << std::endl;
 
-    // Transfer ownership
+    // Transfers ownership
     std::unique_ptr<int> ptr2 = std::move(ptr);
     if (!ptr) {
         std::cout << "ptr is now null" << std::endl;
@@ -73,8 +73,7 @@ int main() {
 										A <code>shared_ptr</code> allows multiple smart pointers to share ownership of a single resource. It employs reference counting to keep track of how many <code>shared_ptr</code> instances are managing the same resource. When the last <code>shared_ptr</code> goes out of scope, the resource is deleted.<br><br>
 										<b>Key Features:</b>
 										<ul>
-											<li><b>Reference Counting</b>: Automatically deallocates the resource when the last <code>shared_ptr</code> is destroyed.
-</li>
+											<li><b>Reference Counting</b>: Automatically deallocates the resource when the last <code>shared_ptr</code> is destroyed.</li>
 											<li><b>Copyable</b>: Multiple <code>shared_ptr</code> instances can manage the same resource.</li>
 											<li><b>Thread-Safe Reference Count</b>: Suitable for multi-threaded environments.</li>
 										</ul>
@@ -145,7 +144,7 @@ int main() {
 
 
 										<h3>Avoiding Pitfalls</h3>
-										Circular References in <code>shared_ptr</code>: Circular references can prevent resource deallocation. Use <code>std::weak_ptr</code> to break cycles.
+										<b>Circular References in <code>shared_ptr</code></b>: Circular references can prevent resource deallocation. Use <code>std::weak_ptr</code> to break cycles.
 										<div id="code-container" style="margin: 10px 10px;">
 												<div class="code-block" data-code='
 #include <iostream>
@@ -156,14 +155,14 @@ class B; // Forward declaration
 class A {
 public:
     std::shared_ptr<B> b_ptr;  // Shared pointer to B
-    // std::weak_ptr<B> b_ptr; // Use weak_ptr to avoid circular reference
+    // std::weak_ptr<B> b_ptr; // Uses weak_ptr to avoid circular reference
     ~A() { std::cout << "A destroyed\n"; }
 };
 
 class B {
 public:
     std::shared_ptr<A> a_ptr;  // Shared pointer to A
-    // std::weak_ptr<A> a_ptr; // Use weak_ptr to avoid circular reference
+    // std::weak_ptr<A> a_ptr; // Uses weak_ptr to avoid circular reference
     ~B() { std::cout << "B destroyed\n"; }
 };
 
@@ -174,8 +173,7 @@ int main() {
     a->b_ptr = b;
     b->a_ptr = a;
 
-    // When main ends, both objects will not be destroyed
-    // due to circular reference
+    // When main ends, both objects will not be destroyed due to circular reference
     return 0;
 }
 												' data-language="cpp"></div>

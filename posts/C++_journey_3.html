@@ -41,30 +41,44 @@
 												<div class="code-block" data-code='
 #include <iostream>
 
-class Base {
+// Base class
+class Animal {
 public:
-    virtual void show() {
-        std::cout << "Base class show function\n";
+    virtual void makeSound() const {
+        std::cout << "Some generic animal sound" << std::endl;
+    }
+
+    // Virtual destructor
+    virtual ~Animal() {
+        std::cout << "Animal destroyed" << std::endl;
     }
 };
 
-class Derived : public Base {
+// Derived class
+class Dog : public Animal {
 public:
-    void show() override {
-        std::cout << "Derived class show function\n";
+    void makeSound() const override { // Overrides the virtual function
+        std::cout << "Bark" << std::endl;
+    }
+
+    ~Dog() {
+        std::cout << "Dog destroyed" << std::endl;
     }
 };
 
 int main() {
-    Base* b;
-    Derived d;
-    b = &d;
-    b->show(); // Outputs: Derived class show function
+    Animal* animalPtr = new Dog();
+    // Base class pointer points to a derived class object
+    animalPtr->makeSound(); // Outputs Bark
+    // Calls the overridden version in the derived class
+
+    delete animalPtr;
+    // Correctly calls the derived class destructor because of the virtual destructor
     return 0;
 }
 												' data-language="cpp"></div>
 										</div>
-										In this example, calling <code>b->show()</code> invokes the <code>show</code> function of the <code>Derived</code> class, even though <code>b</code> is a pointer to <code>Base</code>. This behavior is due to the virtual function mechanism, which ensures that the most derived version of the function is called.
+										In this example, calling <code>animalPtr->makeSound()</code> invokes the <code>makeSound</code> function of the <code>Dog</code> class, even though <code>animalPtr</code> is a pointer to <code>Animal</code>. This behavior is due to the virtual function mechanism, which ensures that the most derived version of the function is called.
 										<hr/>
 										
 										<h3>Polymorphism</h3>
@@ -79,47 +93,71 @@ int main() {
 												<div class="code-block" data-code='
 #include <iostream>
 #include <vector>
+#include <memory> // For smart pointers
 
+// Base class
 class Shape {
 public:
-    virtual void draw() const {
-        std::cout << "Drawing Shape\n";
+    virtual double area() const = 0;  // Pure virtual function
+    virtual void display() const {
+        std::cout << "Shape with area: " << area() << std::endl;
     }
-    virtual ~Shape() = default; // Virtual destructor
+
+    virtual ~Shape() {}
 };
 
+// Derived class - Circle
 class Circle : public Shape {
+private:
+    double radius;
+
 public:
-    void draw() const override {
-        std::cout << "Drawing Circle\n";
+    Circle(double r) : radius(r) {}
+
+    double area() const override {
+        return 3.14159 * radius * radius;
+    }
+
+    void display() const override {
+        std::cout << "Circle with area: " << area() << std::endl;
     }
 };
 
-class Square : public Shape {
+// Derived class - Rectangle
+class Rectangle : public Shape {
+private:
+    double width, height;
+
 public:
-    void draw() const override {
-        std::cout << "Drawing Square\n";
+    Rectangle(double w, double h) : width(w), height(h) {}
+
+    double area() const override {
+        return width * height;
+    }
+
+    void display() const override {
+        std::cout << "Rectangle with area: " << area() << std::endl;
     }
 };
 
 int main() {
-    std::vector<Shape*> shapes;
-    shapes.push_back(new Circle());
-    shapes.push_back(new Square());
+    // Creates a vector of base class pointers
+    std::vector<std::unique_ptr<Shape>> shapes;
 
+    // Adds different derived class objects to the vector
+    shapes.push_back(std::make_unique<Circle>(5.0));
+    shapes.push_back(std::make_unique<Rectangle>(4.0, 6.0));
+
+    // Using polymorphism to calculate the area for different shapes
     for (const auto& shape : shapes) {
-        shape->draw(); // Calls the appropriate draw() function
+        shape->display();  // Calls the appropriate display function for each derived type
     }
 
-    // Clean up
-    for (auto& shape : shapes) {
-        delete shape;
-    }
     return 0;
 }
 												' data-language="cpp"></div>
 										</div>
-										Here, the <code>draw</code> function is overridden in both <code>Circle</code> and <code>Square</code> classes. When iterating through the <code>shapes</code> vector, the correct <code>draw</code> function is called for each object, demonstrating runtime polymorphism.
+										Here, the <code>display</code> function is overridden in both <code>Circle</code> and <code>Rectangle</code> classes. When iterating through the <code>shapes</code> vector, the correct <code>display</code> function is called for each object, demonstrating runtime polymorphism.
 										<hr/>
 										
 										<h3>Importance of Virtual Destructors</h3>
