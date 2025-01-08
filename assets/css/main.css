@@ -47,6 +47,10 @@ ul ul {
     margin-left: 20px; /* Add indentation for nested lists */
 }
 
+ul ol {
+  margin-left: 20px; /* Add indentation for nested lists */
+}
+
 blockquote, q {
   quotes: none; }
   blockquote:before, blockquote:after, q:before, q:after {
@@ -1284,6 +1288,7 @@ ol {
   padding-left: 1.25em; }
   ol li {
     padding-left: 0.25em; }
+
 
 ul {
   list-style: disc;

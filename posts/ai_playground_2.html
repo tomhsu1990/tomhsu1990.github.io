@@ -1,0 +1,276 @@
+<!DOCTYPE HTML>
+<!--
+	Updated: Ching-Hsiang Hsu
+-->
+<html>
+	<head>
+	    <title>AI playground: NanoGPT</title>
+	    <meta charset="utf-8" />
+	    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	    <link rel="stylesheet" href="../assets/css/default.min.css" />
+	    <link rel="stylesheet" href="../assets/css/main.css" />
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+
+							<!-- Header -->
+								<div id="header-placeholder"></div>
+
+							<!-- Section -->
+								<section>
+									<header class="main">
+										<h1>AI playground: NanoGPT</h1>
+										<div id="back-to-post-placeholder"></div>
+									</header>
+									<hr/>
+
+									<p>
+										<a href="https://github.com/karpathy/nanoGPT" class="icon brands fa-github"><span class="label">Github</span></a> <a href="https://github.com/karpathy/nanoGPT">https://github.com/karpathy/nanoGPT</a> <br><br>
+										NanoGPT, created by Andrej Karpathy, is a lightweight implementation of GPT (Generative Pre-trained Transformer) designed for efficient training and inference. The project aims to provide a simplified yet powerful framework for researchers, developers, and enthusiasts to experiment with GPT models without requiring extensive computational resources. Its minimalistic design makes it ideal for educational purposes, rapid prototyping, and smaller-scale projects.
+										<hr/>
+
+										<h3>Core Features of NanoGPT</h3>
+										<ul>
+											<li><b>Lightweight and Minimalist</b>: Focused on simplicity without compromising functionality.</li>
+											<li><b>Customizable Architectures</b>: Users can easily modify model configurations to suit their needs.</li>
+											<li><b>Optimized for Efficiency</b>: Employs techniques to streamline training and inference on limited hardware.</li>
+											<li><b>Extensive Documentation</b>: Well-documented codebase for ease of understanding and experimentation.</li>
+											<li><b>Support for Fine-Tuning</b>: Easily fine-tune models on specific datasets, enabling domain-specific applications.</li>
+										</ul>
+										<hr/>
+
+										<h3>Basic Hardware Requirements</h3>
+										NanoGPT is designed to run on modest hardware setups, making it accessible to a wider audience:
+										<ul>
+											<li><b>GPU</b>: A CUDA-compatible GPU with at least 4GB of VRAM is recommended.</li>
+											<li><b>CPU</b>: Modern CPUs with multi-core support can handle smaller-scale experiments.</li>
+											<li><b>RAM</b>: Minimum of 8GB, though 16GB or more is preferable for larger datasets.</li>
+											<li><b>Disk Space</b>: At least 10GB free for datasets, checkpoints, and model storage.</li>
+										</ul>
+										<hr/>
+
+										<h3>Setting Up NanoGPT on Different Operating Systems</h3>
+										<ol>
+											<li><b>Mac</b>:</li>
+											<ul>
+												<li><b>Prerequisites:</b></li>
+												<ul>
+													<li><b>Python</b>: Ensure Python 3.8+ is installed. You can check with <code>python3 --version</code>.</li>
+													<li><b>Git</b>: Install Git if not already available (<code>git --version</code>).</li>
+												</ul>
+												<li><b>Installation Steps</b>:</li>
+												<ol>
+													<li>Clone the Repository:</li>
+													<div id="code-container" style="margin: 10px 10px;">
+    													<div class="code-block" data-code='
+git clone https://github.com/karpathy/nanoGPT.git
+cd nanoGPT
+    													' data-language="bash"></div>
+													</div>
+													<li>Set Up a Virtual Environment:</li>
+													<div id="code-container" style="margin: 10px 10px;">
+    													<div class="code-block" data-code='
+python3 -m venv env
+source env/bin/activate
+    													' data-language="bash"></div>
+													</div>
+													<li>Preprocess the Dataset (Optional):</li>
+													<div id="code-container" style="margin: 10px 10px;">
+    													<div class="code-block" data-code='
+python data/shakespeare_char/prepare.py
+    													' data-language="bash"></div>
+													</div>
+													<li>Install Dependencies:</li>
+													<div id="code-container" style="margin: 10px 10px;">
+    													<div class="code-block" data-code='
+pip install torch transformers datasets requests
+    													' data-language="bash"></div>
+													</div>
+													<li>Train the Model:</li>
+													<div id="code-container" style="margin: 10px 10px;">
+    													<div class="code-block" data-code='
+python train.py config/train_shakespeare_char.py
+    													' data-language="bash"></div>
+													</div>
+													<li>Generate Text:</li>
+													<div id="code-container" style="margin: 10px 10px;">
+    													<div class="code-block" data-code='
+python sample.py --out_dir=out-shakespeare-char --start="Once upon a time, "
+    													' data-language="bash"></div>
+													</div>
+												</ol>
+											</ul>
+											<li><b>Windows</b>:</li>
+											<ul>
+												<li><b>Prerequisites:</b></li>
+												<ul>
+													<li><b>Python</b>: Ensure Python 3.8+ is installed. It is available on Windows Store. You can check with <code>python3 --version</code> in command line.</li>
+													<li><b>Git</b>: Install Git if not already available (<code>git --version</code>).</li>
+													<ol>
+														<li>Download Git from the official <a href="https://git-scm.com/">Git website</a>.</li>
+														<li>Install it and ensure "Git Bash" is added to your system PATH.</li>
+													</ol>
+												</ul>
+												<li><b>Installation Steps</b>:</li>
+												<ol>
+													<li>Clone the Repository:</li>
+													<div id="code-container" style="margin: 10px 10px;">
+    													<div class="code-block" data-code='
+git clone https://github.com/karpathy/nanoGPT.git
+cd nanoGPT
+    													' data-language="bash"></div>
+													</div>
+													<li>Set Up a Virtual Environment:</li>
+													<div id="code-container" style="margin: 10px 10px;">
+    													<div class="code-block" data-code='
+python3 -m venv env
+source env/bin/activate
+    													' data-language="bash"></div>
+													</div>
+													<li>Preprocess the Dataset (Optional):</li>
+													<div id="code-container" style="margin: 10px 10px;">
+    													<div class="code-block" data-code='
+python data/shakespeare_char/prepare.py
+    													' data-language="bash"></div>
+													</div>
+													<li>Install Dependencies:</li>
+													<div id="code-container" style="margin: 10px 10px;">
+    													<div class="code-block" data-code='
+pip install torch transformers datasets requests
+    													' data-language="bash"></div>
+													</div>
+													<li>Train the Model:</li>
+													<div id="code-container" style="margin: 10px 10px;">
+    													<div class="code-block" data-code='
+python train.py config/train_shakespeare_char.py
+    													' data-language="bash"></div>
+													</div>
+													<li>Generate Text:</li>
+													<div id="code-container" style="margin: 10px 10px;">
+    													<div class="code-block" data-code='
+python sample.py --out_dir=out-shakespeare-char --start="Long time ago, "
+    													' data-language="bash"></div>
+													</div>
+												</ol>
+											</ul>
+										</ol>
+										<hr/>
+
+										<h3>Applications and Accessibility</h3>
+										NanoGPT can be used in a variety of applications:
+										<ul>
+											<li><b>Creative Writing</b>: Generate poems, stories, and other literary content.</li>
+											<li><b>Chatbots</b>: Build conversational agents.</li>
+											<li><b>Code Generation</b>: Assist in generating boilerplate code.</li>
+											<li><b>Educational Tools</b>: Learn and teach NLP and machine learning concepts.</li>
+										</ul>
+										Its lightweight nature ensures that even users with limited technical expertise or resources can experiment and build projects.
+										<hr/>
+
+										<h3>Mini Project</h3>
+										<a href="https://github.com/tomhsu1990/nanoGPT" class="icon brands fa-github"><span class="label">Github</span></a> <a href="https://github.com/tomhsu1990/nanoGPT">https://github.com/tomhsu1990/nanoGPT</a> <br>
+										In my mini-project, I used NanoGPT to create a model capable of generating poems in the style of the famous Chinese poet Bai Li (李白). Here are the steps I followed:
+										<ol>
+											<li><b>Data Collection</b>: Wrote a script, <code>scrape_bai_li_poems.py</code>, to gather Bai Li’s poems from the internet and record in <code>input.txt</code> with correct encoding.</li>
+											<li><b>Data Preparation</b>: Translated the collected poems into Traditional Chinese and performed data cleaning to ensure the text was consistent and usable for training.</li>
+											<li><b>Training Configuration</b>: Initially, I used the original configuration parameters from <code>train_shakespeare_char.py</code>, but the output was not satisfactory due to mismatched dataset characteristics. For example, the original model used a batch size of 64 and a block size of 256, which were unsuitable for Bai Li’s larger dataset and longer sequences. I tuned the configuration in <code>train_bai_li_char.py</code>, reducing the batch size to 12, increasing the block size to 2048, and adjusting the model dimensions (e.g., reducing n_layer, n_head, and n_embd for faster convergence). These changes significantly improved the results, making the output align better with Bai Li’s poetic style.</li>
+											<ul>
+												<li>Original Parameters' Output</li>
+												<div id="code-container" style="margin: 10px 10px;">
+    												<div class="code-block" data-code='
+秋》露姓縵
+
+濯講七
+村吮詩薔鴻積露漠滿紙夢伯墀
+一違好宦袪蘿忘七
+橘吊蒂武乘振
+一咿淺講講
+
+一咿 穴村七
+一淺步防虛》
+    												' data-language="text"></div>
+												</div>
+												<li>Updated Parameters' Output</li>
+												<div id="code-container" style="margin: 10px 10px;">
+    												<div class="code-block" data-code='
+秋殿開徵客，千里看書一身當百戰，
+山邊門道戒其如青箬笠如水腸中無辭煩憂。
+霓裳曳裾王氣濃前舊水，高失香，桃紅旗十二十水偏逢四人駐顏色，幽。
+
+無無限似儂入寒山中散發洛城頭，唯所歸去，對，前。
+柴門前舊枕浮雲臺，唯所是與人畏
+    												' data-language="text"></div>
+												</div>
+											</ul>
+											<li><b>Training the Model</b>: Ran the training script on the prepared dataset.</li>
+											<div id="code-container" style="margin: 10px 10px;">
+												<div class="code-block" data-code='
+python train.py config/train_bai_li_char.py           
+												' data-language="bash"></div>
+											</div>
+											<li><b>Poem Generation</b>: The results captured Bai Li’s poetic style with creative and unique variations. However, the format did not align perfectly with traditional Chinese poetic paradigms. Future work will focus on refining the model to better understand and adhere to the structure and style of classical poetry.</li>
+											<div id="code-container" style="margin: 10px 10px;">
+												<div class="code-block" data-code='
+python sample.py --out_dir=out-bai-li-char --start="秋"
+												' data-language="bash"></div>
+											</div>
+										</ol>
+										This project demonstrated NanoGPT’s ability to fine-tune models effectively on domain-specific datasets, even for a complex and artistic task like poetry generation. The final generated poems were both stylistically aligned with Bai Li’s work and imaginative in their own right.
+										<hr/>
+
+										<h3>Future Work</h3>
+										<ul>
+											<li><b>Model Optimization</b>: Integrating techniques like quantization and pruning to further reduce resource requirements.</li>
+											<li><b>Enhanced Multilingual Support</b>: Extending the framework to handle diverse languages more effectively.</li>
+											<li><b>Community Contributions</b>: Encouraging collaboration for plugins and extensions.</li>
+											<li><b>Better Accessibility</b>: Creating GUI tools for non-technical users to experiment with NanoGPT.</li>
+										</ul>
+										<hr/>
+
+										<h3>Comparison</h3>
+										Compared to full-scale implementations of GPT (e.g., OpenAI’s GPT or Hugging Face’s Transformers), NanoGPT focuses on:
+										<ul>
+											<li><b>Simplicity</b>: Stripped-down architecture with fewer dependencies.</li>
+											<li><b>Accessibility</b>: Lower hardware requirements, making it suitable for personal projects.</li>
+											<li><b>Flexibility</b>: Easier to adapt for niche applications.</li>
+										</ul>
+										While NanoGPT is not intended for large-scale production, it excels in educational contexts and for hobbyist projects.
+										<hr/>
+
+										<h3>Conclusion</h3>
+										NanoGPT offers a unique blend of simplicity, power, and accessibility, making it an excellent tool for exploring GPT-based models. Whether you’re an educator, researcher, or hobbyist, NanoGPT provides the building blocks for creative and impactful applications.
+									</p>
+								</section>
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+					<div id="sidebar">
+						<div class="inner">
+							<!-- Menu -->
+								<div id="menu-placeholder"></div>
+
+							<!-- Section -->
+								<div id="contact-placeholder"></div>
+
+							<!-- Footer -->
+								<div id="footer-placeholder"></div>
+						</div>
+					</div>
+	    	</div>
+
+		<!-- Scripts -->
+			<script src="../assets/js/jquery.min.js"></script>
+			<script src="../assets/js/browser.min.js"></script>
+			<script src="../assets/js/breakpoints.min.js"></script>
+			<script src="../assets/js/util.js"></script>
+			<script src="../assets/js/highlight.min.js"></script>
+			<script src="../assets/js/main.js"></script>
+	</body>
+</html>
