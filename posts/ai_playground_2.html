@@ -61,8 +61,8 @@
 											<ul>
 												<li><b>Prerequisites:</b></li>
 												<ul>
-													<li><b>Python</b>: Ensure Python 3.8+ is installed. You can check with <code>python3 --version</code>.</li>
-													<li><b>Git</b>: Install Git if not already available (<code>git --version</code>).</li>
+													<li><b>Python</b>: Ensure Python 3.8~3.11 is installed. You can check with <code>python3 --version</code>.</li>
+													<li><b>Git</b>: Install git if not already available (<code>git --version</code>).</li>
 												</ul>
 												<li><b>Installation Steps</b>:</li>
 												<ol>
@@ -89,7 +89,15 @@ python data/shakespeare_char/prepare.py
 													<li>Install Dependencies:</li>
 													<div id="code-container" style="margin: 10px 10px;">
     													<div class="code-block" data-code='
-pip install torch transformers datasets requests
+pip install --upgrade pip
+pip install transformers datasets requests numpy tiktoken
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
+    													' data-language="bash"></div>
+													</div>
+													If you are using an Apple M1/M2 chip, make sure to install the version optimized for Apple Silicon:
+													<div id="code-container" style="margin: 10px 10px;">
+    													<div class="code-block" data-code='
+pip install torch torchvision torchaudio
     													' data-language="bash"></div>
 													</div>
 													<li>Train the Model:</li>
@@ -110,12 +118,8 @@ python sample.py --out_dir=out-shakespeare-char --start="Once upon a time, "
 											<ul>
 												<li><b>Prerequisites:</b></li>
 												<ul>
-													<li><b>Python</b>: Ensure Python 3.8+ is installed. It is available on Windows Store. You can check with <code>python3 --version</code> in command line.</li>
-													<li><b>Git</b>: Install Git if not already available (<code>git --version</code>).</li>
-													<ol>
-														<li>Download Git from the official <a href="https://git-scm.com/">Git website</a>.</li>
-														<li>Install it and ensure "Git Bash" is added to your system PATH.</li>
-													</ol>
+													<li><b>Python</b>: Ensure Python 3.8~3.11 is installed. It is available on Windows Store. You can check with <code>python3 --version</code> in command line.</li>
+													<li><b>Git</b>: Install git if not already available (<code>git --version</code>).</li>
 												</ul>
 												<li><b>Installation Steps</b>:</li>
 												<ol>
@@ -142,7 +146,7 @@ python data/shakespeare_char/prepare.py
 													<li>Install Dependencies:</li>
 													<div id="code-container" style="margin: 10px 10px;">
     													<div class="code-block" data-code='
-pip install torch transformers datasets requests
+pip install torch transformers datasets requests numpy tiktoken
     													' data-language="bash"></div>
 													</div>
 													<li>Train the Model:</li>

@@ -292,6 +292,7 @@
 					<li><a href="${basePath}index.html">Homepage</a></li>
 					<li><a href="${basePath}work.html">Work Experience</a></li>
 					<li><a href="${basePath}background.html">Academic Background</a></li>
+					<li><a href="${basePath}post.html">Post</a></li>
 					<li>
 						<span class="opener">Research and Publication</span>
 						<ul>
@@ -310,7 +311,6 @@
 							<li><a href="${basePath}project/3D_pop-up.html">3D Pop-up Book</a></li>
 						</ul>
 					</li>
-					<li><a href="${basePath}post.html">Post</a></li>
 					<li><a href="${basePath}oj_records.html">Online Judge Record</a></li>
 				</ul>
 			</nav>
