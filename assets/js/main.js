@@ -266,9 +266,9 @@
 
 	// Menu.
 		document.addEventListener("DOMContentLoaded", function () {
+			let menuHTML = ``;
 			// Get the full path of the current page
 			const currentPath = window.location.pathname;
-			console.log("Current Path:", currentPath);
 
 			// Process the path to stop at "tomhsu1990.github.io"
 			const rootFolderName = "tomhsu1990.github.io";
@@ -278,16 +278,15 @@
 			if (currentPath.includes(rootFolderName)) {
 			    // Find the position of the rootFolderName and slice the path
 			    const indexOfRoot = currentPath.indexOf(rootFolderName) + rootFolderName.length;
-
-			    console.log("index of root:", indexOfRoot);
 			    basePath = currentPath.substring(0, indexOfRoot)+'/';
-			}
 
-			console.log("Base Path:", basePath);
 
-			// Dynamically generate the menu
-			const menuHTML = `
-			<nav id="menu">
+
+			    console.log("Base Path:", basePath);
+
+			    // Dynamically generate the menu
+			    menuHTML = `
+			    <nav id="menu">
 				<header class="major">
 					<!--
 					<h2>Menu</h2>
@@ -318,8 +317,39 @@
 					</li>
 					<li><a href="${basePath}oj_records.html">Online Judge Record</a></li>
 				</ul>
-			</nav>
-			`;
+			    </nav>
+			    `;
+			} else {
+			    menuHTML = `
+			    <nav id="menu">
+			        <ul>
+			            <li><a href="/index.html">Homepage</a></li>
+			            <li><a href="/work.html">Work Experience</a></li>
+			            <li><a href="/background.html">Academic Background</a></li>
+			            <li><a href="/post.html">Post</a></li>
+			            <li>
+			                <span class="opener">Research and Publication</span>
+			                <ul>
+			                    <li><a href="/research/SSS.html">Soft Subdivision Search</a></li>
+			                    <li><a href="/research/MotSeg.html">Motion and Semantic Segmentation</a></li>
+			                    <li><a href="/research/ActionRecog.html">Egocentric Action Recognition</a></li>
+			                </ul>
+			            </li>
+			            <li>
+			                <span class="opener">Project</span>
+			                <ul>
+			                    <li><a href="/project/Navigation_SLAM.html">Navigation, Localization and Mapping</a></li>
+			                    <li><a href="/project/RoboCup.html">RoboCup Standard Platform League</a></li>
+			                    <li><a href="/project/LEGO_arm.html">LEGO Robot Arm System</a></li>
+			                    <li><a href="/project/Restaurant_Rating.html">Restaurant Rating System</a></li>
+			                    <li><a href="/project/3D_pop-up.html">3D Pop-up Book</a></li>
+			                </ul>
+			            </li>
+			            <li><a href="/oj_records.html">Online Judge Record</a></li>
+			        </ul>
+			    </nav>
+			    `;
+			}
 
 			document.getElementById("menu-placeholder").innerHTML = menuHTML;
 		});
