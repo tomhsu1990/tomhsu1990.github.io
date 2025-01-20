@@ -1,0 +1,228 @@
+<!DOCTYPE HTML>
+<!--
+	Updated: Ching-Hsiang Hsu
+-->
+<html>
+	<head>
+	    <title>AI playground: Genesis</title>
+	    <meta charset="utf-8" />
+	    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	    <link rel="stylesheet" href="../assets/css/default.min.css" />
+	    <link rel="stylesheet" href="../assets/css/main.css" />
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+
+							<!-- Header -->
+								<div id="header-placeholder"></div>
+
+							<!-- Section -->
+								<section>
+									<header class="main">
+										<h1>AI playground: Genesis</h1>
+										<div id="back-to-post-placeholder"></div>
+									</header>
+									<hr/>
+
+									<p>
+										<a href="https://github.com/Genesis-Embodied-AI/Genesis" class="icon brands fa-github"><span class="label">Github</span></a> <a href="https://github.com/Genesis-Embodied-AI/Genesis">https://github.com/Genesis-Embodied-AI/Genesis</a> <br><br>
+										Genesis AI is an open-source physics simulation platform designed for robotics, embodied AI, and physical AI development. It offers a versatile and efficient environment to simulate a variety of materials and physical phenomena, enabling researchers and developers to design, test, and validate intelligent systems in realistic virtual settings before real-world deployment.
+										<hr/>
+
+										<h3>Core Features of Genesis</h3>
+										<ul>
+											<li><b>Universal Physics Engine</b>: Supports simulation of diverse materials, including rigid bodies, fluids, deformable objects, and granular materials.
+											</li>
+											<li><b>High-Performance Simulation</b>: Capable of reaching simulation speeds up to 43 million FPS on high-end GPUs like the RTX 4090.
+											</li>
+											<li><b>Photorealistic Rendering</b>: Offers fast and realistic visual rendering to enhance the simulation experience.
+											</li>
+											<li><b>Generative Data Engine</b>: Translates natural language prompts into diverse simulation scenarios, enabling efficient experiment creation. (not release yet)
+											</li>
+											<li><b>Cross-Platform Compatibility</b>: Runs natively on Linux, macOS, and Windows, supporting various computing backends like CPU, Nvidia GPU, AMD GPU, and Apple Metal.
+											</li>
+										</ul>
+										<hr/>
+
+										<h3>Basic Hardware Requirements</h3>
+										Genesis AI can run on standard hardware setups but performs optimally with:
+										<ul>
+											<li><b>GPU</b>: Nvidia RTX series (recommended for high-performance simulation)</li>
+											<li><b>Operation System</b>: macOS, Linux, and Windows</li>
+											<li><b>RAM and Storage</b>: Adequate RAM (16GB or higher) and sufficient storage for handling large datasets</li>
+										</ul>
+										<hr/>
+
+										<h3>Setting Up Genesis on Different Operating Systems</h3>
+										<ol>
+											<li><b>Mac</b>:</li>
+											I tried to set up an virtual environment based on different python version. Still, no luck to make it work. There are many dependecy combinations to resolve such as python-tk, trimesh, PyOpenGL, pygel3d, ... I finally found a solution in <a href="https://github.com/Genesis-Embodied-AI/Genesis/issues">Genesis's github issues</a>. Many thanks to <b>soumith</b> for sharing these <a href="https://github.com/Genesis-Embodied-AI/Genesis/issues/11#issuecomment-2557519124">magic steps</a>. If you have installation issues, it is highly recommended to check in Genesis's github issues before asking Google or other LLM.
+											<ul>
+												<li><b>Prerequisites</b>:</li>
+												<ul>
+													<li>Preinstall ffmpeg on Mac through brew.</li>
+													<li>Python: Ensure Python 3.12 is installed. You can check with python3 --version.</li>
+												</ul>
+												<li><b>Installation Steps</b>:</li>
+												<ol>
+													<li>Prepare mini conda environment:</li>
+													<div id="code-container" style="margin: 10px 10px;">
+    													<div class="code-block" data-code='
+curl https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-arm64.sh -o miniconda.sh
+bash miniconda.sh -b -u -p miniconda # installs to current folder in a `miniconda` subfolder
+. miniconda/bin/activate
+    													' data-language="bash"></div>
+													</div>
+													<li>Set up conda environment:</li>
+													<div id="code-container" style="margin: 10px 10px;">
+    													<div class="code-block" data-code='
+conda create -n genesis python=3.12
+conda activate genesis
+    													' data-language="bash"></div>
+													</div>
+													<li>Install Dependencies:</li>
+													<div id="code-container" style="margin: 10px 10px;">
+    													<div class="code-block" data-code='
+pip install genesis-world
+pip install torch
+    													' data-language="bash"></div>
+													</div>
+													<li>Execute:</li>
+													<div id="code-container" style="margin: 10px 10px;">
+    													<div class="code-block" data-code='
+python examples/render_on_macos.py --vis
+    													' data-language="bash"></div>
+													</div>
+												</ol>
+											</ul>
+											<li><b>Windows</b>:</li>
+											<b>Please note that the interactive viewer is currently not supported on Windows. You will meet a <code>glGetUniformLocation</code> error.</b>
+											<ul>
+												<li><b>Installation Steps</b>:</li>
+												<ol>
+													<li>Prepare mini conda environment:</li>
+													<div id="code-container" style="margin: 10px 10px;">
+    													<div class="code-block" data-code='
+download miniconda at https://repo.anaconda.com/miniconda/
+choose https://repo.anaconda.com/miniconda/Miniconda3-latest-Windows-x86_64.exe
+    													' data-language="text"></div>
+													</div>
+													<li>Set up conda system path:</li>
+													<ol>
+														<li>Press <code>Win + s</code> and search for <b>Environment Variables</b>.</li>
+														<li>Click <b>"Edit the system environment variables"</b>.</li>
+														<li>In the <b>System Properties</b> window, click <b>"Environment Variables..."</b>.</li>
+														<li>Under <b>System variables</b>, scroll down and find the <code>Path</code> variable.</li>
+														<li>Select it and click <b>Edit</b>.</li>
+														<li>Click <b>New</b> and add the following paths (adjust if using Miniconda):</li>
+														<div id="code-container" style="margin: 10px 10px;">
+	    													<div class="code-block" data-code='
+C:\path_to\miniconda
+C:\path_to\miniconda\Scripts
+C:\path_to\miniconda\Library\bin
+    													' data-language="powershell"></div>
+														</div>
+															<li>Click <b>OK</b> on all windows to save.</li>
+													</ol>
+													<li>Set up conda environment:</li>
+													<div id="code-container" style="margin: 10px 10px;">
+    													<div class="code-block" data-code='
+
+conda create -n genesis python=3.12
+conda activate genesis
+    													' data-language="powershell"></div>
+													</div>
+													<li>Install Dependencies:</li>
+													<div id="code-container" style="margin: 10px 10px;">
+    													<div class="code-block" data-code='
+pip install genesis-world
+pip install torch
+    													' data-language="powershell"></div>
+													</div>
+													<li>Execute:</li>
+													<div id="code-container" style="margin: 10px 10px;">
+    													<div class="code-block" data-code='
+python examples/render_on_macos.py --vis
+    													' data-language="powershell"></div>
+													</div>
+												</ol>
+											</ul>
+										</ol>
+										<hr/>
+
+										<h3>Applications and Accessibility</h3>
+										Genesis AI supports various applications:
+										<ul>
+											<li><b>Robotics R&D</b>: Testing and validating robotic behaviors in a realistic simulation environment.</li>
+											<li><b>Material Science</b>: Simulating liquids, gases, deformable objects, and more for scientific research.</li>
+											<li><b>AI Training</b>: Creating realistic environments for embodied AI agents to interact and learn.</li>
+											<li><b>Industrial Automation</b>: Validating automation scenarios with high physical fidelity.</li>
+										</ul>
+										<hr/>
+
+										<h3>Demos</h3>
+										<div class="video-container">
+											<p align="center">
+												<iframe width="720" height="540"
+													src="https://www.youtube.com/embed/jYCdNry24d4" frameborder="0" allowfullscreen>
+												</iframe>
+											</p>
+										</div>
+										I conducted an interesting experiment using Genesis by importing a 3D model of a small recycle trash bin from Trellis. In the simulation, I applied gravity to make the bin drop from the air and land realistically on the ground, effectively demonstrating Genesis's physics capabilities in handling object dynamics and material interactions. This initial test not only validated the accuracy of the physics engine but also highlighted how easily external 3D models can be integrated into the simulation.<br><br>
+
+										During this experiment, I noticed that updating Genesis surfaces or materials required me to frequently loo up its official website for additional information. This process could be streamlined if a feature like gs.generate were available. Such a feature would allow users to easily apply different physical effects and material properties directly within the simulation environment, making experimentation and development much more intuitive and efficient.<br><br>
+
+										Building upon this experiment, I plan to develop more complex applications, such as using a robotic arm like the Franka Emika Panda to interact with various objects. For instance, future scenarios may involve the robotic arm delicately grasping and manipulating fragile items like a glass cup or performing practical tasks such as sorting recyclable materials. By combining object interaction with physics-driven simulations, these experiments will showcase Genesis's potential in developing realistic robotic workflows and complex automation tasks.<br><br>
+
+										These hands-on demonstrations underscore Genesis's versatility and core functionalities, offering a solid foundation for exploring more advanced and interactive simulation environments.
+										<hr/>
+
+										<h3>Comparison</h3>
+										<ul>
+											<li><b>Genesis AI</b>: Focuses on open-source, high-fidelity physics simulation for diverse material modeling and robotics applications.</li>
+											<li><b>NVIDIA Cosmos</b>: Offers a suite of generative models and simulation tools optimized for NVIDIA's hardware, focusing on efficient development and deployment of physical AI models.</li>
+											<li><b>Gazebo</b>: A widely used open-source robotics simulator that emphasizes real-world physics and sensor simulation, primarily supporting ROS (Robot Operating System) integration.</li>
+											<li><b>PyBullet</b>: An open-source physics engine popular for robotics and machine learning research, offering easy Python integration but lacking the advanced rendering and simulation speed of Genesis.</li>
+											<li><b>Unity ML-Agents</b>: Primarily a game engine adapted for AI training with reinforcement learning, featuring rich 3D environments but lacking the specialized physics simulation capabilities of Genesis.</li>
+										</ul>
+
+										Genesis stands out for its open-source approach and universal physics engine, providing high performance and photorealistic rendering, while platforms like Cosmos, Gazebo, PyBullet, and Unity ML-Agents serve more specialized or hardware-optimized roles in simulation and AI development.
+										<hr/>
+
+										<h3>Conclusion</h3>
+										Genesis AI is a powerful and flexible platform that combines high-performance simulation, photorealistic rendering, and generative data capabilities. Its cross-platform support and user-friendly Python interface make it an essential tool for researchers and developers in robotics, AI, and industrial automation. As it evolves, Genesis is poised to significantly advance embodied and physical AI applications.
+									</p>
+								</section>
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+					<div id="sidebar">
+						<div class="inner">
+							<!-- Menu -->
+								<div id="menu-placeholder"></div>
+
+							<!-- Section -->
+								<div id="contact-placeholder"></div>
+
+							<!-- Footer -->
+								<div id="footer-placeholder"></div>
+						</div>
+					</div>
+	    	</div>
+
+		<!-- Scripts -->
+			<script src="../assets/js/jquery.min.js"></script>
+			<script src="../assets/js/browser.min.js"></script>
+			<script src="../assets/js/breakpoints.min.js"></script>
+			<script src="../assets/js/util.js"></script>
+			<script src="../assets/js/highlight.min.js"></script>
+			<script src="../assets/js/main.js"></script>
+	</body>
+</html>
