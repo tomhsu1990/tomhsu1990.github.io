@@ -1,0 +1,637 @@
+<!DOCTYPE HTML>
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+
+	Updated: Ching-Hsiang Hsu
+-->
+<html>
+	<head>
+		<title>Fun - Tower of Hanoi Game</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<style>
+			#game-container {
+				display: flex;
+				justify-content: center;
+				align-items: flex-end; /* Align pegs to the bottom */
+				width: 600px;
+				height: 400px;
+				margin: 20px auto;
+				position: relative;
+				background-color: #f9f9f9;
+				border-radius: 10px;
+				padding: 20px;
+			}
+
+			.peg {
+				width: 50px;
+				height: 300px;
+				background-color: #ccc;
+				margin: 0 40px;
+				display: flex;
+				flex-direction: column;
+				align-items: flex-start; /* Align disks to the bottom of the peg */
+				position: relative;
+				cursor: pointer;
+				border-radius: 5px;
+			}
+
+			.peg:hover {
+				opacity: 0.8;
+			}
+
+			.peg.selected {
+				border: 3px solid #f56a6a;
+			}
+
+			.disk {
+				height: 30px;
+				border-radius: 5px;
+				position: absolute;
+				left: 50%;
+				transform: translateX(-50%);
+				transition: all 0.5s ease-in-out; /* Smooth transition for moving */
+				box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+			}
+
+			.disk-1 {
+				width: 80px;
+				background-color: #f56a6a;
+				bottom: 0px;
+			}
+			.disk-2 {
+				width: 100px;
+				background-color: #f7b731;
+				bottom: 30px;
+			}
+			.disk-3 {
+				width: 120px;
+				background-color: #5f27cd;
+				bottom: 60px;
+			}
+			.disk-4 {
+				width: 140px;
+				background-color: #00d2d3;
+				bottom: 90px;
+			}
+			.disk-5 {
+				width: 160px;
+				background-color: #ff9ff3;
+				bottom: 120px;
+			}
+
+			#controls {
+				text-align: center;
+				margin: 20px 0;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				gap: 15px;
+			}
+
+			#controls button {
+				background-color: #ccc;
+				color: white !important;
+				border: none;
+				padding: 6px 12px;
+				font-size: 16px;
+				cursor: pointer;
+				border-radius: 8px;
+				transition: background-color 0.3s;
+				box-shadow: none;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+
+			#controls button:hover {
+				background-color: #bbb;
+			}
+
+			#controls select {
+				padding: 6px 12px;
+				font-size: 16px;
+				border-radius: 5px;
+				border: 1px solid #ccc;
+				width: 80px;
+				vertical-align: middle;
+			}
+
+			#controls label {
+				font-size: 16px;
+				font-weight: normal;
+				vertical-align: middle;
+			}
+
+			#message {
+				text-align: center;
+				margin-top: 20px;
+				font-size: 18px;
+				font-weight: bold;
+				color: #f56a6a;
+				min-height: 25px;
+			}
+
+			.game-section {
+				background-color: white;
+				padding: 30px;
+				border-radius: 10px;
+				box-shadow: none;
+				margin: 20px 0;
+			}
+
+			/* Poker Game Styles */
+			#poker-game-container {
+				display: grid;
+				grid-template-columns: repeat(6, 80px);
+				grid-template-rows: repeat(4, 120px);
+				gap: 10px;
+				margin: 20px auto;
+				justify-content: center;
+			}
+
+			.poker-card {
+				width: 80px;
+				height: 120px;
+				background-color: #fff;
+				border: 1px solid #ccc;
+				border-radius: 8px;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				font-size: 20px;
+				cursor: pointer;
+				transition: transform 0.6s;
+				transform-style: preserve-3d;
+				box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+				position: relative;
+			}
+
+			.poker-card.flipped {
+				transform: rotateY(180deg);
+			}
+
+			.poker-card-front, .poker-card-back {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				backface-visibility: hidden;
+				border-radius: 8px;
+				box-sizing: border-box;
+				padding: 5px;
+			}
+
+			.poker-card-back {
+				background-color: #f56a6a;
+				color: #fff;
+				font-size: 24px;
+				font-weight: bold;
+			}
+
+			.poker-card-front {
+				background-color: #fff;
+				border: 1px solid #ccc;
+				transform: rotateY(180deg);
+				font-size: 16px;
+				font-weight: bold;
+				color: #333;
+			}
+
+			.poker-card.matched {
+				opacity: 0.6;
+				pointer-events: none;
+				background-color: #ffc107;
+			}
+
+			.poker-card.matched .poker-card-front {
+				background-color: #ffc107;
+				color: #333;
+			}
+
+			#poker-info {
+				text-align: center;
+				margin: 20px 0;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				gap: 20px;
+				font-size: 18px;
+			}
+
+			#restart-poker-button {
+				background-color: #ccc;
+				color: white !important;
+				border: none;
+				padding: 6px 12px;
+				font-size: 16px;
+				cursor: pointer;
+				border-radius: 8px;
+				transition: background-color 0.3s;
+				box-shadow: none;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+
+			#restart-poker-button:hover {
+				background-color: #bbb;
+			}
+		</style>
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+
+							<!-- Header -->
+								<div id="header-placeholder"></div>
+
+							<!-- Content -->
+								<section>
+									<header class="main">
+										<h1>Fun Zone</h1>
+									</header>
+									<hr class="major" />
+									<div class="game-section">
+										<h2>Tower of Hanoi</h2>
+										<p>
+											The Tower of Hanoi is a classic mathematical puzzle. The objective is to move all disks from the leftmost peg to the rightmost peg, following these rules:
+										</p>
+										<ul>
+											<li>Only one disk can be moved at a time</li>
+											<li>Each move consists of taking the upper disk from one of the stacks and placing it on top of another stack</li>
+											<li>No disk may be placed on top of a smaller disk</li>
+										</ul>
+										<p>
+											<strong>How to play:</strong> Click on a peg to select the top disk, then click on another peg to move it there. Good luck!
+										</p>
+
+										<div id="game-container">
+											<div class="peg" id="peg1"></div>
+											<div class="peg" id="peg2"></div>
+											<div class="peg" id="peg3"></div>
+										</div>
+
+										<div id="controls">
+											<label for="num-disks">Number of Disks:</label>
+											<select id="num-disks">
+												<option value="3">3</option>
+												<option value="4">4</option>
+												<option value="5">5</option>
+											</select>
+											<button onclick="resetGame()">Reset Game</button>
+										</div>
+
+										<div id="message"></div>
+									</div>
+
+									<hr class="major" />
+									<div class="game-section">
+										<h2>Poker Card Matching Game</h2>
+										<p>
+											Match pairs of identical poker cards by flipping them over. The goal is to find all 12 pairs in the fewest moves and shortest time possible.
+										</p>
+										<p>
+											<strong>How to play:</strong> Click on cards to flip them over. Find two identical cards to make a match. All cards will be briefly visible, then flip back if they don't match.
+										</p>
+
+										<div id="poker-info">
+											Moves: <span id="moves">0</span> | Time: <span id="timer">0:00</span>
+											<button id="restart-poker-button">Restart</button>
+										</div>
+
+										<div id="poker-game-container"></div>
+									</div>
+
+									<hr class="major" />
+									<p>
+										<i>Play is the highest form of Research!</i> - Albert Einstein
+									</p>
+
+								</section>
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+					<div id="sidebar">
+						<div class="inner">
+							<!-- Menu -->
+								<div id="menu-placeholder"></div>
+
+							<!-- Section -->
+								<div id="contact-placeholder"></div>
+
+							<!-- Footer -->
+								<div id="footer-placeholder"></div>
+						</div>
+					</div>
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+			<!-- Tower of Hanoi Game Script -->
+			<script>
+				const gameContainer = document.getElementById('game-container');
+				const pegs = document.querySelectorAll('.peg');
+				const numDisksSelect = document.getElementById('num-disks');
+				const messageDiv = document.getElementById('message');
+
+				let numDisks = 3;
+				let disks = [[], [], []]; // Array of arrays representing disks on each peg
+				let selectedDisk = null;
+				let selectedPeg = null;
+
+				function initializeGame() {
+					numDisks = parseInt(numDisksSelect.value);
+					disks = [[], [], []];
+					selectedDisk = null;
+					selectedPeg = null;
+					messageDiv.textContent = '';
+
+					// Clear existing disks
+					pegs.forEach(peg => {
+						peg.innerHTML = '';
+						peg.classList.remove('selected');
+					});
+
+					// Create disks and place them on peg 1
+					for (let i = numDisks; i >= 1; i--) {
+						const disk = document.createElement('div');
+						disk.classList.add('disk', `disk-${i}`);
+						disk.id = `disk-${i}`;
+						disk.dataset.size = i;
+						pegs[0].appendChild(disk);
+						disks[0].push(disk);
+					}
+
+					updateDiskPositions();
+				}
+
+				function updateDiskPositions() {
+					pegs.forEach((peg, index) => {
+						const pegDisks = disks[index];
+						let bottomOffset = 0;
+						pegDisks.forEach(disk => {
+							disk.style.bottom = `${bottomOffset}px`;
+							bottomOffset += 30; // Height of each disk
+						});
+					});
+				}
+
+				function handlePegClick(event) {
+					const peg = event.currentTarget;
+					const pegIndex = Array.from(pegs).indexOf(peg);
+
+					if (!selectedDisk) {
+						// First click: Select a disk from this peg
+						if (disks[pegIndex].length > 0) {
+							selectedDisk = disks[pegIndex][disks[pegIndex].length - 1];
+							selectedPeg = peg;
+							peg.classList.add('selected');
+							messageDiv.textContent = `Selected disk ${selectedDisk.dataset.size} from Peg ${pegIndex + 1}.`;
+						}
+					} else {
+						// Second click: Try to move the selected disk to this peg
+						if (peg === selectedPeg) {
+							// Click on the same peg: Deselect
+							peg.classList.remove('selected');
+							selectedDisk = null;
+							selectedPeg = null;
+							messageDiv.textContent = 'Disk deselected.';
+						} else {
+							// Click on a different peg: Attempt to move
+							if (canMove(selectedDisk, pegIndex)) {
+								moveDisk(selectedDisk, pegIndex);
+								selectedPeg.classList.remove('selected');
+								selectedDisk = null;
+								selectedPeg = null;
+								messageDiv.textContent = 'Move successful!';
+								checkWin();
+							} else {
+								messageDiv.textContent = 'Invalid move. Cannot place a larger disk on a smaller one.';
+							}
+						}
+					}
+				}
+
+				function canMove(disk, targetPegIndex) {
+					const sourcePegIndex = Array.from(pegs).indexOf(selectedPeg);
+					const targetPegDisks = disks[targetPegIndex];
+
+					if (targetPegDisks.length === 0) {
+						return true; // Can move to an empty peg
+					} else {
+						const topDiskOnTarget = targetPegDisks[targetPegDisks.length - 1];
+						return parseInt(disk.dataset.size) < parseInt(topDiskOnTarget.dataset.size);
+					}
+				}
+
+				function moveDisk(disk, targetPegIndex) {
+					const sourcePegIndex = Array.from(pegs).indexOf(selectedPeg);
+
+					// Remove disk from source peg
+					disks[sourcePegIndex].pop();
+					selectedPeg.removeChild(disk);
+
+					// Add disk to target peg
+					disks[targetPegIndex].push(disk);
+					pegs[targetPegIndex].appendChild(disk);
+
+					// Update positions
+					updateDiskPositions();
+				}
+
+				function checkWin() {
+					if (disks[2].length === numDisks) {
+						messageDiv.textContent = `🎉 Congratulations! You moved all ${numDisks} disks to Peg 3! 🎉`;
+						// Disable clicks after winning
+						pegs.forEach(peg => peg.removeEventListener('click', handlePegClick));
+					}
+				}
+
+				function resetGame() {
+					// Remove existing event listeners before reinitializing
+					pegs.forEach(peg => {
+						peg.removeEventListener('click', handlePegClick);
+					});
+
+					initializeGame();
+
+					// Add event listeners back
+					pegs.forEach(peg => {
+						peg.addEventListener('click', handlePegClick);
+					});
+				}
+
+				// Initial setup when page loads
+				document.addEventListener('DOMContentLoaded', function() {
+					initializeGame();
+
+					// Add event listeners to pegs
+					pegs.forEach(peg => {
+						peg.addEventListener('click', handlePegClick);
+					});
+				});
+			</script>
+
+			<!-- Poker Card Matching Game Script -->
+			<script>
+				const pokerGameContainer = document.getElementById('poker-game-container');
+				const movesSpan = document.getElementById('moves');
+				const timerSpan = document.getElementById('timer');
+				const restartPokerButton = document.getElementById('restart-poker-button');
+
+				const suits = ['♥', '♦', '♣', '♠'];
+				const ranks = ['2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K', 'A'];
+				let pokerCards = [];
+				let flippedCards = [];
+				let moves = 0;
+				let startTime;
+				let timerInterval;
+				let matchedPairs = 0;
+
+				function createPokerCards() {
+					const cardPairs = [];
+					for (const suit of suits) {
+						for (const rank of ranks) {
+							cardPairs.push({ suit, rank, id: `${suit}${rank}` });
+						}
+					}
+					// Select 12 pairs (24 cards total)
+					const selectedPairs = cardPairs.slice(0, 12);
+					pokerCards = [...selectedPairs, ...selectedPairs]; // Duplicate the pairs
+					shufflePokerArray(pokerCards);
+				}
+
+				function shufflePokerArray(array) {
+					for (let i = array.length - 1; i > 0; i--) {
+						const j = Math.floor(Math.random() * (i + 1));
+						[array[i], array[j]] = [array[j], array[i]];
+					}
+				}
+
+				function displayPokerCards() {
+					pokerGameContainer.innerHTML = ''; // Clear previous cards
+					pokerCards.forEach(card => {
+						const cardDiv = document.createElement('div');
+						cardDiv.classList.add('poker-card');
+						cardDiv.dataset.id = card.id;
+
+						const cardBack = document.createElement('div');
+						cardBack.classList.add('poker-card-back');
+
+						const cardFront = document.createElement('div');
+						cardFront.classList.add('poker-card-front');
+						cardFront.textContent = `${card.rank}${card.suit}`;
+
+						cardDiv.appendChild(cardBack);
+						cardDiv.appendChild(cardFront);
+
+						cardDiv.addEventListener('click', handlePokerCardClick);
+						pokerGameContainer.appendChild(cardDiv);
+					});
+				}
+
+				function handlePokerCardClick(event) {
+					const clickedCard = event.currentTarget;
+
+					if (flippedCards.length === 2 || clickedCard.classList.contains('flipped') || clickedCard.classList.contains('matched')) {
+						return; // Ignore clicks if 2 cards are already flipped or card is already flipped/matched
+					}
+
+					startPokerTimer(); // Start timer on the first click
+
+					clickedCard.classList.add('flipped');
+					flippedCards.push(clickedCard);
+
+					moves++;
+					movesSpan.textContent = moves;
+
+					if (flippedCards.length === 2) {
+						setTimeout(checkPokerMatch, 1000); // Check for match after 1 second
+					}
+				}
+
+				function checkPokerMatch() {
+					const card1 = flippedCards[0];
+					const card2 = flippedCards[1];
+
+					const card1Data = pokerCards.find(c => c.id === card1.dataset.id);
+					const card2Data = pokerCards.find(c => c.id === card2.dataset.id);
+
+					if (card1Data.rank === card2Data.rank && card1Data.suit === card2Data.suit) {
+						// Match found
+						card1.classList.add('matched');
+						card2.classList.add('matched');
+						card1.classList.remove('flipped');
+						card2.classList.remove('flipped');
+						matchedPairs++;
+						checkPokerWin();
+					} else {
+						// No match
+						card1.classList.remove('flipped');
+						card2.classList.remove('flipped');
+					}
+
+					flippedCards = []; // Reset flipped cards array
+				}
+
+				function checkPokerWin() {
+					if (matchedPairs === 12) {
+						clearInterval(timerInterval);
+						alert(`🎉 Congratulations! You won in ${moves} moves and ${timerSpan.textContent}! 🎉`);
+					}
+				}
+
+				function startPokerTimer() {
+					if (!timerInterval) {
+						startTime = Date.now();
+						timerInterval = setInterval(updatePokerTimer, 1000);
+					}
+				}
+
+				function updatePokerTimer() {
+					const elapsedTime = Math.floor((Date.now() - startTime) / 1000);
+					const minutes = Math.floor(elapsedTime / 60);
+					const seconds = elapsedTime % 60;
+					timerSpan.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+				}
+
+				function restartPokerGame() {
+					clearInterval(timerInterval);
+					timerInterval = null;
+					moves = 0;
+					matchedPairs = 0;
+					flippedCards = [];
+					movesSpan.textContent = 0;
+					timerSpan.textContent = '0:00';
+					createPokerCards();
+					displayPokerCards();
+				}
+
+				// Initial setup for poker game
+				document.addEventListener('DOMContentLoaded', function() {
+					restartPokerGame();
+					restartPokerButton.addEventListener('click', restartPokerGame);
+				});
+			</script>
+
+	</body>
+</html> 

@@ -316,6 +316,7 @@
 						</ul>
 					</li>
 					<li><a href="${basePath}oj_records.html">Online Judge Record</a></li>
+					<li><a href="${basePath}fun.html">Fun Zone</a></li>
 				</ul>
 			    </nav>
 			    `;
@@ -346,6 +347,7 @@
 			                </ul>
 			            </li>
 			            <li><a href="/oj_records.html">Online Judge Record</a></li>
+			            <li><a href="/fun.html">Fun</a></li>
 			        </ul>
 			    </nav>
 			    `;
@@ -425,7 +427,7 @@
 		    	         -->
 		            </header>
 		            <p>
-		                If you’d like to get in touch, feel free to reach out via the email address below. I’m happy to answer any questions you may have.
+		                If you'd like to get in touch, feel free to reach out via the email address below. I'm happy to answer any questions you may have.
 		            </p>
 		            <ul class="contact">
 		                <li class="solid fa-envelope">chhsu (at) nyu (dot) edu</li>
