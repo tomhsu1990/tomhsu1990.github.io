@@ -296,7 +296,7 @@
 					<li><a href="${basePath}index.html">Homepage</a></li>
 					<li><a href="${basePath}work.html">Work Experience</a></li>
 					<li><a href="${basePath}background.html">Academic Background</a></li>
-					<li><a href="${basePath}post.html">Post</a></li>
+					<li><a href="${basePath}post.html">Posts</a></li>
 					<li>
 						<span class="opener">Research and Publication</span>
 						<ul>
@@ -327,7 +327,7 @@
 			            <li><a href="/index.html">Homepage</a></li>
 			            <li><a href="/work.html">Work Experience</a></li>
 			            <li><a href="/background.html">Academic Background</a></li>
-			            <li><a href="/post.html">Post</a></li>
+			            <li><a href="/post.html">Posts</a></li>
 			            <li>
 			                <span class="opener">Research and Publication</span>
 			                <ul>
@@ -427,10 +427,12 @@
 		    	         -->
 		            </header>
 		            <p>
-		                If you'd like to get in touch, feel free to reach out via the email address below. I'm happy to answer any questions you may have.
+		                If you would like to discuss engineering leadership, robotics, AI infrastructure, or potential collaboration, feel free to reach out.
 		            </p>
 		            <ul class="contact">
-		                <li class="solid fa-envelope">chhsu (at) nyu (dot) edu</li>
+		                <li class="icon solid fa-envelope">chhsu (at) nyu (dot) edu</li>
+		                <li class="icon brands fa-linkedin"><a href="https://www.linkedin.com/in/ching-hsiang-hsu/">linkedin.com/in/ching-hsiang-hsu</a></li>
+		                <li class="icon brands fa-github"><a href="https://github.com/tomhsu1990">github.com/tomhsu1990</a></li>
 		                <!--
 		                <li class="fa-phone">(929) 000-0000</li>
 		                <li class="fa-home">1234 Somewhere Road #8254 Nashville, TN 00000-0000</li>
