@@ -179,13 +179,12 @@ python sample.py --out_dir=out-shakespeare-char --start="Long time ago, "
 
 										<h3>Mini Project</h3>
 										<a href="https://github.com/tomhsu1990/nanoGPT-Bai-Li" class="icon brands fa-github"><span class="label">Github</span></a> <a href="https://github.com/tomhsu1990/nanoGPT-Bai-Li">https://github.com/tomhsu1990/nanoGPT-Bai-Li</a> <br>
-										In my mini-project, I used nanoGPT to create a model capable of generating poems in the style of the famous Chinese poet Bai Li (李白). Here are the steps I followed:
+										In this mini-project, I adapted nanoGPT into a character-level Traditional Chinese model trained on Li Bai (李白) poems. The key point is that this project does <b>not</b> use the default GPT-2 BPE tokenizer. Instead, it builds a dedicated character vocabulary from <code>data/bai_li_char/input.txt</code>, and both training and sampling must use the same <code>meta.pkl</code>. If the checkpoint and tokenizer metadata do not match, the generated Chinese output becomes unreadable.
 										<ol>
-											<li><b>Data Collection</b>: Wrote a script, <code>scrape_bai_li_poems.py</code>, to gather Bai Li’s poems from the internet and record in <code>input.txt</code> with correct encoding.</li>
-											<li><b>Data Preparation</b>: Translated the collected poems into Traditional Chinese and performed data cleaning to ensure the text was consistent and usable for training.</li>
-											<li><b>Training Configuration</b>: Initially, I used the original configuration parameters from <code>train_shakespeare_char.py</code>, but the output was not satisfactory due to mismatched dataset characteristics. For example, the original model used a batch size of 64 and a block size of 256, which were unsuitable for Bai Li’s larger dataset and longer sequences. I tuned the configuration in <code>train_bai_li_char.py</code>, reducing the batch size to 12, increasing the block size to 2048, and adjusting the model dimensions (e.g., reducing n_layer, n_head, and n_embd for faster convergence). These changes significantly improved the results, making the output align better with Bai Li’s poetic style.</li>
+											<li><b>Data Collection and Preparation</b>: I prepared a Traditional Chinese corpus in <code>data/bai_li_char/input.txt</code> and used <code>data/bai_li_char/prepare.py</code> to build <code>train.bin</code>, <code>val.bin</code>, and <code>meta.pkl</code>. This makes the dataset and tokenizer path explicit and reproducible.</li>
+											<li><b>Character-Level Training</b>: The project uses <code>config/train_bai_li_char.py</code> and trains a local CPU-friendly nanoGPT setup against the Li Bai corpus. The model is intentionally lightweight, but the tokenizer setup is critical: sampling must load <code>data/bai_li_char/meta.pkl</code> from the same dataset used during training.</li>
 											<ul>
-												<li>Original Parameters' Output</li>
+												<li>Earlier incorrect output when tokenizer/configuration handling was wrong</li>
 												<div id="code-container" style="margin: 10px 10px;">
     												<div class="code-block" data-code='
 秋》露姓縵
@@ -200,7 +199,7 @@ python sample.py --out_dir=out-shakespeare-char --start="Long time ago, "
 一淺步防虛》
     												' data-language="text"></div>
 												</div>
-												<li>Updated Parameters' Output</li>
+												<li>Readable Chinese output after using the correct character vocabulary path</li>
 												<div id="code-container" style="margin: 10px 10px;">
     												<div class="code-block" data-code='
 秋殿開徵客，千里看書一身當百戰，
@@ -212,20 +211,33 @@ python sample.py --out_dir=out-shakespeare-char --start="Long time ago, "
     												' data-language="text"></div>
 												</div>
 											</ul>
-											<li><b>Training the Model</b>: Ran the training script on the prepared dataset.</li>
+											<li><b>Latest Local Rerun</b>: I reran training and sampling locally to verify that the current workflow still works as expected.</li>
 											<div id="code-container" style="margin: 10px 10px;">
 												<div class="code-block" data-code='
-python train.py config/train_bai_li_char.py           
+python train.py config/train_bai_li_char.py --max_iters=3000
 												' data-language="bash"></div>
 											</div>
-											<li><b>Poem Generation</b>: The results captured Bai Li’s poetic style with creative and unique variations. However, the format did not align perfectly with traditional Chinese poetic paradigms. Future work will focus on refining the model to better understand and adhere to the structure and style of classical poetry.</li>
+											<ul>
+												<li>training checkpoint: <code>iter 3000</code></li>
+												<li>training loss: <code>0.0103</code></li>
+												<li>iteration time: <code>8441.20 ms</code></li>
+												<li>MFU: <code>0.17%</code></li>
+											</ul>
+											<li><b>Poem Generation</b>: Sampling now correctly uses the Li Bai character vocabulary, which produces readable Chinese output and fragments that are stylistically closer to classical poetry.</li>
 											<div id="code-container" style="margin: 10px 10px;">
 												<div class="code-block" data-code='
 python sample.py --out_dir=out-bai-li-char --start="秋"
 												' data-language="bash"></div>
 											</div>
+											<div id="code-container" style="margin: 10px 10px;">
+												<div class="code-block" data-code='
+out_dir out-bai-li-char
+checkpoint dataset: bai_li_char
+Loading meta from data/bai_li_char/meta.pkl...
+												' data-language="text"></div>
+											</div>
 										</ol>
-										This project demonstrated nanoGPT’s ability to fine-tune models effectively on domain-specific datasets, even for a complex and artistic task like poetry generation. The final generated poems were both stylistically aligned with Bai Li’s work and imaginative in their own right.
+										This project demonstrates how small language models can still be useful for domain-specific generation when the data path, vocabulary, and runtime assumptions are handled carefully. The current output is readable and often evocative, but it still shows common small-model issues such as repetition, phrase collapse, and unstable poem structure.
 										<hr/>
 
 										<h3>Future Work</h3>
