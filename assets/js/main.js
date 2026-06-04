@@ -447,16 +447,8 @@
 		document.addEventListener("DOMContentLoaded", function () {
 		    const footerHTML = `
 		        <footer id="footer">
-		            <center>
-		                <a href="http://www.clustrmaps.com/map/tomhsu1990.github.io" class="image;">
-		                    <img src="http://www.clustrmaps.com/map_v2.png?d=W6ozFcbGi_U5iR7W4r_2qJ_rPRizafHPJu3MffXB8T0" 
-		                         title="Visit tracker for tomhsu1990.github.io" 
-		                         alt="" 
-		                         style="width: 80%; height: 80%; margin:auto;" />
-		                </a>
-		            </center>
 		            <p class="copyright">
-		                <br> &copy; Ching-Hsiang Hsu. All rights reserved. Design: 
+		                &copy; Ching-Hsiang Hsu. All rights reserved. Design:
 		                <a href="https://html5up.net">HTML5 UP</a>.
 		            </p>
 		        </footer>
