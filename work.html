@@ -11,6 +11,7 @@
 		<title>Work Experience</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<meta name="description" content="Ching-Hsiang (Tom) Hsu's work across autonomous-driving planning, safety fallback, validation, deterministic replay, edge AI, and vehicle runtime systems." />
 		<link rel="stylesheet" href="assets/css/main.css" />
 	</head>
 	<body>
@@ -30,43 +31,47 @@
 									<header class="main">
 										<h1>Work Experience</h1>
 									</header>
+									<p>
+										My work has followed autonomy from algorithm to vehicle platform: first building motion-planning behavior, then making it safe and testable through fallback and simulation, and now developing the runtime, replay, and edge infrastructure needed to debug and deploy robotics AI as a complete system.
+									</p>
 
 									<hr class="major" />
 									<p>
-										<font size="5"><b>Senior Integration Software Engineer,</b></font> Aug 2025 - present<br>
+										<font size="5"><b>Senior Integration Software Engineer</b></font> &middot; Aug 2025 - present<br>
 										Woven by Toyota, Sunnyvale, CA
 
 										<ul style="margin-top:-1.5em;">
-											<li>Build runtime, validation, and performance infrastructure for real-time in-vehicle systems, primarily in Python with supporting C++ components.</li>
-											<li>Focus on deterministic behavior, debugging, profiling, and system integration across complex software pipelines.</li>
-											<li>Work hands-on on tooling and system software spanning perception, runtime infrastructure, and vehicle-facing platforms.</li>
+											<li>Architected a deterministic runtime capture and replay framework in C++ and Python, enabling reproducible debugging and validation for safety-critical vehicle systems.</li>
+											<li>Designed end-to-end benchmarks for imaging pipelines from sensor and ISP through preprocessing, undistortion, stitching, and display on NVIDIA Orin and Thor.</li>
+											<li>Optimized heterogeneous CPU/GPU pipelines for latency, throughput, and memory efficiency under real-time constraints.</li>
+											<li>Led integration across perception, voice, and vehicle-interface modules, with an emphasis on deterministic behavior and system-level reliability.</li>
+											<li>Developed a modular ROS2-based SDK to make vehicle capabilities easier to integrate, reuse, and evolve across teams.</li>
 										</ul>
 									</p>
 
 									<hr class="major" />
 									<p>
-										<font size="5"><b>Tech Lead of Planning and Integration team,</b></font> May 2019 - Aug 2025<br>
+										<font size="5"><b>Tech Lead of Planning and Integration</b></font> &middot; May 2019 - Aug 2025<br>
 										AutoX Technologies Inc., San Jose, CA
 
 										<ul style="margin-top:-1.5em;">
-											<li>Led planning and integration for production autonomous driving systems across urban and suburban environments.</li>
-											<li>Managed cross-functional development spanning motion planning, system integration, safety handling, and deployment readiness.</li>
-											<li>Worked closely with partner teams to translate research and platform capabilities into robust vehicle behavior in real-world operations.</li>
-											<li>Drove technical direction for planning-related architecture, system behavior, and end-to-end integration quality.</li>
-											<li>Supported large-scale testing and deployment efforts by improving development workflow, validation, and issue investigation processes.</li>
-											<li>Helped bridge algorithm development with product execution, balancing system performance, engineering practicality, and operational constraints.</li>
+											<li>Led the design and deployment of a real-time planning framework combining machine-learning and rule-based decision making, improving decision accuracy by 60% in complex urban environments.</li>
+											<li>Designed and implemented a minimum-risk maneuver framework for degraded-system fallback, achieving a 100% safe-stop rate across 10,000+ failure-mode simulations.</li>
+											<li>Defined planning modules as stable APIs and integrated them with simulation environments for repeatable validation and interactive AI-agent development.</li>
+											<li>Aligned planning with perception, prediction, control, and safety teams to improve end-to-end behavior rather than optimizing modules in isolation.</li>
+											<li>Delivered production autonomy features through an iterative loop of implementation, simulation-in-the-loop testing, issue investigation, and on-road deployment.</li>
 										</ul>
 									</p>
 
 									<hr class="major" />
 									<p>
-										<font size="5"><b>Software Engineer,</b></font> May 2018 - April 2019<br>
+										<font size="5"><b>Software Engineer</b></font> &middot; May 2018 - Apr 2019<br>
 										AutoX Technologies Inc., San Jose, CA
 
 										<ul style="margin-top:-1.5em;">
-											<li>Designed and improved motion planning software for autonomous driving applications.</li>
-											<li>Validated system behavior through simulation and real-world testing, with strong emphasis on reliability and maintainability.</li>
-											<li>Contributed to early product launches and regulatory milestones for autonomous vehicle deployment.</li>
+											<li>Developed optimization-based and search-based motion-planning algorithms for production autonomous vehicles.</li>
+											<li>Implemented core driving behaviors including lane changes, merges, and pullovers.</li>
+											<li>Created modular planning APIs and integrated them into simulation environments, establishing the validation pattern that later supported broader deployment.</li>
 										</ul>
 									</p>
 

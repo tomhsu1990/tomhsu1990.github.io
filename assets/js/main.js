@@ -15,7 +15,7 @@
 		    const headerHTML = `
 		        <header id="header">
 		            <ul class="icons">
-		                <li><a href="mailto:chhsu@nyu.edu" class="icon brands fa-envelope-o"><span class="label">E-mail</span></a></li>
+		                <li><a href="mailto:tom.hsu1990@gmail.com" class="icon solid fa-envelope"><span class="label">E-mail</span></a></li>
 		                <li><a href="https://www.linkedin.com/in/ching-hsiang-hsu/" class="icon brands fa-linkedin"><span class="label">LinkedIn</span></a></li>
 		                <li><a href="https://github.com/tomhsu1990" class="icon brands fa-github"><span class="label">Github</span></a></li>
 		                <li><a href="https://www.youtube.com/channel/UCsyHPAJxPqzgiJW0HllRzHA" class="icon brands fa-youtube"><span></span></a></li>
@@ -427,10 +427,10 @@
 		    	         -->
 		            </header>
 		            <p>
-		                If you would like to discuss engineering leadership, robotics, AI infrastructure, or potential collaboration, feel free to reach out.
+		                I am always glad to compare notes on robotics architecture, replay and validation, real-time deployment, or safety-critical integration.
 		            </p>
 		            <ul class="contact">
-		                <li class="icon solid fa-envelope">chhsu (at) nyu (dot) edu</li>
+		                <li class="icon solid fa-envelope"><a href="mailto:tom.hsu1990@gmail.com">tom.hsu1990 (at) gmail (dot) com</a></li>
 		                <li class="icon brands fa-linkedin"><a href="https://www.linkedin.com/in/ching-hsiang-hsu/">linkedin.com/in/ching-hsiang-hsu</a></li>
 		                <li class="icon brands fa-github"><a href="https://github.com/tomhsu1990">github.com/tomhsu1990</a></li>
 		                <!--
